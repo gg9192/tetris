@@ -1,3 +1,4 @@
+import javax.lang.model.util.TypeKindVisitor14;
 import javax.print.attribute.standard.OrientationRequested;
 import javax.sound.sampled.Line;
 import java.util.*;
@@ -123,7 +124,7 @@ public class Board {
     //int[][] board = {{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5}};
     public void draw(){
         if (needPiece) {
-            cp = new TPiece(4,1);
+            cp = new ReverseZPiece(4,1);
             needPiece = false;
             /*(
             int random = (int)Math.floor(Math.random()*(6-0+1)+0);
@@ -182,6 +183,7 @@ public class Board {
             this.centerX = x;
             this.centerY = y;
         }
+
 
         public void tick() {
             if (check() == false) {
@@ -847,7 +849,8 @@ public class Board {
                 return;
             }
             if (this.orientation == 1) {
-                if (canRotate()) {piece[0] = new Tuple(centerX - 1, centerY);
+                if (canRotate()) {
+                    piece[0] = new Tuple(centerX - 1, centerY);
                     piece[1] = new Tuple(centerX, centerY);
                     piece[2] = new Tuple(centerX + 1, centerY);
                     piece[3] = new Tuple(centerX + 2, centerY);
@@ -868,10 +871,10 @@ public class Board {
                 while (t1 <23  && grid[piece[3].getX()][t1 + 1] == 0) {
                     t1++;
                 }
-                shadow[0] = new Tuple(piece[0].getX(),t1);
-                shadow[1] = new Tuple(piece[0].getX(),t1-1);
-                shadow[2] = new Tuple(piece[0].getX(),t1-2);
-                shadow[3] = new Tuple(piece[0].getX(),t1-3  );
+                shadow[0] = new Tuple(piece[0].getX(),t1-3);
+                shadow[1] = new Tuple(piece[1].getX(),t1-2);
+                shadow[2] = new Tuple(piece[2].getX(),t1-1);
+                shadow[3] = new Tuple(piece[3].getX(),t1  );
                 return;
             }
             else {
@@ -947,8 +950,8 @@ public class Board {
             }
             else if (orientation == 1) {
                 if (canRotate()) {
-                    piece[0] = new Tuple(centerX + 1, centerY - 1);
-                    piece[1] = new Tuple(centerX, centerY - 1);
+                    piece[0] = new Tuple(centerX, centerY - 1);
+                    piece[1] = new Tuple(centerX + 1, centerY - 1);
                     piece[2] = new Tuple(centerX, centerY);
                     piece[3] = new Tuple(centerX, centerY + 1);
                     findShadow();
@@ -1002,16 +1005,16 @@ public class Board {
                 return;
             }
             if (orientation == 1) {
-                int t1 = piece[0].getY();
+                int t1 = piece[1].getY();
                 int t2 = piece[3].getY();
-                while (t1 <23 && t2 <23 && grid[piece[0].getX()][t1 + 1] == 0 && grid[piece[3].getX()][t2 + 1] == 0 ) {
+                while (t1 <23 && t2 <23 && grid[piece[1].getX()][t1 + 1] == 0 && grid[piece[3].getX()][t2 + 1] == 0 ) {
                     t1++;
                     t2++;
                 }
                 shadow[0] = new Tuple(piece[0].getX(),t1);
-                shadow[1] = new Tuple(piece[1].getX(),t2);
-                shadow[2] = new Tuple(piece[2].getX(),t1);
-                shadow[3] = new Tuple(piece[3].getX(),t2 - 1);
+                shadow[1] = new Tuple(piece[1].getX(),t1);
+                shadow[2] = new Tuple(piece[2].getX(),t2 - 1);
+                shadow[3] = new Tuple(piece[3].getX(),t2);
                 return;
             }
             if (orientation == 2) {
@@ -1129,8 +1132,8 @@ public class Board {
             if (this.orientation == 3) {
                 if (canRotate()) {
                     piece[0] = new Tuple(centerX, centerY - 1);
-                    piece[1] = new Tuple(centerX, centerY);
-                    piece[2] = new Tuple(centerX - 1, centerY);
+                    piece[1] = new Tuple(centerX - 1, centerY);
+                    piece[2] = new Tuple(centerX, centerY);
                     piece[3] = new Tuple(centerX - 1, centerY  + 1);
                     findShadow();
                     this.orientation = -1;
@@ -1182,23 +1185,23 @@ public class Board {
                     t2++;
                     t3++;
                 }
-                shadow[0] = new Tuple(piece[3].getX(),t2);
-                shadow[1] = new Tuple(piece[1].getX(),t2);
-                shadow[2] = new Tuple(piece[2].getX(),t3 - 1);
-                shadow[3] = new Tuple(piece[0].getX(),t3 - 1);
+                shadow[0] = new Tuple(piece[0].getX(), t1);
+                shadow[1] = new Tuple(piece[1].getX(),t1);
+                shadow[2] = new Tuple(piece[2].getX(),t1 + 1);
+                shadow[3] = new Tuple(piece[3].getX(),t1 + 1);
                 return;
             }
             else {
-                int t1 = piece[1].getY();
+                int t1 = piece[2].getY();
                 int t2 = piece[3].getY();
-                while (t1 <23 && t2 <23 && grid[piece[1].getX()][t1 + 1] == 0 && grid[piece[3].getX()][t2 + 1] == 0 ) {
+                while (t1 <23 && t2 <23 && grid[piece[2].getX()][t1 + 1] == 0 && grid[piece[3].getX()][t2 + 1] == 0 ) {
                     t1++;
                     t2++;
                 }
-                shadow[0] = new Tuple(piece[3].getX(),t1);
-                shadow[1] = new Tuple(piece[1].getX(),t1 - 1);
-                shadow[2] = new Tuple(piece[2].getX(),t2);
-                shadow[3] = new Tuple(piece[0].getX(),t1);
+                shadow[0] = new Tuple(piece[0].getX(),t1 - 1);
+                shadow[1] = new Tuple(piece[1].getX(),t1);
+                shadow[2] = new Tuple(piece[2].getX(),t2-1);
+                shadow[3] = new Tuple(piece[3].getX(),t2);
                 return;
             }
         }
