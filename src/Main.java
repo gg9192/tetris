@@ -41,12 +41,6 @@ public class Main extends PApplet{
     }
     static Screen screen = new Screen();
     public void draw() {
-        tick ++;
-
-        if (tick > 20) {
-
-
-        }
         screen.draw();
     }
 }

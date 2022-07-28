@@ -212,6 +212,7 @@ public class Board {
     }
     public abstract class Piece {
 
+        //https://tetris.fandom.com/wiki/Lock_delay
         int pieceLock =  -1;
         int orientation = -1;
         int centerX;
