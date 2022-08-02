@@ -139,6 +139,20 @@ public class Board {
     //int [][] board = {{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4}};
     //int[][] board = {{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5}};
 
+    public void fixBoard(int numLines, int base) {
+        for (int y = base - 1; y >= maxHeight; y -- ) {
+            for (int x = 0; x < 10; x ++) {
+                grid[x][y + numLines] = grid[x][y];
+
+            }
+        }
+        //set the top lines to 0
+        for (int i = 0; i < numLines; i ++) {
+            for (int x = 0; x < 10; x ++) {
+                grid[x][maxHeight - i] = 0;
+            }
+        }
+    }
     private boolean canClear(int col) {
         for (int i = 0; i < 9; i ++) {
            if (grid[i][col] != 0) {
@@ -220,6 +234,7 @@ public class Board {
         }
 
         public void tick() {
+            System.out.println(Arrays.toString(piece));
             if (!check() && this.pieceLock == -1) {
                 for (int i = 0; i < 4; i++) {
                     piece[i].setY(piece[i].getY() + 1);
@@ -286,6 +301,7 @@ public class Board {
             if (Arrays.equals(piece, shadow)) {
                 pieceLock ++;
                 if (pieceLock >= 41) {
+                    Set<Integer> s = new HashSet<>();
                     for (Tuple t : piece) {
                         //puts instance of array actually on the board
                         if (this instanceof LPiece || this instanceof ReverseLPiece) {
@@ -306,14 +322,24 @@ public class Board {
 
                         }
                 }
+                    int canClear = 0;
+                    for (Integer i : s) {
+                        if (canClear(i)) {
+                            canClear ++;
+                        }
+                    }
+
                     if (cp.piece[0].getY() < maxHeight) {maxHeight = cp.piece[0].getY();}
                     System.out.println(maxHeight);
+
+
                     return true;
 
 
                 }
 
-        }
+        } else {pieceLock = -1;
+                return false;}
             return false;
         }
         public void draw() {
