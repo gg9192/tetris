@@ -4,6 +4,7 @@ import processing.core.PImage;
 public class Screen {
     public Board b = new Board(350,150);
     public void draw() {
+        Main.processing.background(21,42,106);
         b.draw();
         PImage logo = Main.processing.loadImage("Logo.png");
         PFont font = Main.processing.createFont("TETRIS.ttf", 20);
@@ -19,7 +20,7 @@ public class Screen {
         Main.processing.text("NEXT PIECE", 675, 95);
         Main.processing.fill(242,168,64);
         Main.processing.textSize(30);
-        Main.processing.text("Score: " + b.score, 670, 400);
+        Main.processing.text("Score: " + b.score, 315, 90);
     }
 
 }

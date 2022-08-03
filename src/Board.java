@@ -315,7 +315,7 @@ public class Board {
             if (Arrays.equals(piece, shadow)) {
                 pieceLock ++;
                 if (pieceLock >= 41) {
-
+                    int numCleared = 0;
                     for (Tuple t : piece) {
 
                         //puts instance of array actually on the board
@@ -334,12 +334,25 @@ public class Board {
                         if (this instanceof SquarePiece) {
                             grid[t.getX()][t.getY()] = 5;
                         }
-                        canClear(t.getY());
+                        if (canClear(t.getY())) {
+                            numCleared ++;
+
+                        }
                 }
-
-
                     if (cp.piece[0].getY() < maxHeight) {maxHeight = cp.piece[0].getY();}
 
+                    if (numCleared == 1) {
+                        score += 100;
+                    }
+                    if (numCleared == 2) {
+                        score += 300;
+                    }
+                    if (numCleared == 3) {
+                        score += 500;
+                    }
+                    if (numCleared == 4) {
+                        score += 800;
+                    }
 
 
                     return true;
