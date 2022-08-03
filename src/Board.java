@@ -17,6 +17,9 @@ public class Board {
     // color 5 = yellow square piece
     int x;
     int y;
+
+    int rowToBeCleared = 0;
+    int howManyRows = 0;
     public Board(int x, int y) {
         this.x = x;
         this.y = y;
@@ -139,31 +142,37 @@ public class Board {
     //int [][] board = {{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4}};
     //int[][] board = {{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5}};
 
-    public void fixBoard(int numLines, int base) {
-        for (int y = base - 1; y >= maxHeight; y -- ) {
+    public void fixBoard(int base) {
+
+        for (int y = base; y >= maxHeight; y --) {
+            System.out.println(y);
             for (int x = 0; x < 10; x ++) {
-                grid[x][y + numLines] = grid[x][y];
+                grid[x][y] = grid[x][y + 1];
 
             }
         }
-        //set the top lines to 0
-        for (int i = 0; i < numLines; i ++) {
-            for (int x = 0; x < 10; x ++) {
-                grid[x][maxHeight - i] = 0;
-            }
+        for (int x = 0; x < 10; x ++) {
+            grid[x][maxHeight] = 0;
         }
+        maxHeight++;
+        System.out.println(maxHeight);
     }
     private boolean canClear(int col) {
-        for (int i = 0; i < 9; i ++) {
-           if (grid[i][col] != 0) {
+
+        for (int i = 0; i < 10; i ++) {
+           if (grid[i][col] == 0) {
+               System.out.println("fuck");
                return false;
            }
+        }
+        for (int i = 0; i < 10; i ++) {
+            grid[i][col] = clearTime;
         }
         return true;
     }
     public void draw(){
         if (needPiece) {
-            cp = new ReverseZPiece(4,1);
+            cp = new LinePiece(4,1);
             needPiece = false;
             /*(
             int random = (int)Math.floor(Math.random()*(6-0+1)+0);
@@ -202,16 +211,23 @@ public class Board {
         Main.processing.strokeWeight(1);
         Main.processing.fill(242,168,64);
         Main.processing.rect(this.x , this.y, (10 * 25) + 10, (24 * 25) + 10);
-        for(int x = 0; x < grid.length; x++) {
-            for (int y = 0; y < grid[x].length; y++) {
+        for(int y = 23; y > -1 ; y--)
+        {
+            int canC = -1;
+            for (int x = 0; x < 10; x++) {
 
                 drawSquare(grid[x][y], getCords(x, y));
                 if (grid[x][y] < 0) {
                     grid[x][y] = grid[x][y] +1;
-                    if (grid[x][y] == 0) {qwe = true;}
+                    if (grid[x][y] == 0) {qwe = true;
+                    canC = x;}
                 }
 
             }
+            if (canC != -1) {
+                fixBoard(canC);
+            }
+
         }
         tick ++;
         if (tick > 50) {
@@ -301,8 +317,9 @@ public class Board {
             if (Arrays.equals(piece, shadow)) {
                 pieceLock ++;
                 if (pieceLock >= 41) {
-                    Set<Integer> s = new HashSet<>();
+
                     for (Tuple t : piece) {
+
                         //puts instance of array actually on the board
                         if (this instanceof LPiece || this instanceof ReverseLPiece) {
                             grid[t.getX()][t.getY()] = 1;
@@ -318,16 +335,10 @@ public class Board {
                         }
                         if (this instanceof SquarePiece) {
                             grid[t.getX()][t.getY()] = 5;
-
-
                         }
+                        canClear(t.getY());
                 }
-                    int canClear = 0;
-                    for (Integer i : s) {
-                        if (canClear(i)) {
-                            canClear ++;
-                        }
-                    }
+
 
                     if (cp.piece[0].getY() < maxHeight) {maxHeight = cp.piece[0].getY();}
                     System.out.println(maxHeight);
