@@ -143,11 +143,11 @@ public class Board {
     //int[][] board = {{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5}};
 
     public void fixBoard(int base) {
-
-        for (int y = base; y >= maxHeight; y --) {
+        System.out.println(base + ", " + maxHeight);
+        for (int y = base; y > maxHeight; y --) {
             System.out.println(y);
             for (int x = 0; x < 10; x ++) {
-                grid[x][y] = grid[x][y + 1];
+                grid[x][y] = grid[x][y - 1];
 
             }
         }
@@ -155,13 +155,11 @@ public class Board {
             grid[x][maxHeight] = 0;
         }
         maxHeight++;
-        System.out.println(maxHeight);
     }
     private boolean canClear(int col) {
 
         for (int i = 0; i < 10; i ++) {
            if (grid[i][col] == 0) {
-               System.out.println("fuck");
                return false;
            }
         }
@@ -172,7 +170,7 @@ public class Board {
     }
     public void draw(){
         if (needPiece) {
-            cp = new ZPiece(4,1);
+            cp = new LinePiece(4,1);
             needPiece = false;
             /*(
             int random = (int)Math.floor(Math.random()*(6-0+1)+0);
@@ -220,7 +218,7 @@ public class Board {
                 if (grid[x][y] < 0) {
                     grid[x][y] = grid[x][y] +1;
                     if (grid[x][y] == 0) {qwe = true;
-                    canC = x;}
+                    canC = y;}
                 }
 
             }
@@ -250,7 +248,7 @@ public class Board {
         }
 
         public void tick() {
-            System.out.println(Arrays.toString(piece));
+
             if (!check() && this.pieceLock == -1) {
                 for (int i = 0; i < 4; i++) {
                     piece[i].setY(piece[i].getY() + 1);
@@ -341,7 +339,7 @@ public class Board {
 
 
                     if (cp.piece[0].getY() < maxHeight) {maxHeight = cp.piece[0].getY();}
-                    System.out.println(maxHeight);
+
 
 
                     return true;
@@ -542,7 +540,6 @@ public class Board {
             rotate();
         }
         public boolean canRotate() {
-            System.out.println(centerX);
             if (this.orientation == 0) {
                 if (centerX == 9) {return false;}
                 return grid[centerX + 1][centerY - 1] == 0 && grid[centerX][centerY - 1] == 0 && grid[centerX][centerY] == 0 && grid[centerX - 1][centerY] == 0;
@@ -1026,7 +1023,7 @@ public class Board {
 
         @Override
         public void findShadow() {
-            System.out.println(this.orientation);
+
             if (orientation == 0) {
                 int t1 = piece[1].getY();
                 int t2 = piece[2].getY();
