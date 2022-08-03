@@ -172,7 +172,7 @@ public class Board {
     }
     public void draw(){
         if (needPiece) {
-            cp = new LinePiece(4,1);
+            cp = new ZPiece(4,1);
             needPiece = false;
             /*(
             int random = (int)Math.floor(Math.random()*(6-0+1)+0);
@@ -548,13 +548,16 @@ public class Board {
                 return grid[centerX + 1][centerY - 1] == 0 && grid[centerX][centerY - 1] == 0 && grid[centerX][centerY] == 0 && grid[centerX - 1][centerY] == 0;
             }
             if (this.orientation == 1) {
-                if (centerX == 9) {return false;}
+                if (centerX == 9 ) {return false;}
+
                 return grid[centerX][centerY - 1] == 0 && grid[centerX][centerY] == 0 && grid[centerX + 1][centerY] == 0 && grid[centerX + 1][centerY + 1] == 0;
             }
             if (orientation == 2) {
+                if (centerX == 0) {return false;}
                 return grid[centerX + 1][centerY] == 0 && grid[centerX][centerY] == 0 && grid[centerX][centerY + 1] == 0 && grid[centerX - 1][centerY + 1] == 0;
             }
             else {
+
                 return grid[centerX - 1][centerY - 1] == 0 && grid[centerX - 1][centerY] == 0 && grid[centerX][centerY] == 0 && grid[centerX][centerY + 1] == 0;
 
             }
@@ -591,19 +594,30 @@ public class Board {
                 return;
             }
             if (this.orientation == 2) {
-                piece[0] = new Tuple(centerX, centerY);
-                piece[1] = new Tuple(centerX + 1, centerY);
-                piece[2] = new Tuple(centerX - 1, centerY + 1);
-                piece[3] = new Tuple(centerX, centerY + 1);
-                findShadow();
+                if (canRotate()) {
+                    piece[0] = new Tuple(centerX, centerY);
+                    piece[1] = new Tuple(centerX + 1, centerY);
+                    piece[2] = new Tuple(centerX - 1, centerY + 1);
+                    piece[3] = new Tuple(centerX, centerY + 1);
+                    findShadow();
+                    return;
+                }
+                this.orientation--;
+                return;
             }
             else {
-                piece[0] = new Tuple(centerX - 1, centerY - 1);
-                piece[1] = new Tuple(centerX - 1, centerY);
-                piece[2] = new Tuple(centerX, centerY);
-                piece[3] = new Tuple(centerX, centerY + 1);
-                findShadow();
-                this.orientation = -1;
+                if (canRotate()) {
+                    piece[0] = new Tuple(centerX - 1, centerY - 1);
+                    piece[1] = new Tuple(centerX - 1, centerY);
+                    piece[2] = new Tuple(centerX, centerY);
+                    piece[3] = new Tuple(centerX, centerY + 1);
+                    findShadow();
+                    this.orientation = -1;
+                    return;
+                }
+                this.orientation--;
+                return;
+
             }
 
         }
