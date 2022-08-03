@@ -5,4 +5,6 @@ using flow. This entire project was coded from scratch using the Processing Java
 I decided to use GitHub as my version control solution half way through the project to better doccument
 my progress. 
 
+In order for the project to work, you MUST add core.jar (processing) as a library!
+
 https://www.linkedin.com/in/alex-guo-b104ba208/

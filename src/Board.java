@@ -3,7 +3,7 @@
 import java.util.*;
 
 public class Board {
-
+    public int score = 0;
     private int maxHeight = 23;
     protected int clearTime = -50;
 

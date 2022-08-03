@@ -17,6 +17,9 @@ public class Screen {
         Main.processing.fill(0,0,0);
         Main.processing.text("HELD PIECE", 90, 95);
         Main.processing.text("NEXT PIECE", 675, 95);
+        Main.processing.fill(242,168,64);
+        Main.processing.textSize(30);
+        Main.processing.text("Score: " + b.score, 670, 400);
     }
 
 }
