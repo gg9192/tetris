@@ -18,6 +18,40 @@ public class Board {
     int x;
     int y;
 
+    public static void drawDemoPiece(int x, int y, int type) {
+        if (type == 1) {
+            drawSquare(1, new Tuple(x,y));
+            drawSquare(1, new Tuple(x,y + 25));
+            drawSquare(1, new Tuple(x,y + 50));
+            drawSquare(1, new Tuple(x + 25,y + 50));
+        }
+        else if (type == 2) {
+            drawSquare(2, new Tuple(x,y));
+            drawSquare(2, new Tuple(x,y + 25));
+            drawSquare(2, new Tuple(x,y + 50));
+            drawSquare(2, new Tuple(x,y + 75));
+        }
+        else if (type == 3) {
+            drawSquare(3, new Tuple(x,y));
+            drawSquare(3, new Tuple(x,y + 25));
+            drawSquare(3, new Tuple(x,y + 50));
+            drawSquare(3, new Tuple(x + 25,y + 25));
+        }
+        else if (type == 4) {
+            x -= 12;
+            drawSquare(4, new Tuple(x,y + 25));
+            drawSquare(4, new Tuple(x + 25,y + 25));
+            drawSquare(4, new Tuple(x + 25 ,y));
+            drawSquare(4, new Tuple(x + 50 ,y));
+        }
+        else if (type == 5) {
+            drawSquare(5, new Tuple(x,y));
+            drawSquare(5, new Tuple(x,y + 25));
+            drawSquare(5, new Tuple(x + 25,y));
+            drawSquare(5, new Tuple(x + 25,y + 25));
+        }
+
+    }
     int rowToBeCleared = 0;
     int howManyRows = 0;
     public Board(int x, int y) {

@@ -13,7 +13,7 @@ public class Screen {
         Main.processing.stroke(242,168,64);
         Main.processing.fill(61, 101, 201);
         Main.processing.rect(70,60,200,300);
-        Main.processing.rect(650,60,200,300);
+        Main.processing.rect(650,60,200,180);
         Main.processing.textFont(font);
         Main.processing.fill(0,0,0);
         Main.processing.text("HELD PIECE", 90, 95);
@@ -21,6 +21,7 @@ public class Screen {
         Main.processing.fill(242,168,64);
         Main.processing.textSize(30);
         Main.processing.text("Score: " + b.score, 315, 90);
+        b.drawDemoPiece(740,110,5);
     }
 
 }
