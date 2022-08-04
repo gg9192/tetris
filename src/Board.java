@@ -1,8 +1,10 @@
 
 
+import javax.sound.sampled.Line;
 import java.util.*;
 
 public class Board {
+    private boolean canHold = true;
     public int score = 0;
     private int maxHeight = 23;
     protected int clearTime = -50;
@@ -17,6 +19,95 @@ public class Board {
     // color 5 = yellow square piece
     int x;
     int y;
+
+    public int held = -1;
+
+    public int nextPiece;
+
+    // 0 = L piece
+    // 1 = Reverse L piece
+    // 2 = line piece
+    // 3 = t piece
+    // 4 = z piece
+    // 5 = reverse z piece
+    // 6 = square piece
+    public void hold() {
+        if (canHold) {
+            canHold = false;
+            //no held piece
+            if (held == -1) {
+                if (cp instanceof LPiece) {
+                    held = 0;
+                }
+                if (cp instanceof ReverseLPiece) {
+                    held = 1;
+                }
+                if (cp instanceof LinePiece) {
+                    held = 2;
+                }
+                if (cp instanceof TPiece) {
+                    held = 3;
+                }
+                if (cp instanceof ZPiece) {
+                    held = 4;
+                }
+                if (cp instanceof ReverseZPiece) {
+                    held = 5;
+                }
+                if (cp instanceof SquarePiece) {
+                    held = 6;
+                }
+                needPiece = true;
+        }
+        else {
+                int temp = held;
+                if (cp instanceof LPiece) {
+                    held = 0;
+                }
+                if (cp instanceof ReverseLPiece) {
+                    held = 1;
+                }
+                if (cp instanceof LinePiece) {
+                    held = 2;
+                }
+                if (cp instanceof TPiece) {
+                    held = 3;
+                }
+                if (cp instanceof ZPiece) {
+                    held = 4;
+                }
+                if (cp instanceof ReverseZPiece) {
+                    held = 5;
+                }
+                if (cp instanceof SquarePiece) {
+                    held = 6;
+                }
+                //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                if (temp == 0) {
+                    cp = new LPiece(4,1);
+                }
+                if (temp == 1) {
+                    cp = new ReverseLPiece(4,1);
+                }
+                if (temp == 2) {
+                    cp = new LinePiece(4,1);
+                }
+                if (temp == 3) {
+                    cp = new TPiece(4,1);
+                }
+                if (temp == 4) {
+                    cp = new ZPiece(4,1);
+                }
+                if (temp == 5) {
+                    cp = new ReverseZPiece(4,1);
+                }
+                if (temp == 6) {
+                    cp = new SquarePiece(4,1);
+                }
+
+            }
+        }
+    }
 
     public static void drawDemoPiece(int x, int y, int type) {
         if (type == 1) {
@@ -204,9 +295,7 @@ public class Board {
     }
     public void draw(){
         if (needPiece) {
-            cp = new LinePiece(4,1);
-            needPiece = false;
-            /*(
+
             int random = (int)Math.floor(Math.random()*(6-0+1)+0);
             if (random == 0) {
                 cp = new LinePiece(4,1);
@@ -231,7 +320,7 @@ public class Board {
             }
             needPiece = false;
 
-             */
+
         }
         if (this.cp.check()) {
             needPiece = true;
@@ -349,6 +438,7 @@ public class Board {
             if (Arrays.equals(piece, shadow)) {
                 pieceLock ++;
                 if (pieceLock >= 41) {
+                    canHold = true;
                     int numCleared = 0;
                     for (Tuple t : piece) {
 
