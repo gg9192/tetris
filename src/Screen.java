@@ -3,6 +3,36 @@ import processing.core.PImage;
 
 public class Screen {
     public Board b = new Board(350,150);
+    // 0 = L piece
+    // 1 = Reverse L piece
+    // 2 = line piece
+    // 3 = t piece
+    // 4 = z piece
+    // 5 = reverse z piece
+    // 6 = square piece
+    private void drawHeld(){
+        if (b.held == 0) {
+            b.drawDemoPiece(150,120,0);
+        }
+        if (b.held == 1) {
+            b.drawDemoPiece(150,120,1);
+        }
+        if (b.held == 2) {
+            b.drawDemoPiece(150,120,2);
+        }
+        if (b.held == 3) {
+            b.drawDemoPiece(150,120,3);
+        }
+        if (b.held == 4) {
+            b.drawDemoPiece(150,140,4);
+        }
+        if (b.held == 5) {
+            b.drawDemoPiece(150,120,5);
+        }
+        if (b.held == 6) {
+            b.drawDemoPiece(150,120,6);
+        }
+    }
     public void draw() {
         Main.processing.background(21,42,106);
         b.draw();
@@ -12,7 +42,7 @@ public class Screen {
         Main.processing.strokeWeight(5);
         Main.processing.stroke(242,168,64);
         Main.processing.fill(61, 101, 201);
-        Main.processing.rect(70,60,200,300);
+        Main.processing.rect(70,60,200,180);
         Main.processing.rect(650,60,200,180);
         Main.processing.textFont(font);
         Main.processing.fill(0,0,0);
@@ -21,7 +51,8 @@ public class Screen {
         Main.processing.fill(242,168,64);
         Main.processing.textSize(30);
         Main.processing.text("Score: " + b.score, 315, 90);
-        b.drawDemoPiece(740,110,5);
+        drawHeld();
+
     }
 
 }

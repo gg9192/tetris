@@ -295,7 +295,6 @@ public class Board {
     }
     public void draw(){
         if (needPiece) {
-
             int random = (int)Math.floor(Math.random()*(6-0+1)+0);
             if (random == 0) {
                 cp = new LinePiece(4,1);
@@ -319,6 +318,8 @@ public class Board {
                 cp = new TPiece(4,1);
             }
             needPiece = false;
+
+
 
 
         }
