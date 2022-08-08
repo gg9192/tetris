@@ -10,6 +10,32 @@ public class Screen {
     // 4 = z piece
     // 5 = reverse z piece
     // 6 = square piece
+
+    public void drawNext() {
+        int x = 740;
+        int y = 120;
+        if (b.nextPiece == 0) {
+            b.drawDemoPiece(x,y,0);
+        }
+        if (b.nextPiece == 1) {
+            b.drawDemoPiece(x,y,1);
+        }
+        if (b.nextPiece == 2) {
+            b.drawDemoPiece(x,y,2);
+        }
+        if (b.nextPiece == 3) {
+            b.drawDemoPiece(x,y,3);
+        }
+        if (b.nextPiece == 4) {
+            b.drawDemoPiece(x,y,4);
+        }
+        if (b.nextPiece == 5) {
+            b.drawDemoPiece(x,y,5);
+        }
+        if (b.nextPiece == 6) {
+            b.drawDemoPiece(x,y,6);
+        }
+    }
     private void drawHeld(){
         if (b.held == 0) {
             b.drawDemoPiece(150,120,0);
@@ -52,6 +78,7 @@ public class Screen {
         Main.processing.textSize(30);
         Main.processing.text("Score: " + b.score, 315, 90);
         drawHeld();
+        drawNext();
 
     }
 

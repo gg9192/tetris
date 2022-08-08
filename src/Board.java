@@ -176,6 +176,8 @@ public class Board {
     public Board(int x, int y) {
         this.x = x;
         this.y = y;
+        int random = (int)Math.floor(Math.random()*(6-0+1)+0);
+        this.nextPiece = random;
     }
     public Tuple getCords(int x, int y) {
         return new Tuple(this.x + 5 + 25*x, this.y + 5 + 25*y);
@@ -322,30 +324,39 @@ public class Board {
         return true;
     }
     public void draw(){
+        // 0 = L piece
+        // 1 = Reverse L piece
+        // 2 = line piece
+        // 3 = t piece
+        // 4 = z piece
+        // 5 = reverse z piece
+        // 6 = square piece
         if (needPiece) {
-            int random = (int)Math.floor(Math.random()*(6-0+1)+0);
-            if (random == 0) {
-                cp = new LinePiece(4,1);
-            }
-            if (random == 1) {
-                cp = new SquarePiece(4,1);
-            }
-            if (random == 2) {
+
+            if (nextPiece == 0) {
                 cp = new LPiece(4,1);
             }
-            if (random == 3) {
+            if (nextPiece == 1) {
                 cp = new ReverseLPiece(4,1);
             }
-            if (random == 4) {
-                cp = new ZPiece(4,1);
+            if (nextPiece == 2) {
+                cp = new LinePiece(4,1);
             }
-            if (random == 5) {
-                cp = new ReverseZPiece(4,1);
-            }
-            if (random == 6) {
+            if (nextPiece == 3) {
                 cp = new TPiece(4,1);
             }
+            if (nextPiece == 4) {
+                cp = new ZPiece(4,1);
+            }
+            if (nextPiece == 5) {
+                cp = new ReverseZPiece(4,1);
+            }
+            if (nextPiece == 6) {
+                cp = new SquarePiece(4,1);
+            }
             needPiece = false;
+            int random = (int)Math.floor(Math.random()*(6-0+1)+0);
+            nextPiece = random;
 
 
 
