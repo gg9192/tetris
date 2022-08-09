@@ -100,7 +100,7 @@ public class Board {
                     cp = new TPiece(4,1);
                 }
                 if (temp == 4) {
-                    cp = new ZPiece(4,1);
+                    cp = new ZPiece();
                 }
                 if (temp == 5) {
                     cp = new ReverseZPiece(4,1);
@@ -289,7 +289,7 @@ public class Board {
                             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
                             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
                             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
-                            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
+                            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1},
                             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
                             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
                             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
@@ -336,7 +336,7 @@ public class Board {
         // 5 = reverse z piece
         // 6 = square piece
         if (needPiece) {
-            cp = new ReverseLPiece();
+            cp = new ZPiece();
 
             needPiece = false;
             int random = (int)Math.floor(Math.random()*(6-0+1)+0);
@@ -749,12 +749,26 @@ public class Board {
             }
         }
     }
-    public class ZPiece extends Piece {
 
-        public ZPiece(int x, int y) {
-            rotate();
+    public class ZPiece extends Piece {
+        public ZPiece() {
+            piece[0] = new Tuple(centerX - 1, centerY - 1);
+            piece[1] = new Tuple(centerX , centerY - 1);
+            piece[2] = new Tuple(centerX, centerY);
+            piece[3] = new Tuple(centerX + 1, centerY);
+            findShadow();
         }
         public boolean canRotate() {
+            if (this.centerY < 1) {
+                if (this.orientation == 0) {
+                    if (centerX == 9) {return false;}
+                }
+                if (this.orientation == 1) {
+                    if (centerX == 9 ) {return false;}}
+                if (orientation == 2) {
+                    if (centerX == 0) {return false;}}
+                return true;
+            }
             if (this.orientation == 0) {
                 if (centerX == 9) {return false;}
                 return grid[centerX + 1][centerY - 1] == 0 && grid[centerX][centerY - 1] == 0 && grid[centerX][centerY] == 0 && grid[centerX - 1][centerY] == 0;
@@ -778,7 +792,33 @@ public class Board {
 
         @Override
         public boolean checkDir(int dir) {
-            return false;
+            if (dir == 0) {
+                if (this.centerX == 1) {return false;}
+                if (this.centerY > 1) {
+                    for (Tuple t : piece) {
+                        if (grid[t.getX() - 1][t.getY()] != 0) {
+                            return false;
+                        }
+                    }
+                    return true;
+
+                }
+                return true;
+            }
+            else {
+                if (this.centerX == 8) {return false;}
+                if (this.centerY > 1) {
+                    for (Tuple t : piece) {
+                        if (grid[t.getX() + 1][t.getY()] != 0) {
+                            return false;
+                        }
+                    }
+                    return true;
+
+                }
+                return true;
+            }
+
         }
 
         @Override
@@ -843,10 +883,16 @@ public class Board {
         public void findShadow() {
 
             if (this.orientation == 0) {
-                int t1 = piece[2].getY();
-                int t2 = piece[3].getY();
-                int t3 = piece[1].getY();
-                while (t1 < 23 && t2 <23 && t3 <23 && grid[piece[2].getX()][t1 + 1] == 0 && grid[piece[3].getX()][t2 + 1] == 0 && grid[piece[1].getX()][t3 + 1] == 0) {
+                int t1 = 1;
+                int t2 = 1;
+                int t3 = 0;
+
+                if (piece[2].getY() > 1 && piece[3].getY() > 1 && piece[1].getY() > 0) {
+                    t1 = piece[2].getY();
+                    t2 = piece[3].getY();
+                    t3 = piece[1].getY();
+                }
+                while (t1 < 23 && t2 <23 && t3 <23 && grid[piece[2].getX()][t1 + 1] == 0 && grid[piece[3].getX()][t2 + 1] == 0 && grid[piece[0].getX()][t3 + 1] == 0) {
                     t1++;
                     t2++;
                     t3++;
@@ -860,8 +906,13 @@ public class Board {
 
             }
             if (this.orientation == 1) {
-                int t1 = piece[1].getY();
-                int t2 = piece[3].getY();
+                int t1 = 0;
+                int t2 = 1;
+                if (piece[1].getY() > 1 && piece[3].getY() > 1 ) {
+                    t1 = piece[1].getY();
+                    t2 = piece[3].getY();
+
+                }
                 while (t1 < 23 && t2 < 23 && grid[piece[1].getX()][t1 + 1] == 0 && grid[piece[3].getX()][t2 + 1] == 0) {
                     t1++;
                     t2++;
@@ -872,22 +923,32 @@ public class Board {
                 shadow[3] = new Tuple(piece[3].getX(), t2);
                 return;
             }
-            int t1 = piece[1].getY();
-            int t2;
             if (this.orientation == 2) {
-                t2 = piece[2].getY();
-                int t3 = piece[3].getY();
-                while (t1 < 23 && t2 < 23 && t3 <23 && grid[piece[1].getX()][t1 + 1] == 0 && grid[piece[2].getX()][t2 + 1] == 0 && grid[piece[3].getX()][t3 + 1] == 0) {
+                int t1 = 0;
+                int t2 = 1;
+                int t3 = 1;
+                if (piece[1].getY() > 1 && piece[2].getY() > 1 && piece[3].getY() > 1 ) {
+                    t1 = piece[1].getY();
+                    t2 = piece[2].getY();
+                    t3 = piece[3].getY();
+
+                }
+                while (t1 < 23 && t2 < 23 && t3 < 23 && grid[piece[1].getX()][t1 + 1] == 0 && grid[piece[2].getX()][t2 + 1] == 0 && grid[piece[3].getX()][t3 + 1] == 0) {
                     t1++;
                     t2++;
-                    t3++;
                 }
                 shadow[0] = new Tuple(piece[0].getX(), t1);
                 shadow[1] = new Tuple(piece[1].getX(), t1);
                 shadow[2] = new Tuple(piece[2].getX(), t2);
+                shadow[3] = new Tuple(piece[3].getX(), t2);
             }
             else {
-                t2 = piece[3].getY();
+                int t1 = 0;
+                int t2 = 1;
+                if (piece[1].getY() > 1 && piece[3].getY() > 1) {
+                    t1 = piece[1].getY();
+                    t2 = piece[3].getY();
+                }
                 while (t1 < 23 && t2 < 23 && grid[piece[1].getX()][t1 + 1] == 0 && grid[piece[3].getX()][t2 + 1] == 0) {
                     t1++;
                     t2++;
@@ -895,9 +956,10 @@ public class Board {
                 shadow[0] = new Tuple(piece[0].getX(), t1 - 1);
                 shadow[1] = new Tuple(piece[1].getX(), t1);
                 shadow[2] = new Tuple(piece[2].getX(), t2 - 1);
+                shadow[3] = new Tuple(piece[3].getX(), t2);
             }
-            shadow[3] = new Tuple(piece[3].getX(), t2);
-            return;
+
+
         }
 
 
