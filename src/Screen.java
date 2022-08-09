@@ -14,7 +14,8 @@ public class Screen {
     public void drawNext() {
         int x = 740;
         int y = 120;
-        if (b.nextPiece == 0) {
+        /*
+         (b.nextPiece == 0) {
             b.drawDemoPiece(x,y,0);
         }
         if (b.nextPiece == 1) {
@@ -34,7 +35,9 @@ public class Screen {
         }
         if (b.nextPiece == 6) {
             b.drawDemoPiece(x,y,6);
-        }
+
+         */
+
     }
     private void drawHeld(){
         if (b.held == 0) {

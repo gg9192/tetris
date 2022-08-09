@@ -4,6 +4,11 @@ import javax.sound.sampled.Line;
 import java.util.*;
 
 public class Board {
+    public int level = 1;
+
+    private int tickMax = (int) Math.floor(50 * Math.pow(0.9, level));
+
+    private int linesCleared = 0;
     private boolean canHold = true;
     public int score = 0;
     private int maxHeight = 23;
@@ -22,7 +27,6 @@ public class Board {
 
     public int held = -1;
 
-    public int nextPiece;
 
     // 0 = L piece
     // 1 = Reverse L piece
@@ -84,7 +88,7 @@ public class Board {
                 }
                 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                 if (temp == 0) {
-                    cp = new LPiece(4,1);
+                    cp = new LPiece();
                 }
                 if (temp == 1) {
                     cp = new ReverseLPiece(4,1);
@@ -177,7 +181,6 @@ public class Board {
         this.x = x;
         this.y = y;
         int random = (int)Math.floor(Math.random()*(6-0+1)+0);
-        this.nextPiece = random;
     }
     public Tuple getCords(int x, int y) {
         return new Tuple(this.x + 5 + 25*x, this.y + 5 + 25*y);
@@ -321,6 +324,7 @@ public class Board {
         for (int i = 0; i < 10; i ++) {
             grid[i][col] = clearTime;
         }
+
         return true;
     }
     public void draw(){
@@ -332,31 +336,10 @@ public class Board {
         // 5 = reverse z piece
         // 6 = square piece
         if (needPiece) {
+            cp = new LPiece();
 
-            if (nextPiece == 0) {
-                cp = new LPiece(4,1);
-            }
-            if (nextPiece == 1) {
-                cp = new ReverseLPiece(4,1);
-            }
-            if (nextPiece == 2) {
-                cp = new LinePiece(4,1);
-            }
-            if (nextPiece == 3) {
-                cp = new TPiece(4,1);
-            }
-            if (nextPiece == 4) {
-                cp = new ZPiece(4,1);
-            }
-            if (nextPiece == 5) {
-                cp = new ReverseZPiece(4,1);
-            }
-            if (nextPiece == 6) {
-                cp = new SquarePiece(4,1);
-            }
             needPiece = false;
             int random = (int)Math.floor(Math.random()*(6-0+1)+0);
-            nextPiece = random;
 
 
 
@@ -391,7 +374,7 @@ public class Board {
 
         }
         tick ++;
-        if (tick > 50) {
+        if (tick > tickMax) {
             cp.tick();
             tick = 0;
         }
@@ -399,17 +382,12 @@ public class Board {
         if (qwe) {needPiece = true;}
     }
     public abstract class Piece {
+        int centerX = 4;
+        int centerY = -2;
 
         //https://tetris.fandom.com/wiki/Lock_delay
         int pieceLock =  -1;
-        int orientation = -1;
-        int centerX;
-        int centerY;
-        public Piece(int x, int y) {
-            this.centerX = x;
-            this.centerY = y;
-        }
-
+        int orientation = 0;
         public void tick() {
 
             if (!check() && this.pieceLock == -1) {
@@ -417,8 +395,10 @@ public class Board {
                     piece[i].setY(piece[i].getY() + 1);
                 }
                 this.centerY ++;
+                System.out.println(this.centerY);
                 return;
             }
+
             return;
         }
         public void down() {
@@ -432,23 +412,7 @@ public class Board {
         }
         Tuple[] piece = new Tuple[4];
         Tuple[] shadow = new Tuple[4];
-        public boolean checkDir (int dir) {
-            if (dir == 0) {
-                for (Tuple t : piece ) {
-                    if (t.getX() == 0 || grid[t.getX() - 1][t.getY()] != 0) {
-                        return false;
-                    }
-                }
-            }
-            else {
-                for (Tuple t : piece ) {
-                    if (t.getX() == 9 || grid[t.getX() + 1][t.getY()] != 0) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
+        public abstract boolean checkDir(int dir);
         public void moveLeft() {
             if (checkDir(0)) {
                 this.centerX --;
@@ -518,6 +482,8 @@ public class Board {
                         score += 800;
                     }
 
+                    linesCleared += numCleared;
+                    level = linesCleared/ 10;
 
                     return true;
 
@@ -532,19 +498,23 @@ public class Board {
 
             for (Tuple t : piece) {
                 if (this instanceof LPiece || this instanceof ReverseLPiece) {
-                    drawSquare(1, getCords(t.getX(),t.getY()));
+                    if (t.getY() > -1) {drawSquare(1, getCords(t.getX(),t.getY()));}
                 }
                 if (this instanceof TPiece) {
-                    drawSquare(3, getCords(t.getX(),t.getY()));
+                    if (t.getY() > -1) {drawSquare(3, getCords(t.getX(),t.getY()));}
+
                 }
                 if (this instanceof ZPiece || this instanceof ReverseZPiece) {
-                    drawSquare(4, getCords(t.getX(),t.getY()));
+                    if (t.getY() > -1) {drawSquare(4, getCords(t.getX(),t.getY()));}
+
                 }
                 if (this instanceof SquarePiece) {
-                    drawSquare(5, getCords(t.getX(),t.getY()));
+                    if (t.getY() > -1) {drawSquare(5, getCords(t.getX(),t.getY()));}
+
                 }
                 if (this instanceof LinePiece) {
-                    drawSquare(2, getCords(t.getX(),t.getY()));
+                    if (t.getY() > -1) {drawSquare(2, getCords(t.getX(),t.getY()));}
+
                 }
             }
             drawShadow();
@@ -569,30 +539,79 @@ public class Board {
     }
     public class LPiece extends Piece{
 
-        public LPiece(int x, int y) {
-            super(x, y);
-            this.rotate();
+        public LPiece() {
+            piece[0] = new Tuple(centerX, centerY - 1);
+            piece[1] = new Tuple(centerX, centerY);
+            piece[2] = new Tuple(centerX, centerY + 1);
+            piece[3] = new Tuple(centerX + 1, centerY + 1);
+            findShadow();
         }
         public boolean canRotate() {
-            if (this.orientation == 0) {
-                return grid[centerX][centerY - 1] == 0 && grid[centerX][centerY] == 0 && grid[centerX][centerY + 1] == 0 && grid[centerX + 1][centerY + 1] == 0;
-            }
-            else if (this.orientation == 1) {
-                if (this.centerX == 0) {
+            if (centerY < 1) {
+                if (this.orientation == 1) {
+                    if (this.centerX == 0) {
+                        return false;
+                    }
+                }
+                else {if (this.centerX == 9) {
                     return false;
                 }
-                return grid[centerX - 1][centerY] == 0 && grid[centerX][centerY] == 0 && grid[centerX][centerY + 1] == 0 && grid[centerX + 1][centerY + 1] == 0;
-            }
-            else if (this.orientation == 2) {
-                return grid[centerX - 1][centerY - 1] == 0 && grid[centerX][centerY - 1] == 0 && grid[centerX][centerY] == 0 && grid[centerX][centerY + 1] == 0;
+
+                }
+                return true;
             }
             else {
-                if (this.centerX == 9) {
-                    return false;
+                if (this.orientation == 0) {
+                    return grid[centerX][centerY - 1] == 0 && grid[centerX][centerY] == 0 && grid[centerX][centerY + 1] == 0 && grid[centerX + 1][centerY + 1] == 0;
                 }
-                return grid[centerX - 1][centerY] == 0 && grid[centerX][centerY] == 0 && grid[centerX + 1][centerY] == 0 && grid[centerX - 1][centerY + 1] == 0;
+                else if (this.orientation == 1) {
+                    if (this.centerX == 0) {
+                        return false;
+                    }
+                    return grid[centerX - 1][centerY] == 0 && grid[centerX][centerY] == 0 && grid[centerX][centerY + 1] == 0 && grid[centerX + 1][centerY + 1] == 0;
+                }
+                else if (this.orientation == 2) {
+                    return grid[centerX - 1][centerY - 1] == 0 && grid[centerX][centerY - 1] == 0 && grid[centerX][centerY] == 0 && grid[centerX][centerY + 1] == 0;
+                }
+                else {
+                    if (this.centerX == 9) {
+                        return false;
+                    }
+                    return grid[centerX - 1][centerY] == 0 && grid[centerX][centerY] == 0 && grid[centerX + 1][centerY] == 0 && grid[centerX - 1][centerY + 1] == 0;
+                }
             }
+
         }
+        //left is 0
+        @Override
+        public boolean checkDir(int dir) {
+            if (dir == 0) {
+                for (Tuple t : piece ) {
+                    if (t.getX() > 0) {
+                        if (t.getY() > 0 && grid[t.getX() - 1][t.getY()] != 0) {
+                            return false;
+                        }
+                    }
+                    else {
+                        return false;
+                    }
+                }
+            }
+            if (dir == 0) {
+                for (Tuple t : piece ) {
+                    if (t.getX() > 9) {
+                        if (t.getY() > 0 && grid[t.getX() + 1][t.getY()] != 0) {
+                            return false;
+                        }
+                        else {return false;}
+                    }
+                }
+
+            }
+            return true;
+
+        }
+
         @Override
         public void rotate() {
             this.orientation ++;
@@ -655,8 +674,14 @@ public class Board {
         @Override
         public void findShadow() {
             if (this.orientation == 0) {
-                int t1 = piece[2].getY();
-                int t2 = piece[3].getY();
+                int t1 = 0;
+                int t2 = 0;
+                if (piece[2].getY() > 0 || piece[3].getY() > 0) {
+                    t1 = piece[2].getY();
+                    t2 = piece[3].getY();
+                }
+
+
                 while (t1 < 23 && t2 < 23 &&grid[piece[2].getX()][t1 + 1] == 0 && grid[piece[3].getX()][t2 + 1] == 0) {
                     t1++;
                     t2++;
@@ -668,9 +693,14 @@ public class Board {
                 shadow[3] = new Tuple(piece[3].getX(), t1);
             }
             else if (this.orientation == 1) {
-                int t1 = piece[1].getY();
-                int t2 = piece[2].getY();
-                int t3 = piece[3].getY();
+                int t1 = 0;
+                int t2 = 0;
+                int t3 = 0;
+                if (piece[1].getY() > 0 || piece[2].getY() > 0 || piece[3].getY() > 0) {
+                    t1 = piece[1].getY();
+                    t2 = piece[2].getY();
+                    t2 = piece[3].getY();
+                }
                 while (t1 < 23 && t2 < 23 && t3 < 23 && grid[piece[2].getX()][t2 + 1] == 0 && grid[piece[3].getX()][t3 + 1] == 0 && grid[piece[1].getX()][t1 + 1] == 0 ) {
                     t1++;
                     t2++;
@@ -682,8 +712,12 @@ public class Board {
                 shadow[3] = new Tuple(piece[3].getX(), t1 );
             }
             else if (this.orientation == 2) {
-                int t1 = piece[0].getY();
-                int t2 = piece[3].getY();
+                int t1 = 0;
+                int t2 = 2;
+                if (piece[0].getY() > 0 || piece[3].getY() > 0) {
+                    t1 = piece[0].getY();
+                    t2 = piece[3].getY();
+                }
                 while (t1 < 23 && t2 < 23 && grid[piece[3].getX()][t2 + 1] == 0 && grid[piece[0].getX()][t1 + 1] == 0 ) {
                     t1++;
                     t2++;
@@ -695,9 +729,14 @@ public class Board {
 
             }
             else {
-                int t1 = piece[1].getY();
-                int t2 = piece[2].getY();
-                int t3 = piece[3].getY();
+                int t1 = 0;
+                int t2 = 0;
+                int t3 = 1;
+                if (piece[1].getY() > 0 || piece[2].getY() > 0 || piece[3].getY() > 0) {
+                    t1 = piece[1].getY();
+                    t2 = piece[2].getY();
+                    t2 = piece[3].getY();
+                }
                 while (t1 < 23 && t2 < 23  && t3 <23 && grid[piece[1].getX()][t1 + 1] == 0 && grid[piece[2].getX()][t2 + 1] == 0 && grid[piece[3].getX()][t3 + 1] == 0) {
                     t1++;
                     t2++;
@@ -713,7 +752,6 @@ public class Board {
     public class ZPiece extends Piece {
 
         public ZPiece(int x, int y) {
-            super(x, y);
             rotate();
         }
         public boolean canRotate() {
@@ -736,6 +774,11 @@ public class Board {
 
             }
 
+        }
+
+        @Override
+        public boolean checkDir(int dir) {
+            return false;
         }
 
         @Override
@@ -862,9 +905,13 @@ public class Board {
     public class SquarePiece extends Piece {
 
         public SquarePiece(int x, int y) {
-            super(x, y);
             rotate();
             findShadow();
+        }
+
+        @Override
+        public boolean checkDir(int dir) {
+            return false;
         }
 
         @Override
@@ -893,9 +940,13 @@ public class Board {
     public class TPiece extends Piece {
         int orientation = -1;
         public TPiece(int x, int y) {
-            super(x, y);
             this.rotate();
             this.findShadow();
+        }
+
+        @Override
+        public boolean checkDir(int dir) {
+            return false;
         }
 
         @Override
@@ -1040,7 +1091,6 @@ public class Board {
     public class LinePiece extends Piece {
 
         public LinePiece(int x, int y) {
-            super(x, y);
             rotate();
             findShadow();
         }
@@ -1053,6 +1103,11 @@ public class Board {
                 if (centerX == 0 || centerX == 8 || centerX == 9) {return false;}
                 return grid[centerX - 1][centerY] == 0 && grid[centerX][centerY] == 0 && grid[centerX + 1][centerY] == 0 && grid[centerX + 2][centerY] == 0;
             }
+        }
+
+        @Override
+        public boolean checkDir(int dir) {
+            return false;
         }
 
         @Override
@@ -1123,7 +1178,6 @@ public class Board {
     public class ReverseLPiece extends Piece {
 
         public ReverseLPiece(int x, int y) {
-            super(x, y);
             rotate();
             findShadow();
         }
@@ -1143,6 +1197,11 @@ public class Board {
             else {
                 return grid[centerX][centerY - 1] == 0 && grid[centerX][centerY] == 0 && grid[centerX][centerY + 1] == 0 && grid[centerX - 1][centerY + 1] == 0;
             }
+        }
+
+        @Override
+        public boolean checkDir(int dir) {
+            return false;
         }
 
         @Override
@@ -1263,7 +1322,6 @@ public class Board {
     public class ReverseZPiece extends Piece {
 
         public ReverseZPiece(int x, int y) {
-            super(x, y);
             rotate();
             findShadow();
         }
@@ -1289,6 +1347,11 @@ public class Board {
             else {
                 return grid[centerX][centerY - 1] == 0 && grid[centerX][centerY] == 0 && grid[centerX - 1][centerY] == 0 && grid[centerX - 1][centerY + 1] == 0;
             }
+        }
+
+        @Override
+        public boolean checkDir(int dir) {
+            return false;
         }
 
         @Override
