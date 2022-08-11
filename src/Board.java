@@ -94,16 +94,16 @@ public class Board {
                     cp = new ReverseLPiece();
                 }
                 if (temp == 2) {
-                    cp = new LinePiece(4,1);
+                    cp = new LinePiece();
                 }
                 if (temp == 3) {
-                    cp = new TPiece(4,1);
+                    cp = new TPiece();
                 }
                 if (temp == 4) {
                     cp = new ZPiece();
                 }
                 if (temp == 5) {
-                    cp = new ReverseZPiece(4,1);
+                    cp = new ReverseZPiece();
                 }
                 if (temp == 6) {
                     cp = new SquarePiece(4,1);
@@ -336,7 +336,7 @@ public class Board {
         // 5 = reverse z piece
         // 6 = square piece
         if (needPiece) {
-            cp = new ZPiece();
+            cp = new TPiece();
 
             needPiece = false;
             int random = (int)Math.floor(Math.random()*(6-0+1)+0);
@@ -585,31 +585,49 @@ public class Board {
         //left is 0
         @Override
         public boolean checkDir(int dir) {
-            if (dir == 0) {
-                for (Tuple t : piece ) {
-                    if (t.getX() > 0) {
-                        if (t.getY() > 0 && grid[t.getX() - 1][t.getY()] != 0) {
-                            return false;
-                        }
-                    }
-                    else {
+            for (Tuple t : piece) {
+                if (dir == 0) {
+                    if (t.getX() == 0) {
                         return false;
                     }
-                }
-            }
-            if (dir == 0) {
-                for (Tuple t : piece ) {
-                    if (t.getX() > 9) {
-                        if (t.getY() > 0 && grid[t.getX() + 1][t.getY()] != 0) {
-                            return false;
+                    if (this.orientation == 0 || this.orientation == 1 || this.orientation == 3) {
+                        if (this.centerY >= 1) {
+                            if (grid[t.getX() - 1][t.getY()] != 0) {
+                                return false;
+                            }
                         }
-                        else {return false;}
+                    }
+
+                    else if (this.orientation == 2){
+                        if (this.centerY > -1) {
+                            if (grid[t.getX() - 1][t.getY()] != 0) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+                else {
+                    if (t.getX() == 9) {
+                        return false;
+                    }
+                    if (this.orientation == 0 || this.orientation == 1 || this.orientation == 3) {
+                        if (this.centerY > 0) {
+                            if (grid[t.getX() + 1][t.getY()] != 0) {
+                                return false;
+                            }
+                        }
+                        else if (this.orientation == 2){
+                            if (this.centerY > -1) {
+                                if (grid[t.getX() + 1][t.getY()] != 0) {
+                                    return false;
+                                }
+                            }
+                        }
                     }
                 }
 
             }
             return true;
-
         }
 
         @Override
@@ -792,33 +810,49 @@ public class Board {
 
         @Override
         public boolean checkDir(int dir) {
-            if (dir == 0) {
-                if (this.centerX == 1) {return false;}
-                if (this.centerY > 1) {
-                    for (Tuple t : piece) {
-                        if (grid[t.getX() - 1][t.getY()] != 0) {
-                            return false;
+            for (Tuple t : piece) {
+                if (dir == 0) {
+                    if (t.getX() == 0) {
+                        return false;
+                    }
+                    if (this.orientation == 0 || this.orientation == 1 || this.orientation == 3) {
+                        if (this.centerY >= 1) {
+                            if (grid[t.getX() - 1][t.getY()] != 0) {
+                                return false;
+                            }
                         }
                     }
-                    return true;
 
-                }
-                return true;
-            }
-            else {
-                if (this.centerX == 8) {return false;}
-                if (this.centerY > 1) {
-                    for (Tuple t : piece) {
-                        if (grid[t.getX() + 1][t.getY()] != 0) {
-                            return false;
+                    else if (this.orientation == 2){
+                        if (this.centerY > -1) {
+                            if (grid[t.getX() - 1][t.getY()] != 0) {
+                                return false;
+                            }
                         }
                     }
-                    return true;
-
                 }
-                return true;
-            }
+                else {
+                    if (t.getX() == 9) {
+                        return false;
+                    }
+                    if (this.orientation == 0 || this.orientation == 1 || this.orientation == 3) {
+                        if (this.centerY > 0) {
+                            if (grid[t.getX() + 1][t.getY()] != 0) {
+                                return false;
+                            }
+                        }
+                        else if (this.orientation == 2){
+                            if (this.centerY > -1) {
+                                if (grid[t.getX() + 1][t.getY()] != 0) {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                }
 
+            }
+            return true;
         }
 
         @Override
@@ -973,7 +1007,49 @@ public class Board {
 
         @Override
         public boolean checkDir(int dir) {
-            return false;
+            for (Tuple t : piece) {
+                if (dir == 0) {
+                    if (t.getX() == 0) {
+                        return false;
+                    }
+                    if (this.orientation == 0 || this.orientation == 1 || this.orientation == 3) {
+                        if (this.centerY >= 1) {
+                            if (grid[t.getX() - 1][t.getY()] != 0) {
+                                return false;
+                            }
+                        }
+                    }
+
+                    else if (this.orientation == 2){
+                        if (this.centerY > -1) {
+                            if (grid[t.getX() - 1][t.getY()] != 0) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+                else {
+                    if (t.getX() == 9) {
+                        return false;
+                    }
+                    if (this.orientation == 0 || this.orientation == 1 || this.orientation == 3) {
+                        if (this.centerY > 0) {
+                            if (grid[t.getX() + 1][t.getY()] != 0) {
+                                return false;
+                            }
+                        }
+                        else if (this.orientation == 2){
+                            if (this.centerY > -1) {
+                                if (grid[t.getX() + 1][t.getY()] != 0) {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            return true;
         }
 
         @Override
@@ -1000,15 +1076,60 @@ public class Board {
         }
     }
     public class TPiece extends Piece {
-        int orientation = -1;
-        public TPiece(int x, int y) {
-            this.rotate();
+        int orientation = 0;
+        public TPiece() {
+            piece[0] = new Tuple(centerX, centerY - 1);
+            piece[1] = new Tuple(centerX - 1, centerY);
+            piece[2] = new Tuple(centerX, centerY);
+            piece[3] = new Tuple(centerX + 1, centerY);
             this.findShadow();
         }
 
         @Override
         public boolean checkDir(int dir) {
-            return false;
+            for (Tuple t : piece) {
+                if (dir == 0) {
+                    if (t.getX() == 0) {
+                        return false;
+                    }
+                    if (this.orientation == 0 || this.orientation == 1 || this.orientation == 3) {
+                        if (this.centerY >= 1) {
+                            if (grid[t.getX() - 1][t.getY()] != 0) {
+                                return false;
+                            }
+                        }
+                    }
+
+                    else if (this.orientation == 2){
+                        if (this.centerY > -1) {
+                            if (grid[t.getX() - 1][t.getY()] != 0) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+                else {
+                    if (t.getX() == 9) {
+                        return false;
+                    }
+                    if (this.orientation == 0 || this.orientation == 1 || this.orientation == 3) {
+                        if (this.centerY > 0) {
+                            if (grid[t.getX() + 1][t.getY()] != 0) {
+                                return false;
+                            }
+                        }
+                        else if (this.orientation == 2){
+                            if (this.centerY > -1) {
+                                if (grid[t.getX() + 1][t.getY()] != 0) {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            return true;
         }
 
         @Override
@@ -1066,6 +1187,22 @@ public class Board {
             }
         }
         public boolean canRotate(){
+
+                if (centerY <= 1) {
+                    if (orientation == 0) {
+                        if (centerX == 9) {return false;}}
+                    return true;
+                }
+                if (centerY < 0) {
+                    System.out.println(centerX);
+                    if (orientation == 2) {if (centerX == 0) {
+                        return false;
+                    }
+                    return true;}
+
+                }
+
+
             if (orientation == 0) {
                 if (centerX == 9) {return false;}
                 return grid[centerX - 1][centerY] == 0 && grid[centerX][centerY] == 0 && grid[centerX][centerY - 1] == 0 && grid[centerX + 1][centerY] == 0;
@@ -1089,9 +1226,15 @@ public class Board {
         @Override
         public void findShadow() {
             if (this.orientation == 0) {
-                int t1 = piece[1].getY();
-                int t2 = piece[2].getY();
-                int t3 = piece[3].getY();
+                int t1 = 0;
+                int t2 = 0;
+                int t3 = 0;
+                if (piece[1].getY() > 0 && piece[2].getY() > 0 && piece[3].getY() > 0) {
+                    t1 = piece[1].getY();
+                    t2 = piece[2].getY();
+                    t3 = piece[3].getY();
+                }
+
                 while (t1 < 23 && t2 <23 && t3 <23  && grid[piece[1].getX()][t1 + 1] == 0 && grid[piece[2].getX()][t2 + 1] == 0 && grid[piece[3].getX()][t3 + 1] == 0) {
                     t1 ++;
                     t2++;
@@ -1104,8 +1247,12 @@ public class Board {
                 return;
             }
             if (this.orientation == 1) {
-                int t1 = piece[3].getY();
-                int t2 = piece[2].getY();
+                int t1 = 1;
+                int t2 = 0;
+                if (piece[3].getY() > 0 && piece[2].getY() > 0) {
+                    t1 = piece[3].getY();
+                    t2 = piece[2].getY();
+                }
                 while (t1 < 23 && t2 <23   && grid[piece[3].getX()][t1 + 1] == 0 && grid[piece[2].getX()][t2 + 1] == 0) {
                     t1 ++;
                     t2++;
@@ -1116,12 +1263,15 @@ public class Board {
                 shadow[0] = new Tuple(piece[0].getX(),t1 - 2);
                 return;
             }
-            int t1;
-            int t2;
             if (this.orientation == 2   ) {
-                t1 = piece[0].getY();
-                t2 = piece[2].getY();
-                int t3 = piece[3].getY();
+                int t1 = 0;
+                int t2 = 0;
+                int t3 = 1;
+                if (piece[0].getY() > 0 && piece[2].getY() > 0 && piece[3].getY() > 0) {
+                    t1 = piece[0].getY();
+                    t2 = piece[2].getY();
+                    t3 = piece[3].getY();
+                }
                 while (t1 < 23 && t2 <23 && t3 <23 && grid[piece[0].getX()][t1 + 1] == 0 && grid[piece[2].getX()][t2 + 1] == 0 && grid[piece[3].getX()][t3 + 1] == 0) {
                     t1 ++;
                     t2++;
@@ -1133,8 +1283,12 @@ public class Board {
                 shadow[0] = new Tuple(piece[0].getX(),t1);
             }
             else {
-                t1 = piece[1].getY();
-                t2 = piece[3].getY();
+                int t1 = 0;
+                int t2 = 1;
+                if (piece[1].getY() > 0 && piece[3].getY() > 0) {
+                    t1 = piece[1].getY();
+                    t2 = piece[3].getY();
+                }
                 while (t1 < 23 && t2 <23 && grid[piece[1].getX()][t1 + 1] == 0 && grid[piece[3].getX()][t2 + 1] == 0) {
                     t1 ++;
                     t2++;
@@ -1152,24 +1306,81 @@ public class Board {
     }
     public class LinePiece extends Piece {
 
-        public LinePiece(int x, int y) {
-            rotate();
+        public LinePiece() {
+            this.centerY--;
+            piece[0] = new Tuple(centerX, centerY - 1);
+            piece[1] = new Tuple(centerX, centerY);
+            piece[2] = new Tuple(centerX, centerY + 1);
+            piece[3] = new Tuple(centerX, centerY + 2);
             findShadow();
         }
 
         public boolean canRotate() {
+
+            if (this.orientation == 0) { if (this.centerY < 2) {
+                if (centerX == 0|| centerX == 9) {return false;}
+                return true;
+            }}
+            if (this.orientation == 1) {
+                if (this.centerY < 2) {if (centerX == 0|| centerX == 9) {return false;}
+                    return true;}
+            }
+
+
             if (this.orientation == 0) {
                 return grid[centerX][centerY - 1] == 0 && grid[centerX][centerY] == 0 && grid[centerX][centerY + 1] == 0 && grid[centerX][centerY + 2] == 0;
             }
             else {
-                if (centerX == 0 || centerX == 8 || centerX == 9) {return false;}
+                if (centerX == 0|| centerX == 9) {return false;}
                 return grid[centerX - 1][centerY] == 0 && grid[centerX][centerY] == 0 && grid[centerX + 1][centerY] == 0 && grid[centerX + 2][centerY] == 0;
             }
         }
 
         @Override
         public boolean checkDir(int dir) {
-            return false;
+            for (Tuple t : piece) {
+                if (dir == 0) {
+                    if (t.getX() == 0) {
+                        return false;
+                    }
+                    if (this.orientation == 0 || this.orientation == 1 || this.orientation == 3) {
+                        if (this.centerY >= 1) {
+                            if (grid[t.getX() - 1][t.getY()] != 0) {
+                                return false;
+                            }
+                        }
+                    }
+
+                    else if (this.orientation == 2){
+                        if (this.centerY > -1) {
+                            if (grid[t.getX() - 1][t.getY()] != 0) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+                else {
+                    if (t.getX() == 9) {
+                        return false;
+                    }
+                    if (this.orientation == 0 || this.orientation == 1 || this.orientation == 3) {
+                        if (this.centerY > 0) {
+                            if (grid[t.getX() + 1][t.getY()] != 0) {
+                                return false;
+                            }
+                        }
+                        else if (this.orientation == 2){
+                            if (this.centerY > -1) {
+                                if (grid[t.getX() + 1][t.getY()] != 0) {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            return true;
         }
 
         @Override
@@ -1205,21 +1416,26 @@ public class Board {
 
         @Override
         public void findShadow() {
-            int t1;
+
             if (orientation == 0) {
-                t1 = piece[3].getY();
+                int t1 = 0;
+                if (piece[3].getY()> 0) {
+                    t1 = piece[3].getY();
+                }
                 while (t1 <23  && grid[piece[3].getX()][t1 + 1] == 0) {
                     t1++;
                 }
                 shadow[0] = new Tuple(piece[0].getX(),t1-3);
                 shadow[1] = new Tuple(piece[1].getX(),t1-2);
                 shadow[2] = new Tuple(piece[2].getX(),t1-1);
+                shadow[3] = new Tuple(piece[3].getX(),t1  );
             }
             else {
-                t1 = piece[0].getY();
-                int t2 = piece[1]. getY();
-                int t3 = piece[2]. getY();
-                int t4 = piece[3]. getY();
+                int t1 = 0;
+                int t2 = 0;
+                int t3 = 0;
+                int t4 = 0;
+                if (piece[0].getY() > 0 && piece[1].getY() > 0 && piece[2].getY() > 0 && piece[3].getY() > 0) {}
                 while (t1 <23  && t2 <23  && t3 <23  && t4 <23  && grid[piece[0].getX()][t1 + 1] == 0  && grid[piece[1].getX()][t2 + 1] == 0  && grid[piece[2].getX()][t3 + 1] == 0  && grid[piece[3].getX()][t4 + 1] == 0) {
                     t1++;
                     t2++;
@@ -1229,8 +1445,9 @@ public class Board {
                 shadow[0] = new Tuple(piece[0].getX(),t1);
                 shadow[1] = new Tuple(piece[1].getX(),t1);
                 shadow[2] = new Tuple(piece[2].getX(),t1);
+                shadow[3] = new Tuple(piece[3].getX(),t1  );
             }
-            shadow[3] = new Tuple(piece[3].getX(),t1  );
+
             return;
 
 
@@ -1275,33 +1492,49 @@ public class Board {
         //left is 0
         @Override
         public boolean checkDir(int dir) {
-            if (dir == 0) {
-                for (Tuple t : piece) {
-                    if (t.getX() > 1) {
-                        if (t.getY() > -1) {
-                            if (grid[t.getX() - 1][t.getY()] != 0) {return false;}
-                            return true;
-                        }
-                        return true;
+            for (Tuple t : piece) {
+                if (dir == 0) {
+                    if (t.getX() == 0) {
+                        return false;
                     }
-                    return false;
+                    if (this.orientation == 0 || this.orientation == 1 || this.orientation == 3) {
+                        if (this.centerY >= 1) {
+                            if (grid[t.getX() - 1][t.getY()] != 0) {
+                                return false;
+                            }
+                        }
+                    }
+
+                    else if (this.orientation == 2){
+                        if (this.centerY > -1) {
+                            if (grid[t.getX() - 1][t.getY()] != 0) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+                else {
+                    if (t.getX() == 9) {
+                        return false;
+                    }
+                    if (this.orientation == 0 || this.orientation == 1 || this.orientation == 3) {
+                        if (this.centerY > 0) {
+                            if (grid[t.getX() + 1][t.getY()] != 0) {
+                                return false;
+                        }
+                    }
+                    else if (this.orientation == 2){
+                        if (this.centerY > -1) {
+                            if (grid[t.getX() + 1][t.getY()] != 0) {
+                                return false;
+                            }
+                        }
+                    }
                 }
             }
-            else {
-                for (Tuple t : piece) {
-                    if (t.getX() < 9) {
-                        if (t.getY() > -1) {
-                            if (grid[t.getX() + 1][t.getY()] != 0) {return false;}
-                            return true;
-                        }
-                        return true;
 
-                    }
-                return false;
-                }
-            }
-
-            return false;
+        }
+            return true;
         }
 
         @Override
@@ -1443,48 +1676,108 @@ public class Board {
     }
     public class ReverseZPiece extends Piece {
 
-        public ReverseZPiece(int x, int y) {
-            rotate();
+        public ReverseZPiece() {
+            piece[0] = new Tuple(centerX, centerY - 1);
+            piece[1] = new Tuple(centerX + 1, centerY - 1);
+            piece[2] = new Tuple(centerX , centerY);
+            piece[3] = new Tuple(centerX - 1, centerY);
             findShadow();
         }
 
+
+
+        @Override
+        public boolean checkDir(int dir) {
+            for (Tuple t : piece) {
+                if (dir == 0) {
+                    if (t.getX() == 0) {
+                        return false;
+                    }
+                    if (this.orientation == 0 || this.orientation == 1 || this.orientation == 3) {
+                        if (this.centerY >= 1) {
+                            if (grid[t.getX() - 1][t.getY()] != 0) {
+                                return false;
+                            }
+                        }
+                    }
+
+                    else if (this.orientation == 2){
+                        if (this.centerY > -1) {
+                            if (grid[t.getX() - 1][t.getY()] != 0) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+                else {
+                    if (t.getX() == 9) {
+                        return false;
+                    }
+                    if (this.orientation == 0 || this.orientation == 1 || this.orientation == 3) {
+                        if (this.centerY > 0) {
+                            if (grid[t.getX() + 1][t.getY()] != 0) {
+                                return false;
+                            }
+                        }
+                        else if (this.orientation == 2){
+                            if (this.centerY > -1) {
+                                if (grid[t.getX() + 1][t.getY()] != 0) {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            return true;
+        }
+
         public boolean canRotate() {
+            if (this.centerY <= 0) {
+                if (this.orientation == 0) {
+                    if (centerX == 9) {
+                        return false;
+                    }}}
+            if (this.centerY <= -1) {
+                if (this.orientation == 2) {
+                    if (centerX == 0) {
+                        return false;
+                    }}}
+
+
+
+
             if (this.orientation == 0) {
                 if (centerX == 9) {
                     return false;
                 }
 
-                return grid[centerX - 1][centerY - 1] == 0 && grid[centerX][centerY - 1] == 0 && grid[centerX][centerY] == 0 && grid[centerX + 1][centerY] == 0;
+                return grid[centerX][centerY - 1] == 0 && grid[centerX + 1][centerY - 1] == 0 && grid[centerX - 1][centerY] == 0 && grid[centerX][centerY] == 0;
             }
             if (this.orientation == 1) {
 
-                return grid[centerX + 1][centerY - 1] == 0 && grid[centerX + 1][centerY] == 0 && grid[centerX][centerY] == 0 && grid[centerX][centerY + 1] == 0;
+                return grid[centerX][centerY - 1] == 0 && grid[centerX][centerY] == 0 && grid[centerX + 1][centerY] == 0 && grid[centerX + 1][centerY] == 0;
             }
             if (this.orientation == 2) {
                 if (centerX == 0) {
                     return false;
                 }
-                return grid[centerX - 1][centerY] == 0 && grid[centerX][centerY] == 0 && grid[centerX][centerY + 1] == 0 && grid[centerX + 1][centerY + 1] == 0;
+                return grid[centerX][centerY] == 0 && grid[centerX + 1][centerY] == 0 && grid[centerX - 1][centerY + 1] == 0 && grid[centerX][centerY + 1] == 0;
             }
             else {
-                return grid[centerX][centerY - 1] == 0 && grid[centerX][centerY] == 0 && grid[centerX - 1][centerY] == 0 && grid[centerX - 1][centerY + 1] == 0;
+                return grid[centerX - 1][centerY - 1] == 0 && grid[centerX - 1][centerY] == 0 && grid[centerX][centerY] == 0 && grid[centerX][centerY + 1] == 0;
             }
         }
-
-        @Override
-        public boolean checkDir(int dir) {
-            return false;
-        }
-
         @Override
         public void rotate() {
             this.orientation ++;
             if (this.orientation == 0) {
                 if (canRotate()) {
-                    piece[0] = new Tuple(centerX - 1, centerY - 1);
-                    piece[1] = new Tuple(centerX, centerY - 1);
-                    piece[2] = new Tuple(centerX, centerY);
-                    piece[3] = new Tuple(centerX + 1, centerY);
+                    piece[0] = new Tuple(centerX, centerY - 1);
+                    piece[1] = new Tuple(centerX + 1, centerY - 1);
+                    piece[2] = new Tuple(centerX - 1, centerY);
+                    piece[3] = new Tuple(centerX, centerY);
                     findShadow();
                     return;
                 }
@@ -1492,10 +1785,11 @@ public class Board {
                 return;
             }
             if (this.orientation == 1) {
-                if (canRotate()) {piece[0] = new Tuple(centerX + 1, centerY -1);
-                    piece[1] = new Tuple(centerX + 1, centerY);
-                    piece[2] = new Tuple(centerX, centerY);
-                    piece[3] = new Tuple(centerX, centerY  + 1);
+                if (canRotate()) {
+                    piece[0] = new Tuple(centerX, centerY -1);
+                    piece[1] = new Tuple(centerX, centerY);
+                    piece[2] = new Tuple(centerX + 1, centerY);
+                    piece[3] = new Tuple(centerX + 1, centerY  + 1);
                     findShadow();
                     return;}
                 this.orientation--;
@@ -1504,10 +1798,10 @@ public class Board {
             }
             if (this.orientation == 2) {
                 if (canRotate()) {
-                    piece[0] = new Tuple(centerX - 1, centerY);
-                    piece[1] = new Tuple(centerX, centerY);
-                    piece[2] = new Tuple(centerX, centerY + 1);
-                    piece[3] = new Tuple(centerX + 1, centerY  + 1);
+                    piece[0] = new Tuple(centerX, centerY);
+                    piece[1] = new Tuple(centerX + 1, centerY);
+                    piece[2] = new Tuple(centerX - 1, centerY + 1);
+                    piece[3] = new Tuple(centerX, centerY  + 1);
                     findShadow();
                     return;}
                     this.orientation--;
@@ -1516,10 +1810,10 @@ public class Board {
             }
             if (this.orientation == 3) {
                 if (canRotate()) {
-                    piece[0] = new Tuple(centerX, centerY - 1);
+                    piece[0] = new Tuple(centerX - 1, centerY - 1);
                     piece[1] = new Tuple(centerX - 1, centerY);
                     piece[2] = new Tuple(centerX, centerY);
-                    piece[3] = new Tuple(centerX - 1, centerY  + 1);
+                    piece[3] = new Tuple(centerX, centerY  + 1);
                     findShadow();
                     this.orientation = -1;
                     return;
@@ -1533,10 +1827,16 @@ public class Board {
 
         @Override
         public void findShadow() {
+
             if (orientation == 0) {
-                int t1 = piece[0].getY();
-                int t2 = piece[2].getY();
-                int t3 = piece[3].getY();
+                int t1 = 0;
+                int t2 = 1;
+                int t3 = 1;
+                if (piece[0].getY() > 0 && piece[2].getY() > 0 && piece[3].getY() > 0) {
+                     t1 = piece[0].getY();
+                     t2 = piece[2].getY();
+                     t3 = piece[3].getY();
+                }
                 while (t1 <23 && t2 <23 && t3 <23 && grid[piece[0].getX()][t1 + 1] == 0 && grid[piece[2].getX()][t2 + 1] == 0 && grid[piece[3].getX()][t3 + 1] == 0) {
                     t1++;
                     t2++;
@@ -1549,8 +1849,12 @@ public class Board {
                 return;
             }
             if (orientation == 1) {
-                int t1 = piece[1].getY();
-                int t2 = piece[3].getY();
+                int t1 = 0;
+                int t2 = 1;
+                if (piece[1].getY() > 0 && piece[3].getY() > 0) {
+                    t1 = piece[1].getY();
+                    t2 = piece[3].getY();
+                }
                 while (t1 <23 && t2 <23 && grid[piece[1].getX()][t1 + 1] == 0 && grid[piece[3].getX()][t2 + 1] == 0) {
                     t1++;
                     t2++;
@@ -1561,12 +1865,16 @@ public class Board {
                 shadow[3] = new Tuple(piece[3].getX(),t2);
                 return;
             }
-            int t1;
-            int t2;
+
             if (orientation == 2) {
-                t1 = piece[0].getY();
-                t2 = piece[2].getY();
-                int t3 = piece[3].getY();
+                int t1 = 0;
+                int t2 = 1;
+                int t3 = 1;
+                if (piece[0].getY() > 0 && piece[2].getY() > 0 && piece[3].getY() > 0) {
+                    t1 = piece[0].getY();
+                    t2 = piece[2].getY();
+                    t3 = piece[3].getY();
+                }
                 while (t1 <23 && t2 <23 && t3 <23 && grid[piece[0].getX()][t1 + 1] == 0 && grid[piece[2].getX()][t2 + 1] == 0 && grid[piece[3].getX()][t3 + 1] == 0 ) {
                     t1++;
                     t2++;
@@ -1578,8 +1886,12 @@ public class Board {
                 shadow[3] = new Tuple(piece[3].getX(),t1 + 1);
             }
             else {
-                t1 = piece[2].getY();
-                t2 = piece[3].getY();
+                int t1 = 0;
+                int t2 = 1;
+                if (piece[2].getY() > 0 && piece[3].getY() > 0) {
+                    t1 = piece[2].getY();
+                    t2 = piece[3].getY();
+                }
                 while (t1 <23 && t2 <23 && grid[piece[2].getX()][t1 + 1] == 0 && grid[piece[3].getX()][t2 + 1] == 0 ) {
                     t1++;
                     t2++;
