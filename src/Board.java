@@ -26,7 +26,7 @@ public class Board {
     int y;
 
     public int held = -1;
-
+    public int nextPiece;
 
     // 0 = L piece
     // 1 = Reverse L piece
@@ -180,7 +180,7 @@ public class Board {
     public Board(int x, int y) {
         this.x = x;
         this.y = y;
-        int random = (int)Math.floor(Math.random()*(6-0+1)+0);
+        nextPiece = (int)Math.floor(Math.random()*(6-0+1)+0);
     }
     public Tuple getCords(int x, int y) {
         return new Tuple(this.x + 5 + 25*x, this.y + 5 + 25*y);
@@ -196,7 +196,6 @@ public class Board {
             Main.processing.vertex(t.getX(),t.getY());
             Main.processing.vertex(t.getX() + 25,t.getY());
             Main.processing.vertex(t.getX() + 20,t.getY() + 5);
-            Main.processing.vertex(t.getX() + 5,t.getY() + 5);
             Main.processing.vertex(t.getX() + 5,t.getY() + 20);
             Main.processing.vertex(t.getX(),t.getY() + 25);
 
@@ -336,14 +335,30 @@ public class Board {
         // 5 = reverse z piece
         // 6 = square piece
         if (needPiece) {
-            cp = new LPiece();
-
-            needPiece = false;
             int random = (int)Math.floor(Math.random()*(6-0+1)+0);
-
-
-
-
+            if (nextPiece == 0) {
+                cp = new LPiece();
+            }
+            if (nextPiece == 1) {
+                cp = new ReverseLPiece();
+            }
+            if (nextPiece == 2) {
+                cp = new LinePiece();
+            }
+            if (nextPiece == 3) {
+                cp = new TPiece();
+            }
+            if (nextPiece == 4) {
+                cp = new ZPiece();
+            }
+            if (nextPiece == 5) {
+                cp = new ReverseZPiece();
+            }
+            if (nextPiece == 6) {
+                cp = new SquarePiece();
+            }
+            nextPiece = random;
+            needPiece = false;
         }
         if (this.cp.check()) {
             needPiece = true;
