@@ -31,7 +31,10 @@ public class Main extends PApplet{
             screen.b.cp.rotate();
         }
         else if (keyCode == 83) {
-            screen.b.cp.down();
+            if(screen.b.isLoss == false) {
+                screen.b.cp.down();
+            }
+
         }
         else if (keyCode == 69) {
             screen.b.hold();

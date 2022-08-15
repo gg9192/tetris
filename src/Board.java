@@ -6,6 +6,7 @@ import java.util.*;
 public class Board {
     public int level = 1;
 
+    public boolean isLoss = false;
     private int tickMax = 50;
 
     private int linesCleared = 0;
@@ -35,6 +36,53 @@ public class Board {
     // 4 = z piece
     // 5 = reverse z piece
     // 6 = square piece
+    //centerx = 4
+
+    public boolean checkLoss(int piece) {
+        if (piece == 0) {
+            if (grid[3][1] == 0 && grid[4][1] == 0 && grid[5][1] == 0) {
+                return false;
+            }
+            return true;
+        }
+        else if (piece == 1) {
+            if (grid[3][1] == 0 && grid[4][1] == 0 && grid[5][1] == 0) {
+                return false;
+            }
+            return true;
+
+        }
+        else if (piece == 2) {
+            if (grid[4][3] != 0) {
+                return true;
+            }
+            return false;
+        }
+        else if (piece == 3) {
+            if (grid[3][1] == 0 && grid[4][1] == 0 && grid[5][1] == 0) {
+                return false;
+            }
+            return true;
+        }
+        else if (piece == 4) {
+            if (grid[3][1] == 0 && grid[4][1] == 0 && grid[5][0] == 0) {
+                return false;
+            }
+            return true;
+        }
+        else if (piece == 5) {
+            if (grid[3][0] == 0 && grid[4][1] == 0 && grid[5][1] == 0) {
+                return false;
+            }
+            return true;
+        }
+        else {
+            if (grid[4][1] == 0 && grid[4][1] == 0 && grid[5][1] == 0) {
+                return false;
+            }
+            return true;
+        }
+    }
     public void hold() {
         if (canHold) {
             canHold = false;
@@ -128,7 +176,6 @@ public class Board {
     // color 4 = blue z piece
     // color 5 = yellow square piece
     public void drawDemoPiece(int x, int y, int type) {
-        System.out.println(held);
         if (type == 0) {
             drawSquare(1, new Tuple(x,y));
             drawSquare(1, new Tuple(x,y + 25));
@@ -300,9 +347,7 @@ public class Board {
     //int[][] board = {{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5}};
 
     public void fixBoard(int base) {
-        System.out.println(base + ", " + maxHeight);
         for (int y = base; y > maxHeight; y --) {
-            System.out.println(y);
             for (int x = 0; x < 10; x ++) {
                 grid[x][y] = grid[x][y - 1];
 
@@ -327,6 +372,7 @@ public class Board {
         return true;
     }
     public void draw(){
+
         // 0 = L piece
         // 1 = Reverse L piece
         // 2 = line piece
@@ -335,31 +381,43 @@ public class Board {
         // 5 = reverse z piece
         // 6 = square piece
         if (needPiece) {
-            int random = (int)Math.floor(Math.random()*(6-0+1)+0);
-            if (nextPiece == 0) {
-                cp = new LPiece();
+            if (isLoss == false) {
+                int random = (int)Math.floor(Math.random()*(6-0+1)+0);
+                if (checkLoss(nextPiece)) {
+                    isLoss = true;
+                    System.out.println(isLoss);
+                    System.out.println("asdfasdaeftw");
+                }
+                if (nextPiece == 0) {
+                    cp = new LPiece();
+                }
+                if (nextPiece == 1) {
+                    cp = new ReverseLPiece();
+                }
+                if (nextPiece == 2) {
+                    cp = new LinePiece();
+                }
+                if (nextPiece == 3) {
+                    cp = new TPiece();
+                }
+                if (nextPiece == 4) {
+                    cp = new ZPiece();
+                }
+                if (nextPiece == 5) {
+                    cp = new ReverseZPiece();
+                }
+                if (nextPiece == 6) {
+                    cp = new SquarePiece();
+                }
+                nextPiece = random;
+                needPiece = false;}
+            else {
+                cp = null;
+                return;
             }
-            if (nextPiece == 1) {
-                cp = new ReverseLPiece();
-            }
-            if (nextPiece == 2) {
-                cp = new LinePiece();
-            }
-            if (nextPiece == 3) {
-                cp = new TPiece();
-            }
-            if (nextPiece == 4) {
-                cp = new ZPiece();
-            }
-            if (nextPiece == 5) {
-                cp = new ReverseZPiece();
-            }
-            if (nextPiece == 6) {
-                cp = new SquarePiece();
-            }
-            nextPiece = random;
-            needPiece = false;
+
         }
+
         if (this.cp.check()) {
             needPiece = true;
             return;
@@ -410,7 +468,6 @@ public class Board {
                     piece[i].setY(piece[i].getY() + 1);
                 }
                 this.centerY ++;
-                System.out.println(this.centerY);
                 return;
             }
 
@@ -741,10 +798,7 @@ public class Board {
                     t1 = piece[1].getY();
                     t2 = piece[2].getY();
                     t3 = piece[3].getY();
-                    System.out.println(piece[1].getY());
-                    System.out.println(piece[2].getY());
-                    System.out.println(piece[3].getY());
-                    System.out.println();
+
                 }
                 while (t1 < 23 && t2 < 23 && t3 < 23 && grid[piece[1].getX()][t1 + 1] == 0 && grid[piece[2].getX()][t2 + 1] == 0 && grid[piece[3].getX()][t3 + 1] == 0) {
                     t1++;
@@ -752,7 +806,7 @@ public class Board {
                     t3++;
                 }
 
-                System.out.println(t1 + " " + t2 + " " + t3);
+
                 shadow[0] = new Tuple(piece[0].getX(), t1 - 1);
                 shadow[1] = new Tuple(piece[1].getX(), t1 );
                 shadow[2] = new Tuple(piece[2].getX(), t1 );
@@ -1220,7 +1274,7 @@ public class Board {
             }
         }
         public boolean canRotate(){
-            System.out.println(centerY);
+
 
                 if (centerY < 1) {
                     if (orientation == 0) {
