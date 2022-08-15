@@ -6,7 +6,7 @@ import java.util.*;
 public class Board {
     public int level = 1;
 
-    private int tickMax = (int) Math.floor(50 * Math.pow(0.9, level));
+    private int tickMax = 50;
 
     private int linesCleared = 0;
     private boolean canHold = true;
@@ -470,20 +470,26 @@ public class Board {
                     if (cp.piece[0].getY() < maxHeight) {maxHeight = cp.piece[0].getY();}
 
                     if (numCleared == 1) {
-                        score += 100;
+                        score += 100 * level;
                     }
                     if (numCleared == 2) {
-                        score += 300;
+                        score += 300 * level;
                     }
                     if (numCleared == 3) {
-                        score += 500;
+                        score += 500 * level;
                     }
                     if (numCleared == 4) {
-                        score += 800;
+                        score += 800 * level;
                     }
 
                     linesCleared += numCleared;
-                    level = linesCleared/ 10;
+
+                    int temp = linesCleared/10;
+                    if (temp < 29) {
+                        level = temp + 1;
+                    }
+
+                    tickMax = (int) Math.floor(50 * Math.pow(0.8, level));
 
                     return true;
 
