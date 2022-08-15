@@ -372,6 +372,14 @@ public class Board {
         return true;
     }
     public void draw(){
+        if (isLoss) {
+                for (int x = 0; x < 10; x ++) {
+                    for (int y = 0; y < 24; y ++) {
+                        drawSquare(grid[x][y], getCords(x, y));
+                    }
+                }
+                return;
+        }
 
         // 0 = L piece
         // 1 = Reverse L piece
@@ -410,11 +418,10 @@ public class Board {
                     cp = new SquarePiece();
                 }
                 nextPiece = random;
-                needPiece = false;}
-            else {
-                cp = null;
-                return;
+                needPiece = false;
             }
+
+
 
         }
 
