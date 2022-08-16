@@ -524,6 +524,10 @@ public class Board {
             if (checkDir(0)) {
                 this.centerX --;
                 for (Tuple t : piece) {
+
+
+
+
                     t.setX(t.getX()-1);
                 }
                 findShadow();
@@ -1712,7 +1716,7 @@ public class Board {
 
         @Override
         public void findShadow() {
-
+            System.out.println("shit");
             if (orientation == 0) {
                 int t1 = 0;
                 int t2 = 0;
@@ -1772,7 +1776,7 @@ public class Board {
                 shadow[3] = new Tuple(piece[3].getX(),t1 + 1);
                 return;
             }
-            if (orientation == 3 ) {
+            if (orientation == 3 || this.orientation == -1) {
                 int t1 = 0;
                 int t2 = 0;
 
