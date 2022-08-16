@@ -1,11 +1,14 @@
 
 
+import processing.core.PFont;
+
 import javax.sound.sampled.Line;
 import java.util.*;
 
 public class Board {
     public int level = 1;
 
+    private int lossTick = 0;
     public boolean isLoss = false;
     private int tickMax = 50;
 
@@ -175,6 +178,23 @@ public class Board {
     // color 3 = pink t piece
     // color 4 = blue z piece
     // color 5 = yellow square piece
+
+    public void drawLossSquares(int numSquares) {
+
+        int boardX = getCords(0,0).getX();
+        int boardY = getCords(0,0).getY();
+        for (int x = 0; x <= numSquares; x ++) {
+            Main.processing.strokeWeight(4);
+            Main.processing.fill(242,168,64);
+            Main.processing.rect(boardX,boardY + (x * 100),250,100);
+            Main.processing.fill(0,0,0);
+            PFont font = Main.processing.createFont("TETRIS.ttf", 30);
+            Main.processing.textFont(font);
+            Main.processing.text("GAME", boardX + 50, boardY + (x * 100) + 30);
+            Main.processing.text("OVER", boardX + 100, boardY + (x * 100) + 70);
+        }
+
+    }
     public void drawDemoPiece(int x, int y, int type) {
         if (type == 0) {
             drawSquare(1, new Tuple(x,y));
@@ -373,11 +393,19 @@ public class Board {
     }
     public void draw(){
         if (isLoss) {
+            nextPiece = -1;
                 for (int x = 0; x < 10; x ++) {
                     for (int y = 0; y < 24; y ++) {
                         drawSquare(grid[x][y], getCords(x, y));
                     }
                 }
+                if (lossTick < 36) {
+                    lossTick ++;
+
+
+                }
+            drawLossSquares(lossTick/7);
+
                 return;
         }
 

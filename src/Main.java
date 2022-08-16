@@ -32,7 +32,10 @@ public class Main extends PApplet{
         }
         else if (keyCode == 83) {
             if(screen.b.isLoss == false) {
-                screen.b.cp.down();
+                if (screen.b.cp != null) {
+                    screen.b.cp.down();
+                }
+
             }
 
         }
