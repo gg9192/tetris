@@ -5,6 +5,15 @@ using flow. This entire project was coded from scratch using the Processing Java
 I decided to use GitHub as my version control solution half way through the project to better doccument
 my progress. 
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Backlog:
+Shadow bug of the blue z piece
+Java doc for all methods
+Implement starting menu
+Implement game over menu
+Implement scoreboard
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
 In order for the project to work, you MUST add core.jar (processing) as a library!
 
 https://www.linkedin.com/in/alex-guo-b104ba208/
