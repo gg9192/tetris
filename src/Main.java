@@ -1,15 +1,16 @@
 import processing.core.PApplet;
-
 import java.util.Stack;
 
 public class Main extends PApplet{
     int tick = 0;
     public static PApplet processing;
+    Stack<Character> input = new Stack<>();
+    
     public static void main(String[] args) {
         PApplet.main("Main",args);
 
     }
-    Stack<Character> input = new Stack<>();
+    
 
     public void setup() {
         processing = this;
