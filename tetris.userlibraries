@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="core1">
+    <archive path="C:/Users/alext/tetris/src/core.jar" />
+  </library>
+  <library name="core">
+    <archive path="C:/Users/alext/tetris/src/out/production/tetris/core.jar" />
+  </library>
+</eclipse-userlibraries>
+
