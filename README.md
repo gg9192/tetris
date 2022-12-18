@@ -7,11 +7,11 @@ my progress.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
-Shadow bug of the blue z piece
-Java doc for all methods
-Implement starting menu
-Implement game over menu
-Implement scoreboard
+- Shadow bug of the blue z piece
+- Java doc for all methods
+- Implement starting menu
+- Implement game over menu
+- Implement scoreboard
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 In order for the project to work, you MUST add core.jar (processing) as a library!
