@@ -7,6 +7,8 @@ my progress.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
+- refactor piece object
+- add an ENUM for all colors and pieces
 - Shadow bug of the blue z piece
 - Java doc for all methods
 - Implement starting menu
