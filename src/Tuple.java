@@ -1,4 +1,7 @@
 public class Tuple implements Comparable{
+	
+	//this is a coded version of the type tuple in python
+	//https://www.w3schools.com/python/python_tuples.asp
     private int x;
     private int y;
     public Tuple(int x, int y) {

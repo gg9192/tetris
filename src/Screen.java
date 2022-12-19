@@ -11,6 +11,9 @@ public class Screen {
     // 5 = reverse z piece
     // 6 = square piece
 
+    /**
+     * Draws the next piece
+     */
     public void drawNext() {
         int x = 740;
         int y = 120;
@@ -36,9 +39,11 @@ public class Screen {
         if (b.nextPiece == 6) {
             b.drawDemoPiece(x,y,6);
 
-
-
     }}
+    
+    /**
+     * Draws the held piece, if one exists. 
+     */
     private void drawHeld() {
         if (b.held == 0) {
             b.drawDemoPiece(150,120,0);
@@ -62,6 +67,9 @@ public class Screen {
             b.drawDemoPiece(150,120,6);
         }
     }
+    /**
+     * This function draws the elements on the screen.
+     */
     public void draw() {
         Main.processing.background(21,42,106);
         b.draw();

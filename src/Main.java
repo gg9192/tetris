@@ -5,17 +5,24 @@ public class Main extends PApplet{
     int tick = 0;
     public static PApplet processing;
     Stack<Character> input = new Stack<>();
-    
+    Screen screen = new Screen();
     public static void main(String[] args) {
         PApplet.main("Main",args);
 
     }
     
-
+    /**
+     * This function is run once, when the program starts. It's used to 
+     * define initial environment properties
+     */
     public void setup() {
         processing = this;
         background(21,42,106);
     }
+    
+    /**
+     * This function handles when a key is released
+     */
     public void keyReleased() {
         //a = 65
         //d = 68
@@ -45,11 +52,17 @@ public class Main extends PApplet{
         }
 
     }
-
+    /**
+     * The settings() method runs before the sketch has been set up.
+     * In this case, this is used to specify the window size
+     */
     public void settings() {
         size(885,800 );
     }
-    static Screen screen = new Screen();
+    
+    /**
+     * This is a processing function that draws to the screen.
+     */
     public void draw() {
         screen.draw();
     }
