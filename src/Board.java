@@ -16,7 +16,15 @@ public class Board {
     private boolean canHold = true;
     public int score = 0;
     private int maxHeight = 23;
+    //number of ticks it takes to clear the row
     protected int clearTime = -50;
+    //Current piece
+    Piece cp;
+    boolean needPiece = true;
+    static int[][] grid = new int[10][24];
+    int tick = 0;
+    
+
 
     //10x24
     //piece model https://static.techspot.com/images2/news/bigimage/2019/06/2019-06-06-image-17.jpg
@@ -41,6 +49,11 @@ public class Board {
     // 6 = square piece
     //centerx = 4
 
+    /**
+     * Calculates if the game is lost based on the next piece.
+     * @param piece The piece that is checked.
+     * @return Boolean based on whether the game is lost or not. 
+     */
     public boolean checkLoss(int piece) {
         if (piece == 0) {
             if (grid[3][1] == 0 && grid[4][1] == 0 && grid[5][1] == 0) {
@@ -86,6 +99,11 @@ public class Board {
             return true;
         }
     }
+    
+    /**
+     * Function to handle holding a piece when the proper key is pressed. 
+     * 
+     */
     public void hold() {
         if (canHold) {
             canHold = false;
@@ -179,6 +197,10 @@ public class Board {
     // color 4 = blue z piece
     // color 5 = yellow square piece
 
+    /**
+     * Function that handles the drawing of the squares in loss screen.
+     * @param numSquares Number of squares drawn
+     */
     public void drawLossSquares(int numSquares) {
 
         int boardX = getCords(0,0).getX();
@@ -195,6 +217,20 @@ public class Board {
         }
 
     }
+    
+    /**
+     * Draws a piece at the given location to show next and current piece. 
+     * @param x X coordinate of piece.
+     * @param y Y coordinate of piece.
+     * @param type Type of piece to be drawn.
+     * 0 = L piece
+     * 1 = Reverse L piece
+     * 2 = line piece
+     * 3 = t piece
+     * 4 = z piece
+     * 5 = reverse z piece
+     * 6 = square piece
+     */
     public void drawDemoPiece(int x, int y, int type) {
         if (type == 0) {
             drawSquare(1, new Tuple(x,y));
@@ -242,16 +278,42 @@ public class Board {
         }
 
     }
-    int rowToBeCleared = 0;
-    int howManyRows = 0;
+    
+
+    /**
+     * Constructs a board based on the given X and Y, then decides on a next piece.
+     * @param x X coordinate to draw the board at.
+     * @param y Y coordinate to draw the board at.
+     */
     public Board(int x, int y) {
         this.x = x;
         this.y = y;
         nextPiece = (int)Math.floor(Math.random()*(6-0+1)+0);
     }
+    
+    /**
+     * Calculates the coordinates on the screen of a given block in the game 
+     * based on the 2-D array that stores board data. 
+     * Note that each tetronimo has four blocks
+     * @param x x value of 2d array
+     * @param y y value of 2d array
+     * @return a tuple that gives the coordinates. 
+     */
     public Tuple getCords(int x, int y) {
         return new Tuple(this.x + 5 + 25*x, this.y + 5 + 25*y);
     }
+    
+    /**
+     * Draws a block based on the color and location given
+     * @param color Color of the block
+     * color 0 = black null piece
+     * color 1 = red L piece
+     * color 2 = green line piece
+     * color 3 = pink t piece
+     * color 4 = blue z piece
+     * color 5 = yellow square piece
+     * @param t the tuple containing the coordinates of the piece.
+     */
     public static void drawSquare(int color, Tuple t) {
         Main.processing.strokeWeight(1);
         if (color == 0) {
@@ -345,27 +407,13 @@ public class Board {
             Main.processing.rect(t.getX(),t.getY(),25,25);
         }
     }
-    Piece cp;
-    boolean needPiece = true;
-     static int[][] grid = new int[10][24];
-     //uncomment next line for testing
-    int tick = 0;
-     //static int[][] grid = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1}
-     //                      ,{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
-      //                      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
-      //                      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
-      //                      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
-       //                     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1},
-        //                    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
-         //                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
-            //                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
-             //               {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
-    //int[][] board = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
-    //int[][] board = {{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}};
-    //int[][] board =  {{3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3},{3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3},{3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3},{3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3},{3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3},{3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3},{3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3},{3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3},{3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3},{3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3}};
-    //int [][] board = {{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4}};
-    //int[][] board = {{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5}};
-
+    
+    /**
+     * This function clears one row of the board, from the given 
+     * row, to the maxHeight of the board. Recall that board[0][0] 
+     * represents the top left of the board.
+     * @param base the row that needs to be cleared
+     */
     public void fixBoard(int base) {
         for (int y = base; y > maxHeight; y --) {
             for (int x = 0; x < 10; x ++) {
@@ -378,19 +426,29 @@ public class Board {
         }
         maxHeight++;
     }
-    private boolean canClear(int col) {
+    /**
+     * Checks if the given row can be cleared. If so, prepare the row to be
+     * cleared. 
+     * @param row The row to be checked 
+     * @return boolean based on if the row can be cleared.
+     */
+    private boolean checkClear(int row) {
 
         for (int i = 0; i < 10; i ++) {
-           if (grid[i][col] == 0) {
+           if (grid[i][row] == 0) {
                return false;
            }
         }
         for (int i = 0; i < 10; i ++) {
-            grid[i][col] = clearTime;
+            grid[i][row] = clearTime;
         }
 
         return true;
     }
+    
+    /**
+     * Draws the board and the pieces associated with it. 
+     */
     public void draw(){
         if (isLoss) {
             nextPiece = -1;
@@ -489,13 +547,20 @@ public class Board {
         cp.draw();
         if (qwe) {needPiece = true;}
     }
+    
+    
     public abstract class Piece {
         int centerX = 4;
         int centerY = -2;
-
+        Tuple[] piece = new Tuple[4];
+        Tuple[] shadow = new Tuple[4];
         //https://tetris.fandom.com/wiki/Lock_delay
         int pieceLock =  -1;
         int orientation = 0;
+        
+        /**
+         * Moves the piece down one square
+         */
         public void tick() {
 
             if (!check() && this.pieceLock == -1) {
@@ -508,6 +573,10 @@ public class Board {
 
             return;
         }
+        
+        /**
+         * 
+         */
         public void down() {
             for (int i = 0; i < 4; i ++) {
                 piece[i] = new Tuple(shadow[i].getX(),shadow[i].getY());
@@ -517,9 +586,18 @@ public class Board {
                 needPiece = true;
             }
         }
-        Tuple[] piece = new Tuple[4];
-        Tuple[] shadow = new Tuple[4];
+        
+        /**
+         * Checks if the piece can move in the direction specified
+         * @param dir 0 for left, 1 for right
+         * @return Boolean based on whether the piece can move in the given direction
+         */
         public abstract boolean checkDir(int dir);
+        
+        /**
+         * The event listen calls this function when "D" is pressed.
+         * Moves the piece 1 unit to the left if able to
+         */
         public void moveLeft() {
             if (checkDir(0)) {
                 this.centerX --;
@@ -533,6 +611,11 @@ public class Board {
                 findShadow();
             }
         }
+        
+        /**
+         * The event listen calls this function when "D" is pressed.
+         * Moves the piece 1 unit to the right if able to
+         */
         public void moveRight() {
             if (checkDir(1)) {
                 this.centerX ++;
@@ -549,6 +632,11 @@ public class Board {
         // color 4 = blue z piece
         // color 5 = yellow square piece
 
+        /**
+         * Checks if the piece has "landed" and clears lines on the board
+         * as needed.
+         * @return boolean based on whether the piece has successfully "landed"
+         */
         public boolean check() {
             if (Arrays.equals(piece, shadow)) {
                 pieceLock ++;
@@ -573,12 +661,14 @@ public class Board {
                         if (this instanceof SquarePiece) {
                             grid[t.getX()][t.getY()] = 5;
                         }
-                        if (canClear(t.getY())) {
+                        if (checkClear(t.getY())) {
                             numCleared ++;
 
                         }
                 }
-                    if (cp.piece[0].getY() < maxHeight) {maxHeight = cp.piece[0].getY();}
+                    if (cp.piece[0].getY() < maxHeight) {
+                    	maxHeight = cp.piece[0].getY();
+                    	}
 
                     if (numCleared == 1) {
                         score += 100 * level;
@@ -611,6 +701,7 @@ public class Board {
                 return false;}
             return false;
         }
+        
         public void draw() {
 
             for (Tuple t : piece) {
@@ -636,13 +727,29 @@ public class Board {
             }
             drawShadow();
         }
+        
+        /**
+         * Rotates the piece based on the current orientation.
+         */
         public abstract void rotate();
+        
+        /**
+         * Draws the shadow of the piece onto the board.
+         */
         public void drawShadow() {
             for (Tuple t : shadow) {
                 drawShadowBox(t);
             }
         }
-        public abstract void  findShadow();
+        
+        /**
+         * Finds the shadow of the piece. Note that the shadow 
+         * of a piece is an indicator showing where the piece will
+         * land.
+         */
+        public abstract void findShadow();
+        
+        
         public void drawShadowBox(Tuple t) {
             int x = getCords(t.getX(),t.getY()).getX();
             int y = getCords(t.getX(),t.getY()).getY();
@@ -654,6 +761,7 @@ public class Board {
             Main.processing.line(x + 25, y + 25, x + 25,y);
         }
     }
+    
     public class LPiece extends Piece{
 
         public LPiece() {
@@ -663,6 +771,12 @@ public class Board {
             piece[3] = new Tuple(centerX + 1, centerY + 1);
             findShadow();
         }
+        
+        /**
+         * Checks if the piece is able to rotate
+         * @return a boolean based on whether the pice can rotate 
+         * or not
+         */
         public boolean canRotate() {
             if (centerY < 1) {
                 if (this.orientation == 1) {
@@ -1949,8 +2063,10 @@ public class Board {
             }
             }
 
-
-
+        
+        /**
+         * Calculates where the piece would land if no input is given. 
+         */
         @Override
         public void findShadow() {
 
