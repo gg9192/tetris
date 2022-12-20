@@ -176,7 +176,6 @@ public class LPiece extends Piece{
                     t2 = piece[3].getY();
                 }
 
-                System.out.println(t1 + " " + t2);
                 while (t1 < 23 && t2 < 23 && board.getGridValue(piece[2].getX(), t1 + 1) == 0 && board.getGridValue(piece[3].getX(), t2 + 1) == 0) {
                 	
                     t1++;
