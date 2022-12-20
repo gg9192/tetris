@@ -71,6 +71,7 @@ public class Screen {
      * This function draws the elements on the screen.
      */
     public void draw() {
+    	
         Main.processing.background(21,42,106);
         b.draw();
         PImage logo = Main.processing.loadImage("Logo.png");
