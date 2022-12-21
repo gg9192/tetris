@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class TPiece extends Piece {
         int orientation = 0;
         public TPiece(Board b) {
@@ -6,6 +8,7 @@ public class TPiece extends Piece {
             piece[1] = new Tuple(centerX - 1, centerY);
             piece[2] = new Tuple(centerX, centerY);
             piece[3] = new Tuple(centerX + 1, centerY);
+            
             this.findShadow();
         }
 

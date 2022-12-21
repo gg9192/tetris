@@ -62,8 +62,8 @@ public class Board {
     	this.maxHeight = val;
     }
     
-	public int getGridValue(int centerX, int i) {
-		return grid[x][y];
+	public int getGridValue(int j, int k) {
+		return grid[j][k];
 	}
 	
 
@@ -552,8 +552,7 @@ public class Board {
                 int random = (int)Math.floor(Math.random()*(6-0+1)+0);
                 if (checkLoss(nextPiece)) {
                     isLoss = true;
-                    System.out.println(isLoss);
-                    System.out.println("asdfasdaeftw");
+                    
                 }
                 if (nextPiece == 0) {
                     cp = new LPiece(this);
