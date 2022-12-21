@@ -1,11 +1,15 @@
+import java.util.Arrays;
+
 public class ReverseLPiece extends Piece {
 
         public ReverseLPiece(Board b) {
+        	
         	this.board = b;
             piece[0] = new Tuple(centerX - 1, centerY - 1);
             piece[1] = new Tuple(centerX - 1, centerY);
             piece[2] = new Tuple(centerX, centerY);
             piece[3] = new Tuple(centerX + 1, centerY);
+            
             findShadow();
         }
 
@@ -148,7 +152,6 @@ public class ReverseLPiece extends Piece {
 
         @Override
         public void findShadow() {
-            System.out.println("shit");
             if (orientation == 0) {
                 int t1 = 0;
                 int t2 = 0;
@@ -158,8 +161,10 @@ public class ReverseLPiece extends Piece {
                     t2 = piece[2].getY();
                     t2 = piece[3].getY();
                 }
+                System.out.println(Arrays.toString(piece));
                 while (t1 <23 && t2 <23 && t2 <23 && board.getGridValue(piece[1].getX(), t1 + 1) == 0 && 
                 		board.getGridValue(piece[2].getX(), t2 + 1) == 0 && board.getGridValue(piece[3].getX(), t3 + 1) == 0) {
+                	
                     t1++;
                     t2++;
                     t3++;
