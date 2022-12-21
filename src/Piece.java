@@ -11,7 +11,7 @@ public abstract class Piece {
     Board board;
     
     /**
-     * Moves the piece down one square
+     * Moves the piece down one square. AKA one game tick. 
      */
     public void tick() {
 
@@ -27,7 +27,8 @@ public abstract class Piece {
     }
     
     /**
-     * 
+     * This puts the piece where it would hypothetically land if
+     * no further input is given.
      */
     public void down() {
         for (int i = 0; i < 4; i ++) {
