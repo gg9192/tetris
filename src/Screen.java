@@ -1,6 +1,10 @@
 import processing.core.PFont;
 import processing.core.PImage;
-
+/**
+ * This handles rendering the elements on the screen
+ * @author alext
+ *
+ */
 public class Screen {
     public Board b = new Board(350,150);
     // 0 = L piece

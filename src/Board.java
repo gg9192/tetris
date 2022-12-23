@@ -4,7 +4,11 @@ import processing.core.PFont;
 
 import javax.sound.sampled.Line;
 import java.util.*;
-
+/**
+ * This handles all the events that happen on the game board.
+ * @author alext
+ *
+ */
 public class Board {
     public int level = 1;
 
@@ -21,7 +25,7 @@ public class Board {
     //Current piece
     Piece cp;
     boolean needPiece = true;
-    static int[][] grid = new int[10][24];
+    int[][] grid = new int[10][24];
     int tick = 0;
     
     int x;
@@ -53,13 +57,32 @@ public class Board {
     public int getMaxHeight() {
     	return this.maxHeight;
     }
+    
+    /**
+     * Gets the entire board.
+     * **WARNING FOR TESTING ONLY**
+     * @return
+     */
+    public int[][] getEntireBoard() {
+    	return this.grid;
+    }
+    
     /**
      * Sets the maxHeight to value specified
-     * **WARNING** FOR TESTING ONLY
+     * **WARNING FOR TESTING ONLY**
      * @param val 
      */
     public void setMaxHeight(int val) {
     	this.maxHeight = val;
+    }
+    
+    /**
+     * Sets the current piece
+     * **WARNING FOR TESTING ONLY**
+     * @param p 
+     */
+    public void setCurrentPiece(Piece p) {
+    	this.cp = p;
     }
     
 	public int getGridValue(int j, int k) {

@@ -1,5 +1,10 @@
 import java.util.Arrays;
 
+/**
+ * all pieces in the game inherent from this class
+ * @author alext
+ *https://static.wikia.nocookie.net/tetrisconcept/images/3/3d/SRS-pieces.png/revision/latest?cb=20060626173148
+ */
 public abstract class Piece {
 	int centerX = 4;
     int centerY = -2;
@@ -9,6 +14,22 @@ public abstract class Piece {
     int pieceLock =  -1;
     int orientation = 0;
     Board board;
+    
+    public int getCenterX() {
+    	return this.centerX;
+    }
+    
+    public int getCenterY() {
+    	return this.centerY;
+    }
+    
+    public Tuple[] getShadow() {
+    	return this.shadow;
+    }
+    
+    public Tuple[] getPiece() {
+    	return this.piece;
+    }
     
     /**
      * Moves the piece down one square. AKA one game tick. 
