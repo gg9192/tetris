@@ -12,13 +12,21 @@ public class LinePiece extends Piece {
 
         public boolean canRotate() {
 
-            if (this.orientation == 0) { if (this.centerY < 2) {
-                if (centerX == 0|| centerX == 9) {return false;}
+            if (this.orientation == 0) { 
+            	if (this.centerY < 2) {
+            		if (centerX == 0|| centerX == 9) {
+            			return false;
+            		}
                 return true;
-            }}
+            	}
+            }
             if (this.orientation == 1) {
-                if (this.centerY < 2) {if (centerX == 0|| centerX == 9) {return false;}
-                    return true;}
+                if (this.centerY < 2) {
+                	if (centerX == 0|| centerX == 9) {
+                		return false;
+                		}
+                    return true;
+                    }
             }
 
 
