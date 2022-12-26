@@ -1,7 +1,6 @@
+
+
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
 /*
  * Note that we can test this with an arbitrary piece
@@ -140,7 +139,7 @@ class AbstractPieceTests {
 
 	/**
 	 * Makes sure that the piece can't ghost through 
-	 * other pieces when moving right	. 
+	 * other pieces when moving right. 
 	 */
 	@Test
 	void testGhostRight() {
@@ -162,8 +161,6 @@ class AbstractPieceTests {
 		//shouldn't have moved
 		assertArrayEquals(expected, p.getPiece());
 		assertEquals(4, p.getCenterX());
-		
-		
 	}
 	
 	

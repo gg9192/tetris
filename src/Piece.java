@@ -3,7 +3,6 @@ import java.util.Arrays;
 /**
  * all pieces in the game inherent from this class
  * @author alext
- *https://static.wikia.nocookie.net/tetrisconcept/images/3/3d/SRS-pieces.png/revision/latest?cb=20060626173148
  */
 public abstract class Piece {
 	int centerX = 4;
