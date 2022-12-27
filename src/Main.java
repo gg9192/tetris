@@ -57,7 +57,7 @@ public class Main extends PApplet{
      * In this case, this is used to specify the window size
      */
     public void settings() {
-        size(885,800 );
+        size(885,800);
     }
     
     /**
