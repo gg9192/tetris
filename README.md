@@ -8,6 +8,7 @@ my progress.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 - Jupiter tests
+- Z piece move left ghost bug
 - Shadow bug of the blue z piece
 - Java doc for all methods
 - Implement starting menu
