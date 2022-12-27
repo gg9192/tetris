@@ -139,8 +139,8 @@ public class ReverseLPiece extends Piece {
                 if (canRotate()) {
                     piece[0] = new Tuple(centerX, centerY - 1);
                     piece[1] = new Tuple(centerX, centerY);
-                    piece[2] = new Tuple(centerX, centerY + 1);
-                    piece[3] = new Tuple(centerX - 1, centerY + 1);
+                    piece[2] = new Tuple(centerX - 1, centerY + 1);
+                    piece[3] = new Tuple(centerX, centerY + 1);
                     findShadow();
                     orientation = -1;
                     return;
@@ -161,7 +161,6 @@ public class ReverseLPiece extends Piece {
                     t2 = piece[2].getY();
                     t2 = piece[3].getY();
                 }
-                System.out.println(Arrays.toString(piece));
                 while (t1 <23 && t2 <23 && t2 <23 && board.getGridValue(piece[1].getX(), t1 + 1) == 0 && 
                 		board.getGridValue(piece[2].getX(), t2 + 1) == 0 && board.getGridValue(piece[3].getX(), t3 + 1) == 0) {
                 	

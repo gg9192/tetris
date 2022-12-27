@@ -1,11 +1,11 @@
 public class ReverseZPiece extends Piece {
 
-        public ReverseZPiece(Board b) {
+    public ReverseZPiece (Board b) {
         	this.board = b;
             piece[0] = new Tuple(centerX, centerY - 1);
             piece[1] = new Tuple(centerX + 1, centerY - 1);
-            piece[2] = new Tuple(centerX , centerY);
-            piece[3] = new Tuple(centerX - 1, centerY);
+            piece[2] = new Tuple(centerX - 1 , centerY);
+            piece[3] = new Tuple(centerX, centerY);
             findShadow();
         }
 
