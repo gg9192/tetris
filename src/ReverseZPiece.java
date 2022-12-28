@@ -204,12 +204,12 @@ public class ReverseZPiece extends Piece {
                 int t2 = 1;
                 int t3 = 1;
                 if (piece[0].getY() > 0 && piece[2].getY() > 0 && piece[3].getY() > 0) {
-                    t1 = piece[0].getY();
+                    t1 = piece[1].getY();
                     t2 = piece[2].getY();
                     t3 = piece[3].getY();
                 }
                 
-                while (t1 <23 && t2 <23 && t3 <23 && board.getGridValue(piece[0].getX(), t1 + 1) == 0 && 
+                while (t1 <23 && t2 <23 && t3 <23 && board.getGridValue(piece[1].getX(), t1 + 1) == 0 && 
                 		board.getGridValue(piece[2].getX(), t2 + 1) == 0 && board.getGridValue(piece[3].getX(), t3 + 1) == 0 ) {
                     t1++;
                     t2++;
