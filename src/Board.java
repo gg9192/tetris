@@ -12,6 +12,7 @@ import java.util.*;
 public class Board {
     public int level = 1;
 
+    private boolean debug = true;
     private int lossTick = 0;
     public boolean isLoss = false;
     private int tickMax = 50;
@@ -572,34 +573,40 @@ public class Board {
         // 6 = square piece
         if (needPiece) {
             if (isLoss == false) {
-                int random = (int)Math.floor(Math.random()*(6-0+1)+0);
-                if (checkLoss(nextPiece)) {
-                    isLoss = true;
-                    
+                if (debug == false) {
+                	int random = (int)Math.floor(Math.random()*(6-0+1)+0);
+                    if (checkLoss(nextPiece)) {
+                        isLoss = true;
+                        
+                    }
+                    if (nextPiece == 0) {
+                        cp = new LPiece(this);
+                    }
+                    if (nextPiece == 1) {
+                        cp = new ReverseLPiece(this);
+                    }
+                    if (nextPiece == 2) {
+                        cp = new LinePiece(this);
+                    }
+                    if (nextPiece == 3) {
+                        cp = new TPiece(this);
+                    }
+                    if (nextPiece == 4) {
+                        cp = new ZPiece(this);
+                    }
+                    if (nextPiece == 5) {
+                        cp = new ReverseZPiece(this);
+                    }
+                    if (nextPiece == 6) {
+                        cp = new SquarePiece(this);
+                    }
+                    nextPiece = random;
+                    needPiece = false;
                 }
-                if (nextPiece == 0) {
-                    cp = new LPiece(this);
+                else {
+                	this.cp = new LPiece(this);
+                	needPiece = false;
                 }
-                if (nextPiece == 1) {
-                    cp = new ReverseLPiece(this);
-                }
-                if (nextPiece == 2) {
-                    cp = new LinePiece(this);
-                }
-                if (nextPiece == 3) {
-                    cp = new TPiece(this);
-                }
-                if (nextPiece == 4) {
-                    cp = new ZPiece(this);
-                }
-                if (nextPiece == 5) {
-                    cp = new ReverseZPiece(this);
-                }
-                if (nextPiece == 6) {
-                    cp = new SquarePiece(this);
-                }
-                nextPiece = random;
-                needPiece = false;
             }
 
 
