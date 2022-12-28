@@ -604,7 +604,7 @@ public class Board {
                     needPiece = false;
                 }
                 else {
-                	this.cp = new LPiece(this);
+                	this.cp = new ReverseZPiece(this);
                 	needPiece = false;
                 }
             }
