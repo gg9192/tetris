@@ -221,22 +221,25 @@ public class ReverseZPiece extends Piece {
                 shadow[3] = new Tuple(piece[3].getX(),t1 + 1);
             }
             else {
-                int t1 = 0;
+            	int t1 = 0;
                 int t2 = 1;
-                if (piece[2].getY() > 0 && piece[3].getY() > 0) {
-                    t1 = piece[2].getY();
-                    t2 = piece[3].getY();
+                int t3 = 1;
+                if (piece[1].getY() > 0 && piece[2].getY() > 0 && piece[3].getY() > 0) {
+                     t1 = piece[1].getY();
+                     t2 = piece[2].getY();
+                     t3 = piece[3].getY();
                 }
-                
-                while (t1 <23 && t2 <23 && board.getGridValue(piece[2].getX(), t1 + 1) == 0 && 
-                		board.getGridValue(piece[3].getX(), t2 + 1) == 0 ) {
+                while (t1 <23 && t2 <23 && t3 <23 && board.getGridValue(piece[1].getX(), t1 + 1) == 0 && 
+                		board.getGridValue(piece[2].getX(), t2 + 1) == 0 && board.getGridValue(piece[3].getX(),t3 + 1) == 0) {
                     t1++;
                     t2++;
+                    t3++;
                 }
                 shadow[0] = new Tuple(piece[0].getX(),t1 - 1);
                 shadow[1] = new Tuple(piece[1].getX(),t1);
-                shadow[2] = new Tuple(piece[2].getX(),t2-1);
-                shadow[3] = new Tuple(piece[3].getX(),t2);
+                shadow[2] = new Tuple(piece[2].getX(),t3 - 1);
+                shadow[3] = new Tuple(piece[3].getX(),t3);
+                return;
             }
             return;
         }
