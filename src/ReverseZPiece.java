@@ -13,90 +13,11 @@ public class ReverseZPiece extends Piece {
 
         @Override
         public boolean checkDir(int dir) {
-            for (Tuple t : piece) {
-                if (dir == 0) {
-                    if (t.getX() == 0) {
-                        return false;
-                    }
-                    if (this.orientation == 0 || this.orientation == 1 || this.orientation == 3) {
-                        if (this.centerY >= 1) {
-                            
-                        	if (board.getGridValue(t.getX() - 1, t.getY()) != 0) {
-                                return false;
-                            }
-                        }
-                    }
-
-                    else if (this.orientation == 2){
-                        if (this.centerY > -1) {
-                            
-                        	if (board.getGridValue(t.getX() - 1, t.getY()) != 0) {
-                                return false;
-                            }
-                        }
-                    }
-                }
-                else {
-                    if (t.getX() == 9) {
-                        return false;
-                    }
-                    if (this.orientation == 0 || this.orientation == 1 || this.orientation == 3) {
-                        if (this.centerY > 0) {
-                            
-                        	if (board.getGridValue(t.getX() + 1, t.getY()) != 0) {
-                                return false;
-                            }
-                        }
-                        else if (this.orientation == 2){
-                            if (this.centerY > -1) {
-                            	
-                                if (board.getGridValue(t.getX() + 1, t.getY()) != 0) {
-                                    return false;
-                                }
-                            }
-                        }
-                    }
-                }
-
-            }
             return true;
         }
 
         public boolean canRotate() {
-            if (this.centerY <= -1) {
-                if (this.orientation == 2) {
-                    if (centerX == 0) {
-                        return false;
-                    }}}
-            if (this.centerY <= 0) {
-                if (this.orientation == 0) {
-                    if (centerX == 9) {
-                        return false;
-                    }}
-            else return true;}
-            if (this.orientation == 0) {
-                if (centerX == 9) {
-                    return false;
-                }
-                return board.getGridValue(centerX, centerY - 1) == 0 && board.getGridValue(centerX + 1, centerY - 1) == 0 && 
-                		board.getGridValue(centerX - 1, centerY) == 0 && board.getGridValue(centerX, centerY) == 0;
-            }
-            if (this.orientation == 1) {
-                return board.getGridValue(centerX, centerY - 1) == 0 && board.getGridValue(centerX, centerY) == 0 && 
-                		board.getGridValue(centerX + 1, centerY) == 0 && board.getGridValue(centerX + 1, centerY) == 0;
-            }
-            if (this.orientation == 2) {
-                if (centerX == 0) {
-                    return false;
-                }
-                return board.getGridValue(centerX, centerY) == 0 && board.getGridValue(centerX + 1, centerY) == 0 && 
-                		board.getGridValue(centerX - 1, centerY + 1) == 0 && board.getGridValue(centerX, centerY + 1) == 0;
-            }
-            else {
-
-                return board.getGridValue(centerX - 1, centerY - 1) == 0 && board.getGridValue(centerX - 1, centerY) == 0 && 
-                		board.getGridValue(centerX, centerY) == 0 && board.getGridValue(centerX, centerY + 1) == 0;
-            }
+            return true;
         }
         @Override
         public void rotate() {

@@ -12,52 +12,6 @@ public class SquarePiece extends Piece {
 
         @Override
         public boolean checkDir(int dir) {
-            for (Tuple t : piece) {
-                if (dir == 0) {
-                    if (t.getX() == 0) {
-                        return false;
-                    }
-                    if (this.orientation == 0 || this.orientation == 1 || this.orientation == 3) {
-                        if (this.centerY >= 1) {
-                            
-                        	if (board.getGridValue(t.getX() - 1, t.getY()) != 0) {
-                                return false;
-                            }
-                        }
-                    }
-
-                    else if (this.orientation == 2){
-                        if (this.centerY > -1) {
-                            
-                        	if (board.getGridValue(t.getX() - 1, t.getY()) != 0) {
-                                return false;
-                            }
-                        }
-                    }
-                }
-                else {
-                    if (t.getX() == 9) {
-                        return false;
-                    }
-                    if (this.orientation == 0 || this.orientation == 1 || this.orientation == 3) {
-                        if (this.centerY > 0) {
-                            
-                        	if (board.getGridValue(t.getX() + 1, t.getY()) != 0) {
-                                return false;
-                            }
-                        }
-                        else if (this.orientation == 2){
-                            if (this.centerY > -1) {
-                                
-                            	if (board.getGridValue(t.getX() + 1, t.getY()) != 0) {
-                                    return false;
-                                }
-                            }
-                        }
-                    }
-                }
-
-            }
             return true;
         }
 

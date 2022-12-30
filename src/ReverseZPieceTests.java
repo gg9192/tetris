@@ -12,6 +12,10 @@ class ReverseZPieceTests {
 	void rotate3to0() {
 		Board b = new Board(0,0);
 		Piece p = new ReverseZPiece(b);
+		p.rotate();
+		p.rotate();
+		p.rotate();
+		p.rotate();
 		Tuple[] expected = new Tuple[4];
 		expected[0] = new Tuple(4,-3);
 		expected[1] = new Tuple(5,-3);
@@ -169,7 +173,7 @@ class ReverseZPieceTests {
 	
 	/**
 	 * Test that the shadow does not go through the floor at
-	 * orientation 1.
+	 * orientation 2.
 	 */
 	@Test
 	void testFloor2() {
@@ -209,7 +213,44 @@ class ReverseZPieceTests {
 	 * correctly at orientation 3
 	 */
 	@Test
-	void testShadow3() {}
+	void testShadow3() {
+		Board b = new Board(0,0);
+		b.setGrid(4, 10, 1);
+		Piece p = new ReverseZPiece(b);
+		Tuple[] expected = new Tuple[4];
+		p.rotate();
+		p.rotate();
+		p.rotate();
+		expected[0] = new Tuple(3,7);
+		expected[1] = new Tuple(3,8);
+		expected[2] = new Tuple(4,8);
+		expected[3] = new Tuple(4,9);
+		assertArrayEquals(expected, p.getShadow());
+		b.setGrid(4, 10, 0);
+		b.setGrid(3, 9, 1);
+		p.moveLeft();
+		p.moveRight();
+		assertArrayEquals(expected, p.getShadow());
+	}
+	
+	/**
+	 * Test that the shadow does not go through the floor at
+	 * orientation 3.
+	 */
+	@Test
+	void testFloor3() {
+		Board b = new Board(0,0);
+		Piece p = new ReverseZPiece(b);
+		Tuple[] expected = new Tuple[4];
+		p.rotate();
+		p.rotate();
+		p.rotate();
+		expected[0] = new Tuple(3,21);
+		expected[1] = new Tuple(3,22);
+		expected[2] = new Tuple(4,22);
+		expected[3] = new Tuple(4,23);
+		assertArrayEquals(expected, p.getShadow());
+	}
 	
 	
 
