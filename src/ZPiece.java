@@ -22,10 +22,10 @@ public class ZPiece extends Piece {
             this.orientation++;
             if (this.orientation == 0) {
                 if (canRotate()) {
-                    piece[1] = new Tuple(centerX + 1, centerY - 1);
-                    piece[0] = new Tuple(centerX, centerY - 1);
-                    piece[3] = new Tuple(centerX, centerY);
-                    piece[2] = new Tuple(centerX - 1, centerY);
+                    piece[0] = new Tuple(centerX - 1, centerY - 1);
+                    piece[1] = new Tuple(centerX, centerY - 1);
+                    piece[2] = new Tuple(centerX, centerY);
+                    piece[3] = new Tuple(centerX + 1, centerY);
                     findShadow();
                     return;
                 }

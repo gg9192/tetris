@@ -196,6 +196,10 @@ class ReverseLPieceTests {
 	void rotate3to0() {
 		Board b = new Board(0,0);
 		Piece p = new ReverseLPiece(b);
+		p.rotate();
+		p.rotate();
+		p.rotate();
+		p.rotate();
 		Tuple[] expected = new Tuple[4];
 		expected[0] = new Tuple(3,-3);
 		expected[1] = new Tuple(3,-2);

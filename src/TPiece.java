@@ -2,6 +2,7 @@ import java.util.Arrays;
 
 public class TPiece extends Piece {
         int orientation = 0;
+        
         public TPiece(Board b) {
         	this.board = b;
             piece[0] = new Tuple(centerX, centerY - 1);
@@ -59,9 +60,9 @@ public class TPiece extends Piece {
             }
             else {
                 if (canRotate()) {
+                    piece[0] = new Tuple(centerX, centerY - 1);
                     piece[1] = new Tuple(centerX - 1, centerY);
                     piece[2] = new Tuple(centerX, centerY);
-                    piece[0] = new Tuple(centerX, centerY - 1);
                     piece[3] = new Tuple(centerX, centerY + 1);
                     this.findShadow();
                     orientation = -1;
