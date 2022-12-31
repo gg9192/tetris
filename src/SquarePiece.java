@@ -2,7 +2,6 @@ public class SquarePiece extends Piece {
 
         public SquarePiece(Board b) {
         	this.board = b;
-            this.centerY--;
             piece[0] = new Tuple(centerX, centerY);
             piece[1] = new Tuple(centerX + 1, centerY);
             piece[2] = new Tuple(centerX, centerY + 1);

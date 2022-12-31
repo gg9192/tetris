@@ -604,7 +604,8 @@ public class Board {
                     needPiece = false;
                 }
                 else {
-                	this.cp = new ReverseZPiece(this);
+                	//debug here
+                	this.cp = new ZPiece(this);
                 	needPiece = false;
                 }
             }
