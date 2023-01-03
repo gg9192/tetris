@@ -5,6 +5,21 @@ import org.junit.jupiter.api.Test;
 class ReverseZPieceTests {
 
 	/**
+	 * test to make sure that the piece is initialized 
+	 * properly.
+	 */
+	void testInit() {
+		Board b = new Board(0,0);
+		Piece p = new ReverseZPiece(b);
+		Tuple[] expected = new Tuple[4];
+		expected[0] = new Tuple(4,-3);
+		expected[1] = new Tuple(5,-3);
+		expected[2] = new Tuple(3,-2);
+		expected[3] = new Tuple(4,-2);
+		assertArrayEquals(expected, p.getPiece());
+	}
+	
+	/**
 	 * Test to ensure that the piece rotates correctly
 	 * from 3 to 0
 	 */
