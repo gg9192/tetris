@@ -605,7 +605,7 @@ public class Board {
                 }
                 else {
                 	//debug here
-                	this.cp = new ZPiece(this);
+                	this.cp = new LPiece(this);
                 	needPiece = false;
                 }
             }

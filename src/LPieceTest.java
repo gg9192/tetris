@@ -2,7 +2,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class ReverseLPieceTests {
+class LPieceTest {
 
 	/**
 	 * Test to ensure that the piece rotates correctly
@@ -11,13 +11,13 @@ class ReverseLPieceTests {
 	@Test
 	void rotate0to1() {
 		Board b = new Board(0,0);
-		Piece p = new ReverseLPiece(b);
+		Piece p = new LPiece(b);
 		p.rotate();
 		Tuple[] expected = new Tuple[4];
 		expected[0] = new Tuple(4,-3);
-		expected[1] = new Tuple(5,-3);
-		expected[2] = new Tuple(4,-2);
-		expected[3] = new Tuple(4,-1);
+		expected[1] = new Tuple(4,-2);
+		expected[2] = new Tuple(4,-1);
+		expected[3] = new Tuple(5,-1);
 		assertArrayEquals(expected, p.getPiece());
 	}
 	
@@ -28,19 +28,19 @@ class ReverseLPieceTests {
 	@Test
 	void testShadow1() {
 		Board b = new Board(0,0);
-		b.setGrid(5, 10, 1);
-		Piece p = new ReverseLPiece(b);
+		b.setGrid(4, 10, 1);
+		Piece p = new LPiece(b);
 		p.rotate();
 		Tuple[] expected = new Tuple[4];
-		expected[0] = new Tuple(4,9);
-		expected[1] = new Tuple(5,9);
-		expected[2] = new Tuple(4,10);
-		expected[3] = new Tuple(4,11);
+		expected[0] = new Tuple(4,7);
+		expected[1] = new Tuple(4,8);
+		expected[2] = new Tuple(4,9);
+		expected[3] = new Tuple(5,9);
 		assertArrayEquals(expected, p.getShadow());
+		b.setGrid(4, 10, 0);
+		b.setGrid(5, 10, 1);
 		p.moveLeft();
 		p.moveRight();
-		b.setGrid(5, 10, 0);
-		b.setGrid(4, 12, 1);
 		assertArrayEquals(expected, p.getShadow());
 	}
 	
@@ -49,15 +49,15 @@ class ReverseLPieceTests {
 	 * orientation 1.
 	 */
 	@Test
-	void test1Floor1() {
+	void testFloor1() {
 		Board b = new Board(0,0);
-		Piece p = new ReverseLPiece(b);
+		Piece p = new LPiece(b);
 		p.rotate();
 		Tuple[] expected = new Tuple[4];
 		expected[0] = new Tuple(4,21);
-		expected[1] = new Tuple(5,21);
-		expected[2] = new Tuple(4,22);
-		expected[3] = new Tuple(4,23);
+		expected[1] = new Tuple(4,22);
+		expected[2] = new Tuple(4,23);
+		expected[3] = new Tuple(5,23);
 		assertArrayEquals(expected, p.getShadow());
 	}
 	
@@ -66,19 +66,18 @@ class ReverseLPieceTests {
 	 * from 1 to 2
 	 */
 	@Test
-	void testRotate1to2() {
+	void rotate1to2() {
 		Board b = new Board(0,0);
-		Piece p = new ReverseLPiece(b);
+		Piece p = new LPiece(b);
 		p.rotate();
 		p.rotate();
 		Tuple[] expected = new Tuple[4];
 		expected[0] = new Tuple(3,-2);
 		expected[1] = new Tuple(4,-2);
 		expected[2] = new Tuple(5,-2);
-		expected[3] = new Tuple(5,-1);
+		expected[3] = new Tuple(3,-1);
 		assertArrayEquals(expected, p.getPiece());
 	}
-	
 	
 	/**
 	 * Test to ensure that the shadow is calculated
@@ -87,61 +86,62 @@ class ReverseLPieceTests {
 	@Test
 	void testShadow2() {
 		Board b = new Board(0,0);
-		b.setGrid(5, 10, 1);
-		Piece p = new ReverseLPiece(b);
+		b.setGrid(3, 10, 1);
+		Piece p = new LPiece(b);
 		p.rotate();
 		p.rotate();
 		Tuple[] expected = new Tuple[4];
 		expected[0] = new Tuple(3,8);
 		expected[1] = new Tuple(4,8);
 		expected[2] = new Tuple(5,8);
-		expected[3] = new Tuple(5,9);
+		expected[3] = new Tuple(3,9);
 		assertArrayEquals(expected, p.getShadow());
-		b.setGrid(5, 10, 0);
+		b.setGrid(3, 10, 0);
 		b.setGrid(4, 9, 1);
 		p.moveLeft();
 		p.moveRight();
 		assertArrayEquals(expected, p.getShadow());
 		b.setGrid(4, 9, 0);
-		b.setGrid(3, 9, 1);
+		b.setGrid(5, 9, 1);
 		p.moveLeft();
 		p.moveRight();
 		assertArrayEquals(expected, p.getShadow());
 	}
 	
 	/**
-	 * Test to make sure that the shadow does not go
-	 * through the floor at orientation 2.
+	 * Test that the shadow does not go through the floor at
+	 * orientation 2.
 	 */
 	@Test
 	void testFloor2() {
 		Board b = new Board(0,0);
-		Piece p = new ReverseLPiece(b);
+		Piece p = new LPiece(b);
 		p.rotate();
 		p.rotate();
 		Tuple[] expected = new Tuple[4];
 		expected[0] = new Tuple(3,22);
 		expected[1] = new Tuple(4,22);
 		expected[2] = new Tuple(5,22);
-		expected[3] = new Tuple(5,23);
+		expected[3] = new Tuple(3,23);
 		assertArrayEquals(expected, p.getShadow());
 	}
 	
+
 	/**
 	 * Test to ensure that the piece rotates correctly
 	 * from 2 to 3
 	 */
-	@Test 
+	@Test
 	void rotate2to3() {
 		Board b = new Board(0,0);
-		Piece p = new ReverseLPiece(b);
+		Piece p = new LPiece(b);
 		p.rotate();
 		p.rotate();
 		p.rotate();
 		Tuple[] expected = new Tuple[4];
-		expected[0] = new Tuple(4,-3);
-		expected[1] = new Tuple(4,-2);
-		expected[2] = new Tuple(3,-1);
+		expected[0] = new Tuple(3,-3);
+		expected[1] = new Tuple(4,-3);
+		expected[2] = new Tuple(4,-2);
 		expected[3] = new Tuple(4,-1);
 		assertArrayEquals(expected, p.getPiece());
 	}
@@ -154,38 +154,38 @@ class ReverseLPieceTests {
 	void testShadow3() {
 		Board b = new Board(0,0);
 		b.setGrid(3, 10, 1);
-		Piece p = new ReverseLPiece(b);
+		Piece p = new LPiece(b);
 		p.rotate();
 		p.rotate();
 		p.rotate();
 		Tuple[] expected = new Tuple[4];
-		expected[0] = new Tuple(4,7);
-		expected[1] = new Tuple(4,8);
-		expected[2] = new Tuple(3,9);
-		expected[3] = new Tuple(4,9);
+		expected[0] = new Tuple(3,9);
+		expected[1] = new Tuple(4,9);
+		expected[2] = new Tuple(4,10);
+		expected[3] = new Tuple(4,11);
 		assertArrayEquals(expected, p.getShadow());
 		b.setGrid(3, 10, 0);
-		b.setGrid(4, 10, 1);
+		b.setGrid(4, 12, 1);
 		p.moveLeft();
 		p.moveRight();
 		assertArrayEquals(expected, p.getShadow());
 	}
 	
 	/**
-	 * Test to make sure that the shadow does not go
-	 * through the floor at orientation 3.
+	 * Test that the shadow does not go through the floor at
+	 * orientation 3.
 	 */
 	@Test
 	void testFloor3() {
 		Board b = new Board(0,0);
-		Piece p = new ReverseLPiece(b);
+		Piece p = new LPiece(b);
 		p.rotate();
 		p.rotate();
 		p.rotate();
 		Tuple[] expected = new Tuple[4];
-		expected[0] = new Tuple(4,21);
-		expected[1] = new Tuple(4,22);
-		expected[2] = new Tuple(3,23);
+		expected[0] = new Tuple(3,21);
+		expected[1] = new Tuple(4,21);
+		expected[2] = new Tuple(4,22);
 		expected[3] = new Tuple(4,23);
 		assertArrayEquals(expected, p.getShadow());
 	}
@@ -194,22 +194,23 @@ class ReverseLPieceTests {
 	 * Test to ensure that the piece rotates correctly
 	 * from 3 to 0
 	 */
-	@Test 
+	@Test
 	void rotate3to0() {
 		Board b = new Board(0,0);
-		Piece p = new ReverseLPiece(b);
+		Piece p = new LPiece(b);
 		p.rotate();
 		p.rotate();
 		p.rotate();
 		p.rotate();
 		Tuple[] expected = new Tuple[4];
-		expected[0] = new Tuple(3,-3);
+		expected[0] = new Tuple(5,-3);
 		expected[1] = new Tuple(3,-2);
 		expected[2] = new Tuple(4,-2);
 		expected[3] = new Tuple(5,-2);
 		assertArrayEquals(expected, p.getPiece());
 	}
 	
+
 	/**
 	 * Test to ensure that the shadow is calculated
 	 * correctly at orientation 0
@@ -218,9 +219,13 @@ class ReverseLPieceTests {
 	void testShadow0() {
 		Board b = new Board(0,0);
 		b.setGrid(3, 10, 1);
-		Piece p = new ReverseLPiece(b);
+		Piece p = new LPiece(b);
+		p.rotate();
+		p.rotate();
+		p.rotate();
+		p.rotate();
 		Tuple[] expected = new Tuple[4];
-		expected[0] = new Tuple(3,8);
+		expected[0] = new Tuple(5,8);
 		expected[1] = new Tuple(3,9);
 		expected[2] = new Tuple(4,9);
 		expected[3] = new Tuple(5,9);
@@ -234,23 +239,26 @@ class ReverseLPieceTests {
 		b.setGrid(5, 10, 1);
 		p.moveLeft();
 		p.moveRight();
-		assertArrayEquals(expected, p.getShadow());	
+		assertArrayEquals(expected, p.getShadow());
 	}
 	
 	/**
-	 * Test to make sure that the shadow does not go
-	 * through the floor at orientation 0.
+	 * Test that the shadow does not go through the floor at
+	 * orientation 0.
 	 */
 	@Test
 	void testFloor0() {
 		Board b = new Board(0,0);
-		Piece p = new ReverseLPiece(b);
+		Piece p = new LPiece(b);
+		p.rotate();
+		p.rotate();
+		p.rotate();
+		p.rotate();
 		Tuple[] expected = new Tuple[4];
-		expected[0] = new Tuple(3,22);
+		expected[0] = new Tuple(5,22);
 		expected[1] = new Tuple(3,23);
 		expected[2] = new Tuple(4,23);
 		expected[3] = new Tuple(5,23);
-		assertArrayEquals(expected, p.getShadow());	
 	}
 	
 }
