@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class ReverseLPiece extends Piece {
 
         public ReverseLPiece(Board b) {
