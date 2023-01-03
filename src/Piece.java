@@ -66,7 +66,6 @@ public abstract class Piece {
      * @return Boolean based on whether the piece can move in the given direction
      */
     public boolean checkDir(int dir) {
-    	System.out.println("here");
     	for (Tuple t : piece ) {
     		if (dir == 0) {
     			//left
@@ -285,7 +284,6 @@ public abstract class Piece {
      * @return if the piece can be moved
      */
     private boolean movable(int i, int j) {
-    	System.out.println(i);
     	if (i == -1 || i == 10) {
     		return false;
     	}
