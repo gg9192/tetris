@@ -18,12 +18,6 @@ public class LPiece extends Piece{
             return true;
 
         }
-        //left is 0
-        @Override
-        public boolean checkDir(int dir) {
-            
-            return true;
-        }
 
         @Override
         public void rotate() {

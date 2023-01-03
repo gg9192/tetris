@@ -66,11 +66,11 @@ public abstract class Piece {
      * @return Boolean based on whether the piece can move in the given direction
      */
     public boolean checkDir(int dir) {
+    	System.out.println("here");
     	for (Tuple t : piece ) {
     		if (dir == 0) {
     			//left
     			if (!movable(t.getX() - 1, t.getY())) {
-    				System.out.println("asd");
     				return false;
     			}
     			
@@ -91,6 +91,7 @@ public abstract class Piece {
      * Moves the piece 1 unit to the left if able to
      */
     public void moveLeft() {
+
         if (checkDir(0)) {
             this.centerX --;
             for (Tuple t : piece) {
@@ -284,10 +285,11 @@ public abstract class Piece {
      * @return if the piece can be moved
      */
     private boolean movable(int i, int j) {
+    	System.out.println(i);
     	if (i == -1 || i == 10) {
     		return false;
     	}
-    	if (j < 1) {
+    	if (j < 0) {
     		return true;
     	}
     	else {
