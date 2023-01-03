@@ -15,11 +15,6 @@ public class LinePiece extends Piece {
         }
 
         @Override
-        public boolean checkDir(int dir) {
-            return true;
-        }
-
-        @Override
         public void rotate() {
             this.orientation++;
             if (this.orientation == 0) {

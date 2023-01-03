@@ -65,7 +65,26 @@ public abstract class Piece {
      * @param dir 0 for left, 1 for right
      * @return Boolean based on whether the piece can move in the given direction
      */
-    public abstract boolean checkDir(int dir);
+    public boolean checkDir(int dir) {
+    	for (Tuple t : piece ) {
+    		if (dir == 0) {
+    			//left
+    			if (!movable(t.getX() - 1, t.getY())) {
+    				System.out.println("asd");
+    				return false;
+    			}
+    			
+    		}
+    		else {
+    			//right
+    			if (!movable(t.getX() + 1, t.getY())) {
+    				return false;
+    			}
+    		}
+    		
+    	}
+    	return true;
+    }
     
     /**
      * The event listen calls this function when "D" is pressed.
@@ -234,5 +253,48 @@ public abstract class Piece {
         Main.processing.line(x,y + 25, x, y);
         Main.processing.line(x, y + 25, x + 25, y + 25);
         Main.processing.line(x + 25, y + 25, x + 25,y);
+    }
+    
+    /**
+     * Checks if the given square is empty, returning true if 
+     * it is, and false if it's not or is outside the grid.
+     * @param i x position
+     * @param j y position
+     * @return isEmpty or out of bounds
+     */
+    protected boolean isEmpty(int i, int j) {
+    	if (i < 0 || i >= 10) {
+    		return false;
+    	}
+    	else if (j < 0 || j >= 23) {
+    		return false;
+    	}
+    	else {
+    		return board.getGridValue(j, j) == 0;
+    	}
+    }
+    
+    /**
+     * helper function to make sure that the piece can move
+     * when the piece isn't on the board. If the piece is on 
+     * the board, return false if the given cordinates is NOT
+     * empty. 
+     * @param i x coordinate 
+     * @param j y coordinate
+     * @return if the piece can be moved
+     */
+    private boolean movable(int i, int j) {
+    	if (i == -1 || i == 10) {
+    		return false;
+    	}
+    	if (j < 1) {
+    		return true;
+    	}
+    	else {
+    		if (board.getGridValue(i, j) == 0) {
+    			return true;
+    		}
+    		return false;
+    	}
     }
 }
