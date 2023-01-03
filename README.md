@@ -7,9 +7,8 @@ my progress.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
-- Jupiter tests
-- Shadow bug of the blue z piece
-- Java doc for all methods
+- fix checkdir
+- fix canrotate
 - Implement starting menu
 - Implement game over menu
 - Implement scoreboard

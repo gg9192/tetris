@@ -12,6 +12,7 @@ public class LinePiece extends Piece {
 
         public boolean canRotate() {
         	return true;
+
         }
 
         @Override
