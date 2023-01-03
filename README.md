@@ -7,7 +7,6 @@ my progress.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
-- fix checkdir
 - fix canrotate
 - Implement starting menu
 - Implement game over menu
