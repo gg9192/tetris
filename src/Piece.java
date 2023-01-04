@@ -256,24 +256,24 @@ public abstract class Piece {
     }
     
     /**
-     * Checks if the given square is empty, returning true if 
-     * it is, and false if it's not or is outside the grid.
-     * @param i x position
-     * @param j y position
-     * @return isEmpty or out of bounds
+     * Tests to see if the grid at the given (i,j) is empty. 
+     * Returns false if the piece is out of the grid in a 
+     * direction other than above. 
+     * @param i
+     * @param j
+     * @return
      */
-    protected boolean isEmpty(int i, int j) {
-    	if (i < 0 || i >= 10) {
+    private boolean isRotatable(int i, int j) {
+    	if (i < 0 || i > 10) {
     		return false;
     	}
-    	else if (j < 0 || j >= 23) {
-    		return false;
+    	else if (j < 0) {
+    		return true;
     	}
     	else {
-    		return board.getGridValue(j, j) == 0;
+    		return board.getGridValue(i, j) == 0;
     	}
     }
-    
     /**
      * helper function to make sure that the piece can move
      * when the piece isn't on the board. If the piece is on 
