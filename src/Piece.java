@@ -263,8 +263,9 @@ public abstract class Piece {
      * @param j
      * @return
      */
-    private boolean isRotatable(int i, int j) {
-    	if (i < 0 || i > 10) {
+    protected boolean isRotatable(int i, int j) {
+    	System.out.println(i);
+    	if (i < 0 || i > 9) {
     		return false;
     	}
     	else if (j < 0) {

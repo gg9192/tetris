@@ -11,7 +11,36 @@ public class LinePiece extends Piece {
         }
 
         public boolean canRotate() {
-        	return true;
+        	if (orientation == 0) {
+        		int newX = centerX + 1;
+        		return isRotatable(newX -2, centerY) &&
+        				isRotatable(newX - 1, centerY) &&
+        				isRotatable(newX, centerY) &&
+        				isRotatable(newX + 1, centerY);
+        	}
+        	else if (orientation == 1) {
+        		int newY = centerY + 1;
+                return isRotatable(centerX, newY - 2) &&
+                		isRotatable(centerX, newY - 1) &&
+                		isRotatable(centerX, newY) &&
+                		isRotatable(centerX, newY + 1);
+        	}
+        	else if (orientation == 2) {
+        		int newX = centerX - 1;
+        		return isRotatable(newX - 1, centerY) &&
+        				isRotatable(newX, centerY) &&
+        				isRotatable(newX + 1, centerY) &&
+        				isRotatable(newX + 2, centerY);
+                
+        	}
+        	else {
+        		int newY = centerY - 1;
+        		return isRotatable(centerX, newY - 1) &&
+        				isRotatable(centerX, newY) &&
+        				isRotatable(centerX, newY + 1) &&
+        				isRotatable(centerX, newY + 2);
+               
+        	}
         }
 
         @Override
@@ -74,7 +103,7 @@ public class LinePiece extends Piece {
 
         @Override
         public void findShadow() {
-        	System.out.println(orientation);
+
         	if (this.orientation == 0 || this.orientation == 2) 
         	{
         		int t1 = 0;

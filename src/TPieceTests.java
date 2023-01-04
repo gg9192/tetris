@@ -10,6 +10,7 @@ class TPieceTests {
 	 * test to make sure that the piece is initialized 
 	 * properly.
 	 */
+	@Test
 	void testInit() {
 		Board b = new Board(0,0);
 		Piece p = new TPiece(b);
