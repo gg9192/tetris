@@ -8,14 +8,15 @@ class LinePieceTest {
 	 * test to make sure that the piece is initialized 
 	 * properly.
 	 */
+	@Test
 	void testInit() {
 		Board b = new Board(0,0);
 		Piece p = new LinePiece(b);
 		Tuple[] expected = new Tuple[4];
-		expected[0] = new Tuple(4,-4);
-		expected[1] = new Tuple(4,-3);
-		expected[2] = new Tuple(4,-2);
-		expected[3] = new Tuple(4,-1);
+		expected[0] = new Tuple(2,-3);
+		expected[1] = new Tuple(3,-3);
+		expected[2] = new Tuple(4,-3);
+		expected[3] = new Tuple(5,-3);
 		assertArrayEquals(expected, p.getPiece());
 	}
 	
@@ -78,7 +79,20 @@ class LinePieceTest {
 	 * from 3 to 0
 	 */
 	@Test
-	void rotate3to0() {}
+	void rotate3to0() {
+		Board b = new Board(0,0);
+		Piece p = new LinePiece(b);
+		p.rotate();
+		p.rotate();
+		p.rotate();
+		p.rotate(); 
+		Tuple[] expected = new Tuple[4];
+		expected[0] = new Tuple(2,-3);
+		expected[1] = new Tuple(3,-3);
+		expected[2] = new Tuple(4,-3);
+		expected[3] = new Tuple(5,-3);
+		assertArrayEquals(expected, p.getPiece());
+	}
 
 	/**
 	 * Test to ensure that the shadow is calculated
