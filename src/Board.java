@@ -605,7 +605,7 @@ public class Board {
                 }
                 else {
                 	//debug here
-                	this.cp = new LPiece(this);
+                	this.cp = new LinePiece(this);
                 	needPiece = false;
                 }
             }

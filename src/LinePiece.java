@@ -15,11 +15,6 @@ public class LinePiece extends Piece {
         }
 
         @Override
-        public boolean checkDir(int dir) {
-            return true;
-        }
-
-        @Override
         public void rotate() {
             this.orientation++;
             if (this.orientation == 0) {
@@ -79,8 +74,8 @@ public class LinePiece extends Piece {
 
         @Override
         public void findShadow() {
-        	if (this.orientation == 0 || this.orientation == -1 
-        			|| this.orientation == 2) 
+        	System.out.println(orientation);
+        	if (this.orientation == 0 || this.orientation == 2) 
         	{
         		int t1 = 0;
         		int t2 = 0;
@@ -110,6 +105,7 @@ public class LinePiece extends Piece {
             	shadow[2] = new Tuple(piece[2].getX(), t1);	
             	shadow[3] = new Tuple(piece[3].getX(), t1);
         	}
+        	
         	else {
         		int t1 = 0;
         		if (piece[3].getY() > 0) {
