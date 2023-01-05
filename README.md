@@ -7,7 +7,7 @@ my progress.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
-- fix canrotate
+- check drawNext and drawHeld
 - Implement starting menu
 - Implement game over menu
 - Implement scoreboard
