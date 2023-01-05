@@ -10,16 +10,37 @@ public class ReverseLPiece extends Piece {
             
             findShadow();
         }
-
-        public boolean canRotate() {
-            return true;
-        }
-
-        //left is 0
+        
         @Override
-        public boolean checkDir(int dir) {
-            return true;
+        public boolean canRotate() {
+            if (orientation == 0) {
+            	return isRotatable(centerX - 1, centerY - 1) &&
+            			isRotatable(centerX - 1, centerY) &&
+            			isRotatable(centerX, centerY) &&
+            			isRotatable(centerX + 1, centerY);
+                
+            }
+            else if (orientation == 1) {
+            	return isRotatable(centerX, centerY - 1) &&
+            			isRotatable(centerX + 1, centerY - 1) &&
+            			isRotatable(centerX, centerY) &&
+            			isRotatable(centerX, centerY + 1);
+            }
+            else if (orientation == 2) {
+            	return isRotatable(centerX - 1, centerY) &&
+            			isRotatable(centerX, centerY) &&
+            			isRotatable(centerX + 1, centerY) &&
+            			isRotatable(centerX + 1, centerY + 1);
+            }
+            else {
+            	return isRotatable(centerX, centerY - 1) &&
+            			isRotatable(centerX, centerY) &&
+            			isRotatable(centerX - 1, centerY + 1) &&
+            			isRotatable(centerX, centerY + 1);
+            }
         }
+
+       
 
         @Override
         public void rotate() {

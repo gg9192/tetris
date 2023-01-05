@@ -241,8 +241,14 @@ public abstract class Piece {
      * of a piece is an indicator showing where the piece will
      * land.
      */
-    public abstract void findShadow();
+    protected abstract void findShadow();
     
+    /**
+     * Checks if the piece is able to rotate
+     * @return a boolean based on whether the pice can rotate 
+     * or not
+     */
+    protected abstract boolean canRotate();
     
     public void drawShadowBox(Tuple t) {
     	int x = board.getCords(t.getX(),t.getY()).getX();

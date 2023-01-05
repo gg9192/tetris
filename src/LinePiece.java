@@ -9,7 +9,8 @@ public class LinePiece extends Piece {
             piece[3] = new Tuple(centerX + 1, centerY);
             findShadow();
         }
-
+        
+        @Override
         public boolean canRotate() {
         	if (orientation == 0) {
         		int newX = centerX + 1;
