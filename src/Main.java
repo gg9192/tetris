@@ -4,7 +4,7 @@ import java.util.Stack;
 public class Main extends PApplet{
     int tick = 0;
     public static PApplet processing;
-    Screen screen = new Screen();
+    Game screen = new Game();
     public static void main(String[] args) {
         PApplet.main("Main",args);
 

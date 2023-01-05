@@ -305,66 +305,7 @@ public class Board {
 
     }
     
-    /**
-     * Draws a piece at the given location to show next and current piece. 
-     * @param x X coordinate of piece.
-     * @param y Y coordinate of piece.
-     * @param type Type of piece to be drawn.
-     * 0 = L piece
-     * 1 = Reverse L piece
-     * 2 = line piece
-     * 3 = t piece
-     * 4 = z piece
-     * 5 = reverse z piece
-     * 6 = square piece
-     */
-    public void drawDemoPiece(int x, int y, int type) {
-        if (type == 0) {
-            drawSquare(1, new Tuple(x,y));
-            drawSquare(1, new Tuple(x,y + 25));
-            drawSquare(1, new Tuple(x,y + 50));
-            drawSquare(1, new Tuple(x + 25,y + 50));
-        }
-        else if (type == 1) {
-            drawSquare(1, new Tuple(x,y));
-            drawSquare(1, new Tuple(x,y + 25));
-            drawSquare(1, new Tuple(x,y + 50));
-            drawSquare(1, new Tuple(x - 25,y + 50));
-        }
-        else if (type == 2) {
-            drawSquare(2, new Tuple(x,y));
-            drawSquare(2, new Tuple(x,y + 25));
-            drawSquare(2, new Tuple(x,y + 50));
-            drawSquare(2, new Tuple(x,y + 75));
-        }
-        else if (type == 3) {
-            drawSquare(3, new Tuple(x,y));
-            drawSquare(3, new Tuple(x,y + 25));
-            drawSquare(3, new Tuple(x,y + 50));
-            drawSquare(3, new Tuple(x + 25,y + 25));
-        }
-        else if (type == 4) {
-            drawSquare(4, new Tuple(x, y));
-            drawSquare(4, new Tuple(x + 25, y));
-            drawSquare(4, new Tuple(x + 25, y + 25));
-            drawSquare(4, new Tuple(x + 50, y + 25));
-        }
-        else if (type == 5) {
-            x -= 12;
-            drawSquare(4, new Tuple(x, y + 25));
-            drawSquare(4, new Tuple(x + 25, y + 25));
-            drawSquare(4, new Tuple(x + 25, y));
-            drawSquare(4, new Tuple(x + 50, y));
-
-        }
-        else if (type == 6) {
-            drawSquare(5, new Tuple(x, y));
-            drawSquare(5, new Tuple(x + 25, y));
-            drawSquare(5, new Tuple(x, y + 25));
-            drawSquare(5, new Tuple(x + 25, y + 25));
-        }
-
-    }
+    
     
 
     /**
@@ -605,8 +546,16 @@ public class Board {
                 }
                 else {
                 	//debug here
+                	// 0 = L piece
+                    // 1 = Reverse L piece
+                    // 2 = line piece
+                    // 3 = t piece
+                    // 4 = z piece
+                    // 5 = reverse z piece
+                    // 6 = square piece
                 	this.cp = new ZPiece(this);
-                	
+                	this.held = 0;
+                	this.nextPiece = 6;
                 	needPiece = false;
                 }
             }
