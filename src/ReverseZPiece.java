@@ -8,17 +8,35 @@ public class ReverseZPiece extends Piece {
             piece[3] = new Tuple(centerX, centerY);
             findShadow();
         }
-
-
-
-        @Override
-        public boolean checkDir(int dir) {
-            return true;
-        }
-
+    	
+    	@Override
         public boolean canRotate() {
-            return true;
+    		if (orientation == 0) {
+    			return isRotatable(centerX, centerY - 1) &&
+    					isRotatable(centerX + 1, centerY - 1) &&
+    					isRotatable(centerX - 1, centerY) &&
+    					isRotatable(centerX, centerY);
+    		}
+    		else if (orientation == 1) {
+    			return isRotatable(centerX, centerY - 1) &&
+    					isRotatable(centerX, centerY) &&
+    					isRotatable(centerX + 1, centerY) &&
+    					isRotatable(centerX + 1, centerY  + 1);
+    		}
+    		else if (orientation == 2) {
+    			return isRotatable(centerX, centerX) &&
+    					isRotatable(centerX + 1, centerY) &&
+    					isRotatable(centerX - 1, centerY + 1) &&
+    					isRotatable(centerX, centerY  + 1);
+    		}
+    		else {
+    			return isRotatable(centerX - 1, centerY - 1) &&
+    					isRotatable(centerX - 1, centerY) &&
+    					isRotatable(centerX, centerY) &&
+    					isRotatable(centerX, centerY + 1);
+    		}
         }
+    
         @Override
         public void rotate() {
             this.orientation ++;
@@ -36,7 +54,7 @@ public class ReverseZPiece extends Piece {
             }
             if (this.orientation == 1) {
                 if (canRotate()) {
-                    piece[0] = new Tuple(centerX, centerY -1);
+                    piece[0] = new Tuple(centerX, centerY - 1);
                     piece[1] = new Tuple(centerX, centerY);
                     piece[2] = new Tuple(centerX + 1, centerY);
                     piece[3] = new Tuple(centerX + 1, centerY  + 1);

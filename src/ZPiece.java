@@ -7,15 +7,36 @@ public class ZPiece extends Piece {
             piece[3] = new Tuple(centerX + 1, centerY);
             findShadow();
         }
+        
+        @Override
         public boolean canRotate() {
-           return true;
+           if (orientation == 0) {
+        	   return isRotatable(centerX - 1, centerY - 1) &&
+        			   isRotatable(centerX, centerY - 1) &&
+        			   isRotatable(centerX, centerY) &&
+        			   isRotatable(centerX + 1, centerY);
+           }
+           else if (orientation == 1) {
+        	   return isRotatable(centerX + 1, centerY - 1) &&
+        			   isRotatable(centerX, centerY) &&
+        			   isRotatable(centerX + 1, centerY) &&
+        			   isRotatable(centerX, centerY + 1);
+           }
+           else if (orientation == 2) {
+        	   return isRotatable(centerX - 1, centerY) &&
+        			   isRotatable(centerX, centerY) &&
+        			   isRotatable(centerX, centerY + 1) &&
+        			   isRotatable(centerX + 1, centerY + 1);
+           }
+           else {
+        	   return isRotatable(centerX, centerY - 1) &&
+        			   isRotatable(centerX - 1, centerY) &&
+        			   isRotatable(centerX, centerY) &&
+        			   isRotatable(centerX - 1, centerY + 1);
+           }
         }
 
-        @Override
-        public boolean checkDir(int dir) {
-            
-            return true;
-        }
+
 
         @Override
         public void rotate() {

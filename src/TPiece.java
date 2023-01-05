@@ -14,11 +14,6 @@ public class TPiece extends Piece {
         }
 
         @Override
-        public boolean checkDir(int dir) {
-           return true;
-        }
-
-        @Override
         public void rotate() {
             this.orientation ++;
             if (this.orientation == 0) {
@@ -72,8 +67,33 @@ public class TPiece extends Piece {
                 return;
             }
         }
+        
+        @Override
         public boolean canRotate(){
-        	return true;
+        	if (orientation == 0) {
+        		return isRotatable(centerX - 1, centerY) &&
+        				isRotatable(centerX, centerY) &&
+        				isRotatable(centerX, centerY - 1) &&
+        				isRotatable(centerX + 1, centerY);
+        	}
+        	else if (orientation == 1) {
+        		return isRotatable(centerX, centerY - 1) &&
+        				isRotatable(centerX, centerY) &&
+        				isRotatable(centerX + 1, centerY) &&
+        				isRotatable(centerX, centerY + 1);
+        	}
+        	else if (orientation == 2) {
+        		return isRotatable(centerX - 1, centerY) &&
+        				isRotatable(centerX, centerY) &&
+        				isRotatable(centerX + 1, centerY) &&
+        				isRotatable(centerX, centerY + 1);
+        	}
+        	else {
+        		return isRotatable(centerX, centerY - 1) &&
+        				isRotatable(centerX - 1, centerY) &&
+        				isRotatable(centerX, centerY) && 
+        				isRotatable(centerX, centerY + 1);
+        	}
         }
 
         @Override

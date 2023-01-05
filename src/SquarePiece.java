@@ -9,10 +9,6 @@ public class SquarePiece extends Piece {
             findShadow();
         }
 
-        @Override
-        public boolean checkDir(int dir) {
-            return true;
-        }
 
         @Override
         public void rotate() {
@@ -37,4 +33,9 @@ public class SquarePiece extends Piece {
             shadow[2] = new Tuple(piece[2].getX(),t1);
             shadow[3] = new Tuple(piece[3].getX(),t2);
         }
+
+		@Override
+		protected boolean canRotate() {
+			return true;
+		}
     }
