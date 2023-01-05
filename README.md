@@ -7,7 +7,6 @@ my progress.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
-- check drawNext and drawHeld
 - Implement starting menu
 - Implement game over menu
 - Implement scoreboard
