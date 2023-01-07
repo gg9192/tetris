@@ -13,7 +13,8 @@ class AbstractPieceTests {
 	 */
 	@Test
 	void testTick() {
-		Board b = new Board(0, 0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new TPiece(b);
 		p.tick();
 		Tuple[] expected = new Tuple[4];
@@ -31,7 +32,8 @@ class AbstractPieceTests {
 	 */
 	@Test
 	void testMoveLeft() {
-		Board b = new Board(0, 0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new TPiece(b);
 		p.moveLeft();
 		Tuple[] expected = new Tuple[4];
@@ -49,7 +51,8 @@ class AbstractPieceTests {
 	 */
 	@Test
 	void testMoveRight() {
-		Board b = new Board(0, 0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new TPiece(b);
 		p.moveRight();
 		Tuple[] expected = new Tuple[4];
@@ -67,7 +70,8 @@ class AbstractPieceTests {
 	 */
 	@Test
 	void testLeftBoarder() {
-		Board b = new Board(0, 0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new TPiece(b);
 		p.moveLeft();
 		p.moveLeft();
@@ -92,7 +96,8 @@ class AbstractPieceTests {
 	 */
 	@Test
 	void testRightBoarder() {
-		Board b = new Board(0, 0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new TPiece(b);
 		p.moveRight();
 		p.moveRight();
@@ -117,7 +122,8 @@ class AbstractPieceTests {
 	 */
 	@Test
 	void testGhostLeft() {
-		Board b = new Board(0, 0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new TPiece(b);
 		p.tick();
 		p.tick();
@@ -143,7 +149,8 @@ class AbstractPieceTests {
 	 */
 	@Test
 	void testGhostRight() {
-		Board b = new Board(0, 0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new TPiece(b);
 		p.tick();
 		p.tick();

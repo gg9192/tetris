@@ -12,7 +12,8 @@ class TPieceTests {
 	 */
 	@Test
 	void testInit() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new TPiece(b);
 		Tuple[] expected = new Tuple[4];
 		expected[0] = new Tuple(4,-3);
@@ -28,7 +29,8 @@ class TPieceTests {
 	 */
 	@Test 
 	void rotate3to0() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new TPiece(b);
 		p.rotate();
 		p.rotate();
@@ -47,7 +49,8 @@ class TPieceTests {
 	 */
 	@Test
 	void testShadow0() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		b.setGrid(3, 10, 1);
 		Piece p = new TPiece(b);
 		Tuple[] expected = new Tuple[4];
@@ -74,7 +77,8 @@ class TPieceTests {
 	 */
 	@Test
 	void testFloor0() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new TPiece(b);
 		Tuple[] expected = new Tuple[4];
 		expected[0] = new Tuple(4, 22);
@@ -90,7 +94,8 @@ class TPieceTests {
 	 */
 	@Test 
 	void rotate0to1() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new TPiece(b);
 		p.rotate();
 		Tuple[] expected = new Tuple[4];
@@ -106,7 +111,8 @@ class TPieceTests {
 	 */
 	@Test
 	void testShadow1() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		b.setGrid(4, 10, 1);
 		Piece p = new TPiece(b);
 		p.rotate();
@@ -129,7 +135,8 @@ class TPieceTests {
 	 */
 	@Test
 	void testFloor1() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new TPiece(b);
 		Tuple[] expected = new Tuple[4];
 		p.rotate();
@@ -147,7 +154,8 @@ class TPieceTests {
 	 */
 	@Test 
 	void rotate1to2() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new TPiece(b);
 		p.rotate();
 		p.rotate();
@@ -164,7 +172,8 @@ class TPieceTests {
 	 */
 	@Test
 	void testShadow2() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		b.setGrid(3, 10, 1);
 		Piece p = new TPiece(b);
 		p.rotate();
@@ -193,7 +202,8 @@ class TPieceTests {
 	 */
 	@Test
 	void testFloor2() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new TPiece(b);
 		Tuple[] expected = new Tuple[4];
 		p.rotate();
@@ -211,7 +221,8 @@ class TPieceTests {
 	 */
 	@Test 
 	void rotate2to3() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new TPiece(b);
 		p.rotate();
 		p.rotate();
@@ -229,7 +240,8 @@ class TPieceTests {
 	 */
 	@Test
 	void testShadow3() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		b.setGrid(3, 10, 1);
 		Piece p = new TPiece(b);
 		p.rotate();
@@ -254,7 +266,8 @@ class TPieceTests {
 	 */
 	@Test
 	void testFloor3() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new TPiece(b);
 		Tuple[] expected = new Tuple[4];
 		p.rotate();

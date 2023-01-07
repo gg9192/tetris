@@ -10,7 +10,8 @@ class ReverseLPieceTests {
 	 */
 	@Test
 	void testInit() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new ReverseLPiece(b);
 		Tuple[] expected = new Tuple[4];
 		expected[0] = new Tuple(3,-3);
@@ -26,7 +27,8 @@ class ReverseLPieceTests {
 	 */
 	@Test
 	void rotate0to1() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new ReverseLPiece(b);
 		p.rotate();
 		Tuple[] expected = new Tuple[4];
@@ -43,7 +45,8 @@ class ReverseLPieceTests {
 	 */
 	@Test
 	void testShadow1() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		b.setGrid(5, 10, 1);
 		Piece p = new ReverseLPiece(b);
 		p.rotate();
@@ -66,7 +69,8 @@ class ReverseLPieceTests {
 	 */
 	@Test
 	void test1Floor1() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new ReverseLPiece(b);
 		p.rotate();
 		Tuple[] expected = new Tuple[4];
@@ -83,7 +87,8 @@ class ReverseLPieceTests {
 	 */
 	@Test
 	void testRotate1to2() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new ReverseLPiece(b);
 		p.rotate();
 		p.rotate();
@@ -102,7 +107,8 @@ class ReverseLPieceTests {
 	 */
 	@Test
 	void testShadow2() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		b.setGrid(5, 10, 1);
 		Piece p = new ReverseLPiece(b);
 		p.rotate();
@@ -131,7 +137,8 @@ class ReverseLPieceTests {
 	 */
 	@Test
 	void testFloor2() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new ReverseLPiece(b);
 		p.rotate();
 		p.rotate();
@@ -149,7 +156,8 @@ class ReverseLPieceTests {
 	 */
 	@Test 
 	void rotate2to3() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new ReverseLPiece(b);
 		p.rotate();
 		p.rotate();
@@ -168,7 +176,8 @@ class ReverseLPieceTests {
 	 */
 	@Test
 	void testShadow3() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		b.setGrid(3, 10, 1);
 		Piece p = new ReverseLPiece(b);
 		p.rotate();
@@ -193,7 +202,8 @@ class ReverseLPieceTests {
 	 */
 	@Test
 	void testFloor3() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new ReverseLPiece(b);
 		p.rotate();
 		p.rotate();
@@ -212,7 +222,8 @@ class ReverseLPieceTests {
 	 */
 	@Test 
 	void rotate3to0() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new ReverseLPiece(b);
 		p.rotate();
 		p.rotate();
@@ -232,7 +243,8 @@ class ReverseLPieceTests {
 	 */
 	@Test
 	void testShadow0() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		b.setGrid(3, 10, 1);
 		Piece p = new ReverseLPiece(b);
 		Tuple[] expected = new Tuple[4];
@@ -259,7 +271,8 @@ class ReverseLPieceTests {
 	 */
 	@Test
 	void testFloor0() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new ReverseLPiece(b);
 		Tuple[] expected = new Tuple[4];
 		expected[0] = new Tuple(3,22);

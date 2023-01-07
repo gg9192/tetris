@@ -13,6 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Board {
     public int level = 1;
 
+    private Game g;
     private boolean debug = false;
     private int lossTick = 0;
     public boolean isLoss = false;
@@ -345,8 +346,9 @@ public class Board {
      * @param x X coordinate to draw the board at.
      * @param y Y coordinate to draw the board at.
      */
-    public Board(int x, int y) {
-        this.x = x;
+    public Board(int x, int y, Game g) {
+        this.g = g;
+    	this.x = x;
         this.y = y;
         nextPiece = (int)Math.floor(Math.random()*(6-0+1)+0);
     }
@@ -521,20 +523,7 @@ public class Board {
      */
     public void draw(){
         if (isLoss) {
-            nextPiece = -1;
-                for (int x = 0; x < 10; x ++) {
-                    for (int y = 0; y < 24; y ++) {
-                        drawSquare(grid[x][y], getCords(x, y));
-                    }
-                }
-                if (lossTick < 36) {
-                    lossTick ++;
-
-
-                }
-            drawLossSquares(lossTick/7);
-
-                return;
+        	g.loseGame();
         }
 
         // 0 = L piece

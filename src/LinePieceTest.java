@@ -10,7 +10,8 @@ class LinePieceTest {
 	 */
 	@Test
 	void testInit() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new LinePiece(b);
 		Tuple[] expected = new Tuple[4];
 		expected[0] = new Tuple(2,-3);
@@ -26,7 +27,8 @@ class LinePieceTest {
 	 */
 	@Test
 	void rotate2to3() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new LinePiece(b);
 		p.rotate();
 		p.rotate();
@@ -45,7 +47,8 @@ class LinePieceTest {
 	 */
 	@Test
 	void rotate1to2() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new LinePiece(b);
 		p.rotate();
 		p.rotate();
@@ -63,7 +66,8 @@ class LinePieceTest {
 	 */
 	@Test
 	void rotate0to1() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new LinePiece(b);
 		p.rotate();
 		Tuple[] expected = new Tuple[4];
@@ -80,7 +84,8 @@ class LinePieceTest {
 	 */
 	@Test
 	void rotate3to0() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new LinePiece(b);
 		p.rotate();
 		p.rotate();
@@ -101,7 +106,8 @@ class LinePieceTest {
 	 */
 	@Test
 	void testShadow0And2() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		b.setGrid(2, 10, 1);
 		Piece p = new LinePiece(b);
 		Tuple[] expected = new Tuple[4];
@@ -134,7 +140,8 @@ class LinePieceTest {
 	 */
 	@Test
 	void testShadow1And3() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		b.setGrid(4, 10, 1);
 		Piece p = new LinePiece(b);
 		p.rotate();

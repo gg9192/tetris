@@ -6,7 +6,7 @@ import processing.core.PImage;
  *
  */
 public class Game implements Screen{
-    public Board b = new Board(350,150);
+    private Board b = new Board(350,150, this);
     // 0 = L piece
     // 1 = Reverse L piece
     // 2 = line piece
@@ -15,6 +15,22 @@ public class Game implements Screen{
     // 5 = reverse z piece
     // 6 = square piece
 
+    private boolean isLoss = false;
+    
+    public void loseGame() {
+    	this.isLoss = true;
+    }
+    
+    public Board getBoard() {
+    	return this.b;
+    }
+    
+    Main m;
+    
+    public Game(Main m) {
+    	this.m = m;
+    }
+    
     /**
      * Draws a piece at the given location to show next and current piece. 
      * @param x X coordinate of piece.
@@ -136,25 +152,28 @@ public class Game implements Screen{
      * This function draws the elements on the screen.
      */
     public void draw() {
-        Main.processing.background(21,42,106);
-        b.draw();
-        PImage logo = Main.processing.loadImage("Logo.png");
-        PFont font = Main.processing.createFont("TETRIS.ttf", 20);
-        Main.processing.image(logo, 30, 400);
-        Main.processing.strokeWeight(5);
-        Main.processing.stroke(242,168,64);
-        Main.processing.fill(61, 101, 201);
-        Main.processing.rect(70,60,200,180);
-        Main.processing.rect(650,60,200,180);
-        Main.processing.textFont(font);
-        Main.processing.fill(0,0,0);
-        Main.processing.text("HELD PIECE", 95, 95);
-        Main.processing.text("NEXT PIECE", 675, 95);
-        Main.processing.fill(242,168,64);
-        Main.processing.textSize(30);
-        Main.processing.text("Score: " + b.score, 315, 90);
-        drawHeld();
-        drawNext();
+        if (!isLoss) {
+        	Main.processing.background(21,42,106);
+            b.draw();
+            PImage logo = Main.processing.loadImage("Logo.png");
+            PFont font = Main.processing.createFont("TETRIS.ttf", 20);
+            Main.processing.image(logo, 30, 400);
+            Main.processing.strokeWeight(5);
+            Main.processing.stroke(242,168,64);
+            Main.processing.fill(61, 101, 201);
+            Main.processing.rect(70,60,200,180);
+            Main.processing.rect(650,60,200,180);
+            Main.processing.textFont(font);
+            Main.processing.fill(0,0,0);
+            Main.processing.text("HELD PIECE", 95, 95);
+            Main.processing.text("NEXT PIECE", 675, 95);
+            Main.processing.fill(242,168,64);
+            Main.processing.textSize(30);
+            Main.processing.text("Score: " + b.score, 315, 90);
+            drawHeld();
+            drawNext();
+        }
+    	
 
     }
 

@@ -55,6 +55,7 @@ public class StartMenu implements Screen{
 		if (mouseX >= 220 && mouseX <= 528 && 
 				mouseY >= 245 && mouseY <= 340) {
 			m.setModeGame();
+			m.newGame();
 		}
 		else if (mouseX >= 220 && mouseX <= 470 && 
 				mouseY >= 562 && mouseY <= 652) {
