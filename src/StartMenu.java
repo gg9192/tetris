@@ -54,8 +54,15 @@ public class StartMenu implements Screen{
 	public void onMouseClick(int mouseX, int mouseY) {
 		if (mouseX >= 220 && mouseX <= 528 && 
 				mouseY >= 245 && mouseY <= 340) {
-			System.out.println("here");
 			m.setModeGame();
+		}
+		else if (mouseX >= 220 && mouseX <= 470 && 
+				mouseY >= 562 && mouseY <= 652) {
+			Main.processing.exit();
+		}
+		else if (mouseX >= 220 && mouseX <= 617 &&
+				 mouseY >= 460 && mouseY <= 541) {
+			m.setModeAbout();
 		}
 	}
 	
@@ -64,6 +71,7 @@ public class StartMenu implements Screen{
 	 */
 	@Override
 	public void draw() {
+		Main.processing.background(21,42,106);
 		Main.processing.strokeWeight(5);
         Main.processing.stroke(242,168,64);
         Main.processing.stroke(242,168,64);

@@ -561,7 +561,7 @@ public class Board {
                     if (nextPiece == 2) {
                         cp = new LinePiece(this);
                     }
-                    if (nextPiece == 3) {
+                     if (nextPiece == 3) {
                         cp = new TPiece(this);
                     }
                     if (nextPiece == 4) {

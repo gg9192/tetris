@@ -5,20 +5,29 @@ public class Main extends PApplet{
 	
 	public static enum gameMode {
 		MAINMENU,
-		GAME
+		GAME,
+		ABOUT
 	}
 	
-	gameMode gm = gameMode.MAINMENU;
+	gameMode gm = gameMode.ABOUT;
 			
 	public void setModeGame() {
 		gm = gameMode.GAME;
 	}
 	
+	public void setModeAbout() {
+		gm = gameMode.ABOUT;
+	}
+	
+	public void setModeMenu() {
+		gm = gameMode.MAINMENU;
+	}
     
     //encapsulation?
     public static PApplet processing;
     Game screen = new Game();
     StartMenu sm = new StartMenu(this);
+    AboutMenu am = new AboutMenu(this);
     
     public static void main(String[] args) {
         PApplet.main("Main",args);
@@ -29,10 +38,19 @@ public class Main extends PApplet{
     	if (gm == gameMode.MAINMENU) {
     		sm.onMouseMove(mouseX, mouseY);
     	}
+    	if (gm == gameMode.ABOUT) {
+    		am.onHover(mouseX, mouseY);
+    	}
     }
     
     public void mouseClicked() {
-    	sm.onMouseClick(mouseX, mouseY);
+    	if (gm == gameMode.MAINMENU) {
+    		sm.onMouseClick(mouseX, mouseY);
+    	}
+    	if (gm == gameMode.ABOUT) {
+    		am.onClick(mouseX, mouseY);
+    	}
+    	
     }
     
     /**
@@ -52,6 +70,7 @@ public class Main extends PApplet{
         	screen.b.keyPressed(keyCode);
         }
         
+        
 
     }
     /**
@@ -69,8 +88,12 @@ public class Main extends PApplet{
     	if (gm == gameMode.GAME) {
     		screen.draw();
     	}
-    	else {
+    	else if (gm == gameMode.MAINMENU) {
     		sm.draw();
     	}
+    	else if (gm == gameMode.ABOUT) {
+    		am.draw();
+    	}
+    	
     }
 }
