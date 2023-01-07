@@ -7,7 +7,6 @@ my progress.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
-- Implement starting menu
 - Implement game over menu
 - Implement scoreboard
 
