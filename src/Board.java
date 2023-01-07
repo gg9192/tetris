@@ -4,6 +4,7 @@ import processing.core.PFont;
 
 import javax.sound.sampled.Line;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 /**
  * This handles all the events that happen on the game board.
  * @author alext
@@ -12,7 +13,7 @@ import java.util.*;
 public class Board {
     public int level = 1;
 
-    private boolean debug = true;
+    private boolean debug = false;
     private int lossTick = 0;
     public boolean isLoss = false;
     private int tickMax = 50;
@@ -305,7 +306,38 @@ public class Board {
 
     }
     
-    
+    /**
+     * event listener for keyPresses.
+     * @param keyCode the key pressed
+     */
+    public void keyPressed(int keyCode) {
+    	//a = 65
+        //d = 68
+        //s = 83
+        //r = 82
+        //e = 69
+        if (keyCode == 65) {
+            cp.moveLeft();
+        }
+        else if (keyCode == 68) {
+        	cp.moveRight();
+        }
+        else if (keyCode == 82) {
+            cp.rotate();
+        }
+        else if (keyCode == 83) {
+            if(isLoss == false) {
+                if (cp != null) {
+                    cp.down();
+                }
+
+            }
+
+        }
+        else if (keyCode == 69) {
+            hold();
+        }
+    }
     
 
     /**
@@ -515,7 +547,7 @@ public class Board {
         if (needPiece) {
             if (isLoss == false) {
                 if (debug == false) {
-                	int random = (int)Math.floor(Math.random()*(6-0+1)+0);
+                	int random = ThreadLocalRandom.current().nextInt(0, 6 + 1);
                     if (checkLoss(nextPiece)) {
                         isLoss = true;
                         
