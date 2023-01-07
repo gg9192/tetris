@@ -31,7 +31,8 @@ class BoardTests {
 	 */
 	@Test
 	void testFixBoard() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		fillRow(b, 23);
 		fillRow(b, 22);
 		b.setGrid(2, 21, 1);
@@ -50,7 +51,8 @@ class BoardTests {
 	 */
 	@Test
 	void testFixBoard1() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		fillRow(b, 23);
 		fillRow(b, 22);
 		fillRow(b, 21);

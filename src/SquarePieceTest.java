@@ -9,7 +9,8 @@ class SquarePieceTest {
 	 */
 	@Test
 	void init() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new SquarePiece(b);
 		Tuple[] expected = new Tuple[4];
 		expected[0] = new Tuple(4,-2);
@@ -25,7 +26,8 @@ class SquarePieceTest {
 	 */
 	@Test
 	void testShadow0() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		b.setGrid(4, 10, 1);
 		Piece p = new SquarePiece(b);
 		Tuple[] expected = new Tuple[4];
@@ -46,7 +48,8 @@ class SquarePieceTest {
 	 */
 	@Test 
 	void testFloor() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new SquarePiece(b);
 		Tuple[] expected = new Tuple[4];
 		expected[0] = new Tuple(4, 22);

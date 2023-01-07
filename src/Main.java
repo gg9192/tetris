@@ -10,7 +10,7 @@ public class Main extends PApplet{
 	}
 	
 	gameMode gm = gameMode.ABOUT;
-			
+	
 	public void setModeGame() {
 		gm = gameMode.GAME;
 	}
@@ -25,13 +25,17 @@ public class Main extends PApplet{
     
     //encapsulation?
     public static PApplet processing;
-    Game screen = new Game();
+    Game game = new Game(this);
     StartMenu sm = new StartMenu(this);
     AboutMenu am = new AboutMenu(this);
     
     public static void main(String[] args) {
         PApplet.main("Main",args);
 
+    }
+    
+    public void newGame() {
+    	this.game = new Game(this);
     }
     
     public void mouseMoved() {
@@ -67,7 +71,7 @@ public class Main extends PApplet{
      */
     public void keyReleased() {
         if (gm == gameMode.GAME) {
-        	screen.b.keyPressed(keyCode);
+        	game.getBoard().keyPressed(keyCode);
         }
         
         
@@ -86,7 +90,7 @@ public class Main extends PApplet{
      */
     public void draw() {
     	if (gm == gameMode.GAME) {
-    		screen.draw();
+    		game.draw();
     	}
     	else if (gm == gameMode.MAINMENU) {
     		sm.draw();

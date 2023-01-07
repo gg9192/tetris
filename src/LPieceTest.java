@@ -10,7 +10,8 @@ class LPieceTest {
 	 */
 	@Test
 	void rotate0to1() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new LPiece(b);
 		p.rotate();
 		Tuple[] expected = new Tuple[4];
@@ -27,7 +28,8 @@ class LPieceTest {
 	 */
 	@Test
 	void testShadow1() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		b.setGrid(4, 10, 1);
 		Piece p = new LPiece(b);
 		p.rotate();
@@ -50,7 +52,8 @@ class LPieceTest {
 	 */
 	@Test
 	void testFloor1() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new LPiece(b);
 		p.rotate();
 		Tuple[] expected = new Tuple[4];
@@ -67,7 +70,8 @@ class LPieceTest {
 	 */
 	@Test
 	void rotate1to2() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new LPiece(b);
 		p.rotate();
 		p.rotate();
@@ -85,7 +89,8 @@ class LPieceTest {
 	 */
 	@Test
 	void testShadow2() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		b.setGrid(3, 10, 1);
 		Piece p = new LPiece(b);
 		p.rotate();
@@ -114,7 +119,8 @@ class LPieceTest {
 	 */
 	@Test
 	void testFloor2() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new LPiece(b);
 		p.rotate();
 		p.rotate();
@@ -133,7 +139,8 @@ class LPieceTest {
 	 */
 	@Test
 	void rotate2to3() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new LPiece(b);
 		p.rotate();
 		p.rotate();
@@ -152,7 +159,8 @@ class LPieceTest {
 	 */
 	@Test
 	void testShadow3() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		b.setGrid(3, 10, 1);
 		Piece p = new LPiece(b);
 		p.rotate();
@@ -177,7 +185,8 @@ class LPieceTest {
 	 */
 	@Test
 	void testFloor3() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new LPiece(b);
 		p.rotate();
 		p.rotate();
@@ -196,7 +205,8 @@ class LPieceTest {
 	 */
 	@Test
 	void rotate3to0() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new LPiece(b);
 		p.rotate();
 		p.rotate();
@@ -217,7 +227,8 @@ class LPieceTest {
 	 */
 	@Test
 	void testShadow0() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		b.setGrid(3, 10, 1);
 		Piece p = new LPiece(b);
 		p.rotate();
@@ -248,7 +259,8 @@ class LPieceTest {
 	 */
 	@Test
 	void testFloor0() {
-		Board b = new Board(0,0);
+		Game g = new Game(null);
+		Board b = new Board(0, 0, g);
 		Piece p = new LPiece(b);
 		p.rotate();
 		p.rotate();
