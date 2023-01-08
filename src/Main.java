@@ -25,12 +25,13 @@ public class Main extends PApplet{
     
     //encapsulation?
     public static PApplet processing;
+    public static ScoreBoard s;
     Game game = new Game(this);
     StartMenu sm = new StartMenu(this);
     AboutMenu am = new AboutMenu(this);
     
     public static void main(String[] args) {
-        PApplet.main("Main",args);
+    	PApplet.main("Main",args);
 
     }
     
@@ -67,6 +68,7 @@ public class Main extends PApplet{
      * define initial environment properties
      */
     public void setup() {
+    	this.s = new ScoreBoard();
         processing = this;
         background(21,42,106);
     }
