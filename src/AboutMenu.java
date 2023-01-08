@@ -1,5 +1,9 @@
 import processing.core.PFont;
 
+/** 
+ * The menu that gives information about the
+ * game and me, the author.
+ */
 public class AboutMenu implements Screen {
 	
 	private Main m;

@@ -9,7 +9,7 @@ public class Main extends PApplet{
 		ABOUT
 	}
 	
-	gameMode gm = gameMode.ABOUT;
+	gameMode gm = gameMode.MAINMENU;
 	
 	public void setModeGame() {
 		gm = gameMode.GAME;
@@ -45,6 +45,9 @@ public class Main extends PApplet{
     	if (gm == gameMode.ABOUT) {
     		am.onHover(mouseX, mouseY);
     	}
+    	if (gm == gameMode.GAME) {
+    		game.onMouseMove(mouseX, mouseY);
+    	}
     }
     
     public void mouseClicked() {
@@ -54,7 +57,9 @@ public class Main extends PApplet{
     	if (gm == gameMode.ABOUT) {
     		am.onClick(mouseX, mouseY);
     	}
-    	
+    	if (gm == gameMode.GAME) {
+    		game.onClick(mouseX, mouseY);
+    	}
     }
     
     /**
