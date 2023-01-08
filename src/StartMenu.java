@@ -1,5 +1,10 @@
 import processing.core.PFont;
 
+/**
+ * The start menu.
+ * @author alext
+ *
+ */
 public class StartMenu implements Screen{
 	Main m;
 	

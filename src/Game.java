@@ -15,7 +15,9 @@ public class Game implements Screen{
     // 5 = reverse z piece
     // 6 = square piece
 
+    Main m;
     private boolean isLoss = false;
+    
     
     public void loseGame() {
     	this.isLoss = true;
@@ -25,11 +27,35 @@ public class Game implements Screen{
     	return this.b;
     }
     
-    Main m;
+    private LossMenu lm;
     
-    public Game(Main m) {
-    	this.m = m;
+    public Game(Main me) {
+    	this.m = me;
+    	System.out.println(this.m);
+    	 lm = new LossMenu(me, this);
     }
+    
+    /**
+	 * Handles mouse click.
+	 * @param mouseX X position of Mouse
+	 * @param mouseY Y position of Mouse
+	 */
+	public void onClick(int mouseX, int mouseY) {
+		if (isLoss) {
+			lm.onClick(mouseX, mouseY);
+		}
+	}
+	
+	/**
+	 * Handles mouse move.
+	 * @param mouseX X position of Mouse
+	 * @param mouseY Y position of Mouse
+	 */
+	public void onMouseMove(int mouseX, int mouseY) {
+		if (isLoss) {
+			lm.onMouseMove(mouseX, mouseY);
+		}
+	}
     
     /**
      * Draws a piece at the given location to show next and current piece. 
@@ -172,6 +198,9 @@ public class Game implements Screen{
             Main.processing.text("Score: " + b.score, 315, 90);
             drawHeld();
             drawNext();
+        }
+        else {
+        	lm.draw();
         }
     	
 
