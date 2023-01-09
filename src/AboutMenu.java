@@ -43,9 +43,11 @@ public class AboutMenu implements Screen {
 	public void onHover(int mouseX, int mouseY) {
 		if (mouseX >= 250 & mouseX <= 572 
 				&& mouseY >= 594 && mouseY <= 674) {
+			Main.processing.cursor(12);
 			backHover = true;
 		}
 		else {
+			Main.processing.cursor(0);
 			backHover = false;
 		}
 	}

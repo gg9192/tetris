@@ -26,21 +26,26 @@ public class StartMenu implements Screen{
 	public void onMouseMove(int mouseX, int mouseY){
 		if (mouseX >= 220 && mouseX <= 528 && 
 				mouseY >= 245 && mouseY <= 340) {
+			Main.processing.cursor(12);
 			this.playHover = true;
 		}
 		else if (mouseX >= 220 && mouseX <= 740 &&
 				mouseY >= 360 && mouseY <= 440) {
+			Main.processing.cursor(12);
 			this.hsHover = true;
 		}
 		else if (mouseX >= 220 && mouseX <= 617 &&
 				 mouseY >= 460 && mouseY <= 541) {
+			Main.processing.cursor(12);
 			this.aboutHover = true;
 		}
 		else if (mouseX >= 220 && mouseX <= 470 && 
 				mouseY >= 562 && mouseY <= 652) {
+			Main.processing.cursor(12);
 			this.quitHover = true;
 		}
 		else {
+			Main.processing.cursor(0);
 			this.playHover = false;
 			this.hsHover = false;
 			this.aboutHover = false;

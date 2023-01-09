@@ -40,13 +40,16 @@ public class LossMenu implements Screen {
 	public void onMouseMove(int mouseX, int mouseY) {
 		if (mouseX >= 260 && mouseX <= 620 
 				&& mouseY >= 525 && mouseY <= 606) {
+			Main.processing.cursor(12);
 			backHover = true;
 		}
 		else if (mouseX >= 320 && mouseX <= 562 &&
 				mouseY >= 633 && mouseY <= 725) {
+			Main.processing.cursor(12);
 			quitHover = true;
 		}
 		else {
+			Main.processing.cursor(0);
 			backHover = false;
 			quitHover = false;
 		}
