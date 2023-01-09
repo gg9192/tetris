@@ -30,12 +30,25 @@ public class ScoreBoard {
 	}
 	
 	/**
+	 * Gets how many entries is currently in the 
+	 * scoreboard.
+	 * @return size of scoreboard
+	 */
+	public int getSize() {
+		return scores.size();
+	}
+	
+	/**
 	 * Gets the list of scores.
 	 * **FOR TESTING ONLY**
 	 * @return list of scores
 	 */
 	public ArrayList<ScorePair> getScoreboard() {
 		return scores;
+	}
+	
+	public ScorePair getScorePair(int i) {
+		return scores.get(i);
 	}
 	
 	/**

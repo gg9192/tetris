@@ -16,11 +16,11 @@ public class Game implements Screen{
     // 6 = square piece
 
     Main m;
-    private boolean isLoss = false;
-    
+    private boolean isLoss = false;	
     
     public void loseGame() {
     	this.isLoss = true;
+    	lm = new LossMenu(m, this);
     }
     
     public Board getBoard() {
@@ -29,10 +29,17 @@ public class Game implements Screen{
     
     private LossMenu lm;
     
+    public int getScore() {
+    	return b.getScore();
+    }
+    
     public Game(Main me) {
     	this.m = me;
     	System.out.println(this.m);
-    	 lm = new LossMenu(me, this);
+    	
+    	//for testing
+    	//loseGame();
+    	
     }
     
     /**
@@ -45,6 +52,8 @@ public class Game implements Screen{
 			lm.onClick(mouseX, mouseY);
 		}
 	}
+	
+	
 	
 	/**
 	 * Handles mouse move.
