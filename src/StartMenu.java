@@ -45,7 +45,6 @@ public class StartMenu implements Screen{
 			this.hsHover = false;
 			this.aboutHover = false;
 			this.quitHover = false;
-			
 		}
 		
 	}
@@ -69,6 +68,10 @@ public class StartMenu implements Screen{
 		else if (mouseX >= 220 && mouseX <= 617 &&
 				 mouseY >= 460 && mouseY <= 541) {
 			m.setModeAbout();
+		}
+		else if (mouseX >= 220 && mouseX <= 740 &&
+				mouseY >= 360 && mouseY <= 440) {
+			m.setModeScore();
 		}
 	}
 	

@@ -6,10 +6,15 @@ public class Main extends PApplet{
 	public static enum gameMode {
 		MAINMENU,
 		GAME,
-		ABOUT
+		ABOUT,
+		SCOREBOARD
 	}
 	
-	gameMode gm = gameMode.MAINMENU;
+	gameMode gm = gameMode.SCOREBOARD;
+	
+	public void setModeScore() {
+		gm = gameMode.SCOREBOARD;
+	}
 	
 	public void setModeGame() {
 		gm = gameMode.GAME;
@@ -26,9 +31,10 @@ public class Main extends PApplet{
     //encapsulation?
     public static PApplet processing;
     public static ScoreBoard s;
-    Game game = new Game(this);
-    StartMenu sm = new StartMenu(this);
-    AboutMenu am = new AboutMenu(this);
+    private ScoreBoardScreen sb = new ScoreBoardScreen(this);
+    private Game game = new Game(this);
+    private StartMenu sm = new StartMenu(this);
+    private AboutMenu am = new AboutMenu(this);
     
     public static void main(String[] args) {
     	PApplet.main("Main",args);
@@ -104,6 +110,9 @@ public class Main extends PApplet{
     	}
     	else if (gm == gameMode.ABOUT) {
     		am.draw();
+    	}
+    	else if (gm == gameMode.SCOREBOARD) {
+    		sb.draw();
     	}
     	
     }
