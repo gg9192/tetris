@@ -55,6 +55,9 @@ public class Main extends PApplet{
     	if (gm == gameMode.GAME) {
     		game.onMouseMove(mouseX, mouseY);
     	}
+    	if (gm == gameMode.SCOREBOARD) {
+    		sb.onMouseMove(mouseX, mouseY);
+    	}
     }
     
     public void mouseClicked() {
@@ -66,6 +69,9 @@ public class Main extends PApplet{
     	}
     	if (gm == gameMode.GAME) {
     		game.onClick(mouseX, mouseY);
+    	}
+    	if (gm == gameMode.SCOREBOARD) {
+    		sb.onMouseClick(mouseX, mouseY);
     	}
     }
     

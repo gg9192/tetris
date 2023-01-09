@@ -6,6 +6,8 @@ import processing.core.PFont;
  *
  */
 public class ScoreBoardScreen implements Screen {
+	
+	private boolean backHover = false;
 
 	Main m;
 	
@@ -20,7 +22,15 @@ public class ScoreBoardScreen implements Screen {
 	 * @param mouseY Y position of mouse
 	 */
 	public void onMouseMove(int mouseX, int mouseY){
-		
+		if (mouseX >= 290 && mouseX <= 616 &&
+				mouseY >= 644 && mouseY <= 726) {
+			Main.processing.cursor(12);
+			backHover = true;
+		}
+		else {
+			Main.processing.cursor(0);
+			backHover = false;
+		}
 	}
 	
 	/**
@@ -30,7 +40,10 @@ public class ScoreBoardScreen implements Screen {
 	 * @param mouseY Y position of mouse
 	 */
 	public void onMouseClick(int mouseX, int mouseY) {
-		
+		if (mouseX >= 290 && mouseX <= 616 &&
+				mouseY >= 644 && mouseY <= 726) {
+			m.setModeMenu();
+		}
 	}
 	
 	/**
@@ -58,6 +71,26 @@ public class ScoreBoardScreen implements Screen {
         Main.processing.textFont(font);
         Main.processing.text("HI-SCORES", 220, 160);
         drawHighScores();
+        
+        font = Main.processing.createFont("TETRIS.ttf", 100, true);
+        Main.processing.textFont(font);
+        
+        /*hitbox
+        Main.processing.strokeWeight(0);
+        Main.processing.fill(0,0,0);
+        Main.processing.rect(290, 644, 326, 82);
+        */
+        
+        if (backHover) {
+        	Main.processing.fill(302,228,124);
+        	Main.processing.text("Back", 290, 720);
+        }
+        else {
+        	Main.processing.fill(242,168,64);
+            Main.processing.text("Back", 290, 720);
+        }
+		
+        
 	}
 
 }
