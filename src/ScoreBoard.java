@@ -45,7 +45,7 @@ public class ScoreBoard {
 	 */
 	public String get(int i) {
 		if (i >= scores.size()) {
-			return "---------";
+			return "-----------";
 		}
 		else {
 			return scores.get(i).toString();
