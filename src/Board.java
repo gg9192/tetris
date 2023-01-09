@@ -41,6 +41,10 @@ public class Board {
     	grid[x][y] = val;
     }
 
+    public int getScore() {
+    	return this.score;
+    }
+    
     public void incrementLinesCleared(int val) {
     	linesCleared += val;
     }

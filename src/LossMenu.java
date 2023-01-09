@@ -10,10 +10,19 @@ public class LossMenu implements Screen {
 	Game g;
 	private boolean backHover = false;
 	private boolean quitHover = false;
+	private boolean isHighScore = true;
+	private boolean saveHover = false;
+	private TextEntry textbox;
+	
 	
 	public LossMenu(Main me, Game g) {
 		this.m = me;
 		this.g = g;
+		if (Main.s.getSize() < 4 || g.getScore() > Main.s.getScorePair(Main.s.getSize() - 1).getScore()) {
+			this.isHighScore = true;
+			textbox = new TextEntry(200, 430, 150, 60);
+		}
+		
 	}
 	
 	/**
@@ -29,6 +38,9 @@ public class LossMenu implements Screen {
 		else if (mouseX >= 320 && mouseX <= 562 &&
 				mouseY >= 633 && mouseY <= 725) {
 			Main.processing.exit();
+		}
+		if (isHighScore) {
+			
 		}
 	}
 	
@@ -56,6 +68,37 @@ public class LossMenu implements Screen {
 	}
 	
 	/**
+	 * Handles key press event
+	 */
+	public void onKeyPress(int keyCode) {
+		if (isHighScore) {
+			textbox.onKeyPress(keyCode);
+		}
+	}
+	
+	/**
+	 * Draws the screen elements that allows a user to 
+	 * save their High Score
+	 */
+	private void drawHS() {
+		PFont font = Main.processing.createFont("TETRIS.ttf", 40, true);
+        Main.processing.textFont(font);
+        Main.processing.fill(242,168,64);
+        Main.processing.text("Hi-Score! Click the textbox", 120, 270);
+        Main.processing.text("and input your initials. ", 160, 310);
+        Main.processing.text("(No non-alpha characters ", 130, 350);
+        Main.processing.text("and max length of 3)", 170, 390);
+        textbox.draw();
+        font = Main.processing.createFont("TETRIS.ttf", 70, true);
+        Main.processing.textFont(font);
+        Main.processing.fill(242,168,64);
+        Main.processing.text("Save", 450, 480);
+        
+	}
+	
+	
+	
+	/**
 	 * Draws the loss menu
 	 */
 	@Override
@@ -66,8 +109,8 @@ public class LossMenu implements Screen {
 		PFont font = Main.processing.createFont("TETRIS.ttf", 100, true);
         Main.processing.textFont(font);
         Main.processing.fill(242,168,64);
-        Main.processing.text("GAME", x, y);
-        Main.processing.text("OVER", x + 17, y + 90);
+        Main.processing.text("GAME", x, y - 50);
+        Main.processing.text("OVER", x + 17, y + 40);
         y = y + 420;
         
         /*Hitboxes
@@ -76,6 +119,13 @@ public class LossMenu implements Screen {
         Main.processing.rect(320, 633, 242, 92);
         */
         
+        if (isHighScore) {
+        	drawHS();
+        }
+        
+        font = Main.processing.createFont("TETRIS.ttf", 100, true);
+        Main.processing.textFont(font);
+
         Main.processing.fill(242,168,64);
         
         if (backHover) {

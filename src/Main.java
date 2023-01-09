@@ -10,7 +10,7 @@ public class Main extends PApplet{
 		SCOREBOARD
 	}
 	
-	gameMode gm = gameMode.MAINMENU;
+	gameMode gm = gameMode.GAME;
 	
 	public void setModeScore() {
 		gm = gameMode.SCOREBOARD;
@@ -30,7 +30,7 @@ public class Main extends PApplet{
     
     //encapsulation?
     public static PApplet processing;
-    public static ScoreBoard s;
+    public static ScoreBoard s = new ScoreBoard();
     private ScoreBoardScreen sb = new ScoreBoardScreen(this);
     private Game game = new Game(this);
     private StartMenu sm = new StartMenu(this);
