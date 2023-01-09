@@ -10,7 +10,7 @@ public class Main extends PApplet{
 		SCOREBOARD
 	}
 	
-	gameMode gm = gameMode.SCOREBOARD;
+	gameMode gm = gameMode.MAINMENU;
 	
 	public void setModeScore() {
 		gm = gameMode.SCOREBOARD;
