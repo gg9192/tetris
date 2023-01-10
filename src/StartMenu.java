@@ -28,21 +28,25 @@ public class StartMenu implements Screen{
 				mouseY >= 245 && mouseY <= 340) {
 			Main.processing.cursor(12);
 			this.playHover = true;
+			return;
 		}
 		else if (mouseX >= 220 && mouseX <= 740 &&
 				mouseY >= 360 && mouseY <= 440) {
 			Main.processing.cursor(12);
 			this.hsHover = true;
+			return;
 		}
 		else if (mouseX >= 220 && mouseX <= 617 &&
 				 mouseY >= 460 && mouseY <= 541) {
 			Main.processing.cursor(12);
 			this.aboutHover = true;
+			return;
 		}
 		else if (mouseX >= 220 && mouseX <= 470 && 
 				mouseY >= 562 && mouseY <= 652) {
 			Main.processing.cursor(12);
 			this.quitHover = true;
+			return;
 		}
 		else {
 			Main.processing.cursor(0);
@@ -50,6 +54,7 @@ public class StartMenu implements Screen{
 			this.hsHover = false;
 			this.aboutHover = false;
 			this.quitHover = false;
+			return;
 		}
 		
 	}
@@ -65,18 +70,22 @@ public class StartMenu implements Screen{
 				mouseY >= 245 && mouseY <= 340) {
 			m.setModeGame();
 			m.newGame();
+			return;
 		}
 		else if (mouseX >= 220 && mouseX <= 470 && 
 				mouseY >= 562 && mouseY <= 652) {
 			Main.processing.exit();
+			return;
 		}
 		else if (mouseX >= 220 && mouseX <= 617 &&
 				 mouseY >= 460 && mouseY <= 541) {
 			m.setModeAbout();
+			return;
 		}
 		else if (mouseX >= 220 && mouseX <= 740 &&
 				mouseY >= 360 && mouseY <= 440) {
 			m.setModeScore();
+			return;
 		}
 	}
 	

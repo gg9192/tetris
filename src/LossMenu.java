@@ -20,7 +20,7 @@ public class LossMenu implements Screen {
 		this.g = g;
 		if (Main.s.getSize() < 4 || g.getScore() > Main.s.getScorePair(Main.s.getSize() - 1).getScore()) {
 			this.isHighScore = true;
-			textbox = new TextEntry(200, 430, 150, 60);
+			textbox = new TextEntry(150, 430, 200, 60);
 		}
 		
 	}
@@ -34,13 +34,17 @@ public class LossMenu implements Screen {
 		if (mouseX >= 260 && mouseX <= 620 
 				&& mouseY >= 525 && mouseY <= 606) {
 			m.setModeMenu();
+			return;
 		}
 		else if (mouseX >= 320 && mouseX <= 562 &&
 				mouseY >= 633 && mouseY <= 725) {
 			Main.processing.exit();
+			return;
 		}
 		if (isHighScore) {
+			textbox.onClick(mouseX, mouseY);
 			
+			return;
 		}
 	}
 	
@@ -54,16 +58,19 @@ public class LossMenu implements Screen {
 				&& mouseY >= 525 && mouseY <= 606) {
 			Main.processing.cursor(12);
 			backHover = true;
+			return;
 		}
 		else if (mouseX >= 320 && mouseX <= 562 &&
 				mouseY >= 633 && mouseY <= 725) {
 			Main.processing.cursor(12);
 			quitHover = true;
+			return;
 		}
 		else {
 			Main.processing.cursor(0);
 			backHover = false;
 			quitHover = false;
+			return;
 		}
 	}
 	

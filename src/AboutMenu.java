@@ -45,10 +45,12 @@ public class AboutMenu implements Screen {
 				&& mouseY >= 594 && mouseY <= 674) {
 			Main.processing.cursor(12);
 			backHover = true;
+			return;
 		}
 		else {
 			Main.processing.cursor(0);
 			backHover = false;
+			return;
 		}
 	}
 	
