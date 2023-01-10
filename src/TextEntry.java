@@ -65,112 +65,87 @@ public class TextEntry implements Screen{
 			if (text.length() >= 3) {
 				return;
 			}
-			if (keyCode == 65) {
+			
+			switch (keyCode) {
+			case 65:
 				this.addChar('A');
-				return;
-			}
-			if (keyCode == 66) {
+				break;
+			case 66:
 				this.addChar('B');
-				return;
-			}
-			if (keyCode == 67) {
+				break;
+			case 67:
 				this.addChar('C');
-				return;
-			}
-			if (keyCode == 68) {
+				break;
+			case 68:
 				this.addChar('D');
-				return;
-			}
-			if (keyCode == 69) {
+				break;
+			case 69:
 				this.addChar('E');
-				return;
-			}
-			if (keyCode == 70) {
+				break;
+			case 70:
 				this.addChar('F');
-				return;
-			}
-			if (keyCode == 71) {
+				break;
+			case 71:
 				this.addChar('G');
-				return;
-			}
-			if (keyCode == 72) {
+				break;
+			case 72:
 				this.addChar('H');
-				return;
-			}
-			if (keyCode == 73) {
+				break;
+			case 73:
 				this.addChar('I');
-				return;
-			}
-			if (keyCode == 74) {
+				break;
+			case 74:
 				this.addChar('J');
-				return;
-			}
-			if (keyCode == 75) {
+				break;
+			case 75:
 				this.addChar('K');
-				return;
-			}
-			if (keyCode == 76) {
+				break;
+			case 76:
 				this.addChar('L');
-				return;
-			}
-			if (keyCode == 77) {
+				break;
+			case 77:
 				this.addChar('M');
-				return;
-			}
-			if (keyCode == 78) {
+				break;
+			case 78:
 				this.addChar('N');
-				return;
-			}
-			if (keyCode == 79) {
+				break;
+			case 79: 
 				this.addChar('O');
-				return;
-			}
-			if (keyCode == 80) {
+				break;
+			case 80:
 				this.addChar('P');
-				return;
-			}
-			if (keyCode == 81) {
+				break;
+			case 81:
 				this.addChar('Q');
-				return;
-			}
-			if (keyCode == 82) {
+				break;
+			case 82:
 				this.addChar('R');
-				return;
-			}
-			if (keyCode == 83) {
+				break;
+			case 83:
 				this.addChar('S');
-				return;
-			}
-			if (keyCode == 84) {
+				break;
+			case 84: 
 				this.addChar('T');
-				return;
-			}
-			if (keyCode == 85) {
+				break;
+			case 85:
 				this.addChar('U');
-				return;
-			}
-			if (keyCode == 86) {
+				break;
+			case 86:
 				this.addChar('V');
-				return;
-			}
-			if (keyCode == 87) {
+				break;
+			case 87:
 				this.addChar('W');
-				return;
-			}
-			if (keyCode == 88) {
+				break;
+			case 88:
 				this.addChar('X');
-				return;
-			}
-			if (keyCode == 89) {
+				break;
+			case 89:
 				this.addChar('Y');
-				return;
-			}
-			if (keyCode == 90) {
+				break;
+			case 90:
 				this.addChar('Z');
-				return;
-			}
-			
-			
+				break;
+			} 
 		}
 	}
 	
