@@ -10,9 +10,10 @@ public class LossMenu implements Screen {
 	Game g;
 	private boolean backHover = false;
 	private boolean quitHover = false;
-	private boolean isHighScore = true;
+	private boolean isHighScore = false;
 	private boolean saveHover = false;
 	private TextEntry textbox;
+	private boolean isSaved = false;
 	
 	
 	public LossMenu(Main me, Game g) {
@@ -22,7 +23,6 @@ public class LossMenu implements Screen {
 			this.isHighScore = true;
 			textbox = new TextEntry(150, 430, 200, 60);
 		}
-		
 	}
 	
 	/**
@@ -42,8 +42,9 @@ public class LossMenu implements Screen {
 			return;
 		}
 		if (isHighScore) {
-			textbox.onClick(mouseX, mouseY);
-			
+			if (!isSaved) {
+				textbox.onClick(mouseX, mouseY);
+			}
 			return;
 		}
 	}
@@ -66,6 +67,26 @@ public class LossMenu implements Screen {
 			quitHover = true;
 			return;
 		}
+		else if (!isSaved) {
+			if (mouseX >= 150 && mouseX <= 350 &&
+					mouseY >= 430 && mouseY <= 490) {
+				Main.processing.cursor(2);
+				return;
+			}
+			else if (mouseX >= 448 && mouseX <= 688 &&
+					mouseY >= 426 && mouseY <= 486) {
+				Main.processing.cursor(12);
+				saveHover = true;
+				return;
+			}
+			else {
+				Main.processing.cursor(0);
+				backHover = false;
+				quitHover = false;
+				saveHover = false;
+				return;
+				}
+		}
 		else {
 			Main.processing.cursor(0);
 			backHover = false;
@@ -83,6 +104,8 @@ public class LossMenu implements Screen {
 		}
 	}
 	
+	
+	
 	/**
 	 * Draws the screen elements that allows a user to 
 	 * save their High Score
@@ -98,8 +121,29 @@ public class LossMenu implements Screen {
         textbox.draw();
         font = Main.processing.createFont("TETRIS.ttf", 70, true);
         Main.processing.textFont(font);
-        Main.processing.fill(242,168,64);
-        Main.processing.text("Save", 450, 480);
+        
+        /*hitbox of save button
+        Main.processing.fill(0,0,0);
+        Main.processing.strokeWeight(0);
+        Main.processing.rect(448, 426, 240, 60);
+        */
+        
+        if (!isSaved) {
+        	if (saveHover) {
+        		Main.processing.fill(302,228,124);
+        		Main.processing.text("Save", 450, 480);
+        	}
+        	else {
+        		Main.processing.fill(242,168,64);
+                Main.processing.text("Save", 450, 480);
+        	}
+        	
+        }
+        else {
+        	Main.processing.fill(242,168,64);
+            Main.processing.text("Saved", 430, 480);
+        }
+        
         
 	}
 	
