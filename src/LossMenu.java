@@ -44,6 +44,11 @@ public class LossMenu implements Screen {
 		if (isHighScore) {
 			if (!isSaved) {
 				textbox.onClick(mouseX, mouseY);
+				if (mouseX >= 448 && mouseX <= 688 &&
+						mouseY >= 426 && mouseY <= 486) {
+					Main.s.addScore(textbox.getString(), g.getScore());
+					this.isSaved = true;
+				}
 			}
 			return;
 		}

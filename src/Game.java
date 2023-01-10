@@ -38,7 +38,7 @@ public class Game implements Screen{
     	System.out.println(this.m);
     	
     	//for testing
-    	loseGame();
+    	//loseGame();
     	
     }
     
