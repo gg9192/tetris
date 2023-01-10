@@ -16,7 +16,7 @@ public class Game implements Screen{
     // 6 = square piece
 
     Main m;
-    private boolean isLoss = false;	
+    private boolean isLoss;	
     
     public void loseGame() {
     	this.isLoss = true;
@@ -38,7 +38,7 @@ public class Game implements Screen{
     	System.out.println(this.m);
     	
     	//for testing
-    	//loseGame();
+    	loseGame();
     	
     }
     
@@ -53,6 +53,14 @@ public class Game implements Screen{
 		}
 	}
 	
+	public void keyPressed(int keyCode) {
+		if (!isLoss) {
+			b.keyPressed(keyCode);
+		}
+		else {
+			lm.onKeyPress(keyCode);
+		}
+	}
 	
 	
 	/**

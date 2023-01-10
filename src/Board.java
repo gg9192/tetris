@@ -204,26 +204,40 @@ public class Board {
             if (held == -1) {
                 if (cp instanceof LPiece) {
                     held = 0;
+                    needPiece = true;
+                    return;
                 }
                 if (cp instanceof ReverseLPiece) {
                     held = 1;
+                    needPiece = true;
+                    return;
                 }
                 if (cp instanceof LinePiece) {
                     held = 2;
+                    needPiece = true;
+                    return;
                 }
                 if (cp instanceof TPiece) {
                     held = 3;
+                    needPiece = true;
+                    return;
                 }
                 if (cp instanceof ZPiece) {
                     held = 4;
+                    needPiece = true;
+                    return;
                 }
                 if (cp instanceof ReverseZPiece) {
                     held = 5;
+                    needPiece = true;
+                    return;
                 }
                 if (cp instanceof SquarePiece) {
                     held = 6;
+                    needPiece = true;
+                    return;
                 }
-                needPiece = true;
+                
         }
         else {
                 int temp = held;
@@ -323,12 +337,15 @@ public class Board {
         //e = 69
         if (keyCode == 65) {
             cp.moveLeft();
+            return;
         }
         else if (keyCode == 68) {
         	cp.moveRight();
+        	return;
         }
         else if (keyCode == 82) {
             cp.rotate();
+            return;
         }
         else if (keyCode == 83) {
             if(isLoss == false) {
@@ -337,10 +354,11 @@ public class Board {
                 }
 
             }
-
+            return;
         }
         else if (keyCode == 69) {
             hold();
+            return;
         }
     }
     

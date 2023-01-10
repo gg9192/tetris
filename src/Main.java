@@ -48,30 +48,38 @@ public class Main extends PApplet{
     public void mouseMoved() {
     	if (gm == gameMode.MAINMENU) {
     		sm.onMouseMove(mouseX, mouseY);
+    		
     	}
     	if (gm == gameMode.ABOUT) {
     		am.onHover(mouseX, mouseY);
+    		return;
     	}
     	if (gm == gameMode.GAME) {
     		game.onMouseMove(mouseX, mouseY);
+    		return;
     	}
     	if (gm == gameMode.SCOREBOARD) {
     		sb.onMouseMove(mouseX, mouseY);
+    		return;
     	}
     }
     
-    public void mouseClicked() {
+    public void mousePressed() {
     	if (gm == gameMode.MAINMENU) {
     		sm.onMouseClick(mouseX, mouseY);
+    		return;
     	}
     	if (gm == gameMode.ABOUT) {
     		am.onClick(mouseX, mouseY);
+    		return;
     	}
     	if (gm == gameMode.GAME) {
     		game.onClick(mouseX, mouseY);
+    		return;
     	}
     	if (gm == gameMode.SCOREBOARD) {
     		sb.onMouseClick(mouseX, mouseY);
+    		return;
     	}
     }
     
@@ -90,9 +98,8 @@ public class Main extends PApplet{
      */
     public void keyReleased() {
         if (gm == gameMode.GAME) {
-        	game.getBoard().keyPressed(keyCode);
+        	game.keyPressed(keyCode);
         }
-        
         
 
     }
@@ -110,15 +117,19 @@ public class Main extends PApplet{
     public void draw() {
     	if (gm == gameMode.GAME) {
     		game.draw();
+    		return;
     	}
     	else if (gm == gameMode.MAINMENU) {
     		sm.draw();
+    		return;
     	}
     	else if (gm == gameMode.ABOUT) {
     		am.draw();
+    		return;
     	}
     	else if (gm == gameMode.SCOREBOARD) {
     		sb.draw();
+    		return;
     	}
     	
     }
