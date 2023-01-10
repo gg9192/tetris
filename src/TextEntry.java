@@ -32,6 +32,13 @@ public class TextEntry implements Screen{
 		this.text = this.text.substring(0, text.length() - 1);
 	} 
 	
+	/**
+	 * get the string stored at the textbox
+	 * @return
+	 */
+	public String getString() {
+		return this.text;
+	}
 	
 	/**
 	 * Handle mouse click
