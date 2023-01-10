@@ -7,12 +7,6 @@ my progress.
 
 For more information on processing, visit https://processing.org/overview
 
------------------------------------------------------------------------------------------------------------------------------------------------------------
-Backlog:
-- Implement game over menu
-- Implement scoreboard
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
 In order for the project to work, you MUST add core.jar (processing) as a library!
 
 https://www.linkedin.com/in/alex-guo-b104ba208/
