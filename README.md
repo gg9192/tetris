@@ -5,6 +5,10 @@ using flow. This entire project was coded from scratch using the Processing Java
 I decided to use GitHub as my version control solution half way through the project to better doccument
 my progress. 
 
+NOTE: Because this project was written in java using a library that was not intended to handle applications, sometimes there will be bits of lag. Unfourtunatly, 
+there is nothing I can do about it short of rewriting the whole thing using either a lower level language or a different framework. 
+See https://processing.org/overview for more information about processing.
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 - Implement game over menu
