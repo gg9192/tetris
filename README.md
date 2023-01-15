@@ -7,7 +7,7 @@ my progress.
 
 For more information on processing, visit https://processing.org/overview
 
-In order for the project to work, you MUST add core.jar (processing) as a library!
+In order for the project to work, you MUST add core.jar (processing) as a library, and use Eclipse IDE to import!
 
 https://www.linkedin.com/in/alex-guo-b104ba208/
 
